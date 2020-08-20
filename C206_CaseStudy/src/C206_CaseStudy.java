@@ -89,10 +89,6 @@ public class C206_CaseStudy {
 	//Member 1 - Clarence
 	 
 
-	//Member 2
-	
-	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
-		setHeader("Add Course Category");
 
 	//Member 2 - Caven
 	ArrayList<Course> CategoryList = new ArrayList<Course>();
