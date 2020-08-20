@@ -14,13 +14,14 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 6;
 	private static final int OPTION1_QUIT = 4;
 
-	static ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		ArrayList<Course> courseList = new ArrayList<>();
 		ArrayList<Member> memberList = new ArrayList<>();
+		ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
 		ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 		ArrayList<Category> CategoryList = new ArrayList<Category>();
 
@@ -113,11 +114,11 @@ public class C206_CaseStudy {
 					registerScheduleMenu();
 					option5 = Helper.readInt("Enter an option > ");
 					if (option5 == 1) {
-						viewAllr();
+						viewAllr(reglist);
 					} else if (option5 == 2) {
-						regSche();
+						regSche(reglist);
 					} else if (option5 == 3) {
-						delr();
+						delr(reglist);
 					} else if (option5 == OPTION1_QUIT) {
 						System.out.println("Bye!");
 					} else {
@@ -479,7 +480,7 @@ public class C206_CaseStudy {
 	}
 
 	// Member 5 - Rongxin
-	public static void regSche() {
+	public static void regSche(ArrayList<registerSchedule> reglist) {
 
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
@@ -501,7 +502,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	static void viewAllr() {
+	static void viewAllr(ArrayList<registerSchedule> reglist) {
 		System.out.printf("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",
 				"Status", "Registerion Date");
 		for (registerSchedule i : reglist) {
@@ -510,7 +511,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	static void delr() {
+	static void delr(ArrayList<registerSchedule> reglist) {
 		String del = Helper.readString("Enter the registration number to delete > ");
 		for (registerSchedule i : reglist) {
 			if (del.equalsIgnoreCase(i.registrationNumber)) {
