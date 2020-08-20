@@ -14,13 +14,14 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 6;
 	private static final int OPTION1_QUIT = 4;
 
-	static ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		ArrayList<Course> courseList = new ArrayList<>();
 		ArrayList<Member> memberList = new ArrayList<>();
+		ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
 		ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 		ArrayList<Category> CategoryList = new ArrayList<Category>();
 
@@ -113,11 +114,11 @@ public class C206_CaseStudy {
 					registerScheduleMenu();
 					option5 = Helper.readInt("Enter an option > ");
 					if (option5 == 1) {
-						viewAllr();
+						viewAllr(reglist);
 					} else if (option5 == 2) {
-						regSche();
+						regSche(reglist);
 					} else if (option5 == 3) {
-						delr();
+						delr(reglist);
 					} else if (option5 == OPTION1_QUIT) {
 						System.out.println("Bye!");
 					} else {
@@ -427,27 +428,15 @@ public class C206_CaseStudy {
 	}
 
 	// Member 4 - Sabrina
-	public static String retrieveCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
-		String output = "";
-
-		for (int i = 0; i < scheduleList.size(); i++) {
-
-			output += String.format("%-15s %-15d %-15s %-15s %-15s\n", scheduleList.get(i).getScheduleID(),
-					scheduleList.get(i).getPrice(), scheduleList.get(i).getStartDateTime(),
-					scheduleList.get(i).getEndDateTime(), scheduleList.get(i).getLocation());
-		}
-		return output;
-	}
-
-	// Add course schedule with the following information
+	// Add course schedule
 	public static void addCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID > ");
 		double price = Helper.readDouble("Price > ");
-		String start = Helper.readString("Start date/time (DD/MMM/YYY  HH:MM)");
-		String end = Helper.readString("End date/time (DD/MMM/YYY  HH:MM)");
+		String start = Helper.readString("Start date/time (yyyy-MM-dd HH:mm) > ");
+		String end = Helper.readString("End date/time (yyyy-MM-dd HH:mm) > ");
 		String location = Helper.readString("Course location > ");
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime startDT = LocalDateTime.parse(start, formatter);
 		LocalDateTime endDT = LocalDateTime.parse(end, formatter);
 
@@ -456,9 +445,24 @@ public class C206_CaseStudy {
 		System.out.println("Schedule added");
 	}
 
+	public static String retrieveCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = "";
+		for (int i = 0; i < scheduleList.size(); i++) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			String start = scheduleList.get(i).getStartDateTime().format(formatter);
+			String end = scheduleList.get(i).getEndDateTime().format(formatter);
+
+			output += String.format("%-20s $%-10.2f %-20s %-20s %-15s\n", scheduleList.get(i).getScheduleID(),
+					scheduleList.get(i).getPrice(), start, end, 
+					scheduleList.get(i).getLocation());
+		}
+		return output;
+	}
+	
 	// View course schedule
 	public static void viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
-		String output = String.format("%-15s %-15s %-15s %-15s %-15s\n", "COURSE SCHEDULE ID", "PRICE",
+		String output = String.format("%-20s %-10s %-20s %-20s %-15s\n", 
+				"COURSE SCHEDULE ID", "PRICE",
 				"START DATE TIME", "END DATE TIME", "LOCATION");
 		output += retrieveCourseSchedule(scheduleList);
 		System.out.println(output);
@@ -479,7 +483,7 @@ public class C206_CaseStudy {
 	}
 
 	// Member 5 - Rongxin
-	public static void regSche() {
+	public static void regSche(ArrayList<registerSchedule> reglist) {
 
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
@@ -501,7 +505,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	static void viewAllr() {
+	static void viewAllr(ArrayList<registerSchedule> reglist) {
 		System.out.printf("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",
 				"Status", "Registerion Date");
 		for (registerSchedule i : reglist) {
@@ -510,7 +514,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	static void delr() {
+	static void delr(ArrayList<registerSchedule> reglist) {
 		String del = Helper.readString("Enter the registration number to delete > ");
 		for (registerSchedule i : reglist) {
 			if (del.equalsIgnoreCase(i.registrationNumber)) {
