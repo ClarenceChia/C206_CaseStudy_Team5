@@ -138,7 +138,8 @@ public class C206_CaseStudy {
 					if (option5 == 1) {
 						viewAllr(reglist);
 					} else if (option5 == 2) {
-						regSche(reglist);
+						registerSchedule newReg = add();
+						regSche(reglist,newReg);
 					} else if (option5 == 3) {
 						delr(reglist);
 					} else if (option5 == OPTION1_QUIT) {
@@ -518,18 +519,21 @@ public class C206_CaseStudy {
 	}
 
 	// Member 5 - Rongxin
-	public static void regSche(ArrayList<registerSchedule> reglist) {
-
+	public static registerSchedule add() {
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
 		String memail = Helper.readString("Enter your email > ");
 		Date rdate = Helper.readDate("Enter a today's date > ");
 
 		registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
+		return newReg;
+	}
+	public static void regSche(ArrayList<registerSchedule> reglist, registerSchedule newReg) {
+
 		reglist.add(newReg);
 
 		for (registerSchedule i : reglist) {
-			if (!i.getRegistrationNumber().equalsIgnoreCase(rn)) {
+			if (!i.getRegistrationNumber().equalsIgnoreCase(newReg.registrationNumber)) {
 
 				System.out.println("Register triumph");
 			} else {
@@ -540,13 +544,17 @@ public class C206_CaseStudy {
 		}
 	}
 
-	static void viewAllr(ArrayList<registerSchedule> reglist) {
-		System.out.printf("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",
+	static String viewAllr(ArrayList<registerSchedule> reglist) {
+		String op = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",
 				"Status", "Registerion Date");
 		for (registerSchedule i : reglist) {
-			System.out.printf("%-30s %-20s %-20s %-15s %-20s\n", i.getRegistrationNumber(), i.getScheduleId(),
+			op += String.format("%-30s %-20s %-20s %-15s %-20s\n", i.getRegistrationNumber(), i.getScheduleId(),
 					i.getMemberEmail(), i.getStatus(), i.getRegisterDate());
 		}
+		
+		System.out.println(op);
+		return op;
+
 	}
 
 	static void delr(ArrayList<registerSchedule> reglist) {
