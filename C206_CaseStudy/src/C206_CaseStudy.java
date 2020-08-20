@@ -30,23 +30,29 @@ public class C206_CaseStudy {
 
 			//menu
 			menu();
-			option = Helper.readInt("Enter an option > ");
+			option =  Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
 				//view courses
 				viewCourses(courses);
 				
 			} else if (option == 2) {
+
 				//
-				
+				// add course
+				addCourse(courses);
+
 
 			} else if (option == 3) {
-				//
+				// delete course
+				deleteCourse(courses);
 
 			} else if (option == 4) {
 				//
 
-			} else if (option == OPTION_QUIT) {
+			} 
+			
+			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 				
 			} else {
@@ -79,14 +85,15 @@ public class C206_CaseStudy {
 	//Member 2
 	
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Add Course Category");
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
 		Course newCategory= new Course(category,description);
 		CategoryList.add(newCategory);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+			String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION"
 					);
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			output+=String.format("%10s %30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
 			System.out.println(output);
 		}
 		
@@ -94,10 +101,11 @@ public class C206_CaseStudy {
 	
 
 	public static void viewAllCourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Viewing Course Category");
+		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+				);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
-					);
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
 			System.out.println(output);
 		}
 		
@@ -115,12 +123,14 @@ public class C206_CaseStudy {
 		
 			
 		}
+
 	
 	public static void DeleteACourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Deleting Course Category");
+		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+				);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
-					);
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
 			System.out.println(output);
 		}
 		String category=Helper.readString("Enter a  category name to delete from ");
@@ -130,9 +140,7 @@ public class C206_CaseStudy {
 			}
 		}
 		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
-					);
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
 			System.out.println(output);
 		}
 		
@@ -143,19 +151,15 @@ public class C206_CaseStudy {
 	
 	
 	
+
 	
-		
-	//Member 3
-	public static String retrieveCourses() {
-		String output =  String.format("%-10s %-10s %-10s %-10s %-10.2f %-10s\n", 
 
 	//Member 3 - Daryl
 	private static String retrieveCourses(List<Course> courses) {
-		String output =  String.format("%-10s %-10s %-10s %-10s %-10s %-10s\n", 
-
+		String output =  String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n",
 				"Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		for (Course c : courses) {
-			output += c.toString() + "\n";
+			output += c.toString();
 		}
 		return output;
 	}
@@ -165,7 +169,8 @@ public class C206_CaseStudy {
 		System.out.println(retrieveCourses(courses));
 	}
 	
-	public static void addCourse() {
+	public static void addCourse(List<Course> courses) {
+		setHeader("Add Course");
 		System.out.println("Enter Course Information\n");
 		//course information
 		String id = Helper.readString("ID : ");
@@ -174,9 +179,34 @@ public class C206_CaseStudy {
 		String desc = Helper.readString("Description : ");
 		double duration = Helper.readDouble("Duration : ");
 		String preCourse = Helper.readString("Pre-requisite Course : ");
-		//insert course
+		//add course
 		Course newCourse = new Course(id, title, category, desc, duration, preCourse);
-		
+		courses.add(newCourse);
+		System.out.println("Course Added.");
+	}
+	
+	public static void deleteCourse(List<Course> courses) {
+		setHeader("Delete Course");
+		viewCourses(courses);
+		//course id 
+		String id = Helper.readString("Course ID : ");
+		//check course id is valid
+		boolean isFound = false;
+		Course course = null;
+		for (Course c : courses) {
+			if (c.getId().equals(id)) {
+				isFound = true;
+				course = c;
+				break;
+			}
+		}
+		//delete course
+		if (isFound) {
+			courses.remove(course);
+			System.out.println("Course Deleted.");
+		} else {
+			System.out.println("Invalid Course.");
+		}
 		
 	}
 	
