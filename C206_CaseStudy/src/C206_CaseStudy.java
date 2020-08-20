@@ -140,12 +140,12 @@ public class C206_CaseStudy {
 	
 	
 	//Member 4 - Sabrina
-	public static void retrieveCourseSchedule() {
+	public static String retrieveCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
 
 		for (int i = 0; i < scheduleList.size(); i++) {
 
-			output += String.format("%-10s %-10d %-10s %-10s %-10s\n", 
+			output += String.format("%-15s %-15d %-15s %-15s %-15s\n", 
 					scheduleList.get(i).getScheduleID(),
 					scheduleList.get(i).getPrice(),
 					scheduleList.get(i).getStartDateTime(),
@@ -155,28 +155,48 @@ public class C206_CaseStudy {
 		return output;
 	}
 	
-	
 	//Add course schedule with the following information
 	public static void addCourseSchedule() {
 		String scheduleid = Helper.readString("Course schedule ID > ");
 		double price = Helper.readDouble("Price > ");
-		String start = Helper.readString("Start date/time (DD/MM/YYYY)");
+		String start = Helper.readString("Start date/time (day/month/year  hour:min)");
 		String end = Helper.readString("End date/time (DD/MM/YYYY)");
 		String location = Helper.readString("Course location > ");
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
 		
+		CourseSchedule cc= new CourseSchedule(scheduleid, price, start, end, location);
+		scheduleList.add(cc);
+		System.out.println("Schedule added");	
 	}
 	
 	//View course schedule
-	public static void viewCourseSchedule() {
-		
+	public static void viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = String.format("%-15s %-15s %-15s %-15s %-15s\n", 
+				"COURSE SCHEDULE ID", "PRICE", "START DATE TIME", "END DATE TIME","LOCATION");
+		output += retrieveCourseSchedule(scheduleList);	
+		System.out.println(output);
 	}
 	
 	//Delete course schedule
-	public static void deleteCourseSchedule() {
+	public static void deleteCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String scheduleid = Helper.readString("Course schedule ID > ");
+		char yOrN = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
 		
+		if (yOrN == 'Y' && yOrN == 'y') {
+			for (int i = 0; i < scheduleList.size(); i++) {
+				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
+							scheduleList.get(i).getScheduleID(),
+							scheduleList.get(i).getPrice(),
+							scheduleList.get(i).getStartDateTime(),
+							scheduleList.get(i).getEndDateTime(),
+							scheduleList.get(i).getLocation());
+				
+				}
+			}	
+		}
 	}
+		
 	//- Member 5
 	
 	
