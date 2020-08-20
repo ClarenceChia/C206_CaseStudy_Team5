@@ -26,6 +26,7 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 
 		ArrayList<Course> courses = new ArrayList<>();
+		ArrayList<Course> CategoryList = new ArrayList<Course>();
 		
 		int option = 0;
 
@@ -40,8 +41,11 @@ public class C206_CaseStudy {
 				viewCourses(courses);
 				
 			} else if (option == 2) {
+
+				//
 				// add course
 				addCourse(courses);
+
 
 			} else if (option == 3) {
 				// delete course
@@ -52,7 +56,9 @@ public class C206_CaseStudy {
 				regSche();
 				viewAllr();
 
-			} else if (option == OPTION_QUIT) {
+			} 
+			
+			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 				
 			} else {
@@ -82,6 +88,12 @@ public class C206_CaseStudy {
 	
 	//Member 1 - Clarence
 	 
+
+	//Member 2
+	
+	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Add Course Category");
+
 	//Member 2 - Caven
 	ArrayList<Course> CategoryList = new ArrayList<Course>();
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
@@ -90,9 +102,9 @@ public class C206_CaseStudy {
 		Course newCategory= new Course(category,description);
 		CategoryList.add(newCategory);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+			String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION"
 					);
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			output+=String.format("%10s %30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
 			System.out.println(output);
 		}
 		
@@ -100,10 +112,11 @@ public class C206_CaseStudy {
 	
 
 	public static void viewAllCourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Viewing Course Category");
+		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+				);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
-					);
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
 			System.out.println(output);
 		}
 		
@@ -121,6 +134,35 @@ public class C206_CaseStudy {
 		
 			
 		}
+
+	
+	public static void DeleteACourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Deleting Course Category");
+		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+				);
+		for (int i = 0; i < CategoryList.size(); i++) {
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			System.out.println(output);
+		}
+		String category=Helper.readString("Enter a  category name to delete from ");
+		for (int i = 0; i < CategoryList.size(); i++) {
+			if(CategoryList.get(i).getCategory().equalsIgnoreCase(category)) {
+				CategoryList.remove(i);
+			}
+		}
+		for (int i = 0; i < CategoryList.size(); i++) {
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			System.out.println(output);
+		}
+		
+		
+	}
+		
+
+	
+	
+	
+
 	
 
 	//Member 3 - Daryl
