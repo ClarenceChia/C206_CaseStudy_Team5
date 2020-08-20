@@ -16,6 +16,12 @@ public class Course {
 		this.duration = duration;
 		this.preCourse = preCourse;
 	}
+	
+	public Course(String category,String description) {
+        this.category=category;
+        this.description=description;
+    }
+	
 
 	public String getId() {
 		return id;
@@ -63,5 +69,13 @@ public class Course {
 
 	public void setPreCourse(String preCourse) {
 		this.preCourse = preCourse;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.format("%-10s %-20s %-20s %-20s %-10.2f %-20s", 
+				getId(), getTitle(), getCategory(), getDescription(), getDuration(),
+				getPreCourse() );
 	}
 }
