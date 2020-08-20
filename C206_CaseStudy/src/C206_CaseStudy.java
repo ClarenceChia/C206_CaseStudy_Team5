@@ -1,16 +1,7 @@
 
 import java.util.ArrayList;
-
-
 import java.time.LocalDateTime;
-
 import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-
-
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +13,8 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 
 		ArrayList<Course> courses = new ArrayList<>();
-		
+		ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
+
 		int option = 0;
 
 		while (option != OPTION_QUIT) {
@@ -148,23 +140,43 @@ public class C206_CaseStudy {
 	
 	
 	//Member 4 - Sabrina
-	//Add course schedule with the following information
-	//course schedule id, price, start date/time, end date/time, location
-	String scheduleid = Helper.readString("Course schedule ID > ");
-	double price = Helper.readDouble("Price > ");
-	String start = Helper.readString("Start date/time (DD/MM/YYYY)");
-	String end = Helper.readString("End date/time (DD/MM/YYYY)");
-	String location = Helper.readString("Course location > ");
+	public static void retrieveCourseSchedule() {
+		String output = "";
+
+		for (int i = 0; i < scheduleList.size(); i++) {
+
+			output += String.format("%-10s %-10d %-10s %-10s %-10s\n", 
+					scheduleList.get(i).getScheduleID(),
+					scheduleList.get(i).getPrice(),
+					scheduleList.get(i).getStartDateTime(),
+					scheduleList.get(i).getEndDateTime(),
+					scheduleList.get(i).getLocation());
+		}
+		return output;
+	}
 	
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
+	
+	//Add course schedule with the following information
+	public static void addCourseSchedule() {
+		String scheduleid = Helper.readString("Course schedule ID > ");
+		double price = Helper.readDouble("Price > ");
+		String start = Helper.readString("Start date/time (DD/MM/YYYY)");
+		String end = Helper.readString("End date/time (DD/MM/YYYY)");
+		String location = Helper.readString("Course location > ");
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
+		
+	}
 	
 	//View course schedule
-	
-	
-	
+	public static void viewCourseSchedule() {
+		
+	}
 	
 	//Delete course schedule
-	
+	public static void deleteCourseSchedule() {
+		
+	}
 	//- Member 5
 	
 	
