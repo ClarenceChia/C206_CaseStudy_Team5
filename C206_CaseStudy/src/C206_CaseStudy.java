@@ -122,8 +122,9 @@ public class C206_CaseStudy {
 							System.out.println("Bye!");
 					} else {
 							System.out.println("Invalid option");
-				}
-			} 
+					}	
+				} 
+			}
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
