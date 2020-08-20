@@ -26,7 +26,7 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 
 		ArrayList<Course> courses = new ArrayList<>();
-		ArrayList<Course> CategoryList = new ArrayList<Course>();
+		ArrayList<Category> CategoryList = new ArrayList<Category>();
 		
 		int option = 0;
 
@@ -57,6 +57,7 @@ public class C206_CaseStudy {
 				viewAllr();
 
 			} 
+			
 			
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
@@ -140,7 +141,7 @@ public class C206_CaseStudy {
 
 
 	//Member 2 - Caven
-	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
+	public static void AddCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Add Course Category");
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
@@ -149,7 +150,7 @@ public class C206_CaseStudy {
 		
 		// check for duplicates name
 		for(int i=0 ;i<CategoryList.size();i++) {
-			if(CategoryList.get(i).getCategory().equalsIgnoreCase(category)) {
+			if(CategoryList.get(i).getName().equalsIgnoreCase(category)) {
 				duplicateName=true;
 				System.out.println("Duplicate names Found!");
 				newCat+=Helper.readString("Enter another non-duplicate category name");
@@ -160,18 +161,18 @@ public class C206_CaseStudy {
 		}
 		//create constructor based on whether there is duplicate
 		if(duplicateName== true) {
-			Course newCategory=new Course(newCat,description);
+			Category newCategory=new Category(newCat,description);
 			CategoryList.add(newCategory);
 		}
 		else if(duplicateName == false) {
-			Course newCategory=new Course(category,description);
+			Category newCategory=new Category(category,description);
 			CategoryList.add(newCategory);
 		}
 		
 		String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION"
 				);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output+=String.format("%10s %30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			output+=String.format("%10s %30s\n",CategoryList.get(i).getName(),CategoryList.get(i).getDescription());
 			
 		}
 		System.out.println(output);
@@ -179,22 +180,22 @@ public class C206_CaseStudy {
 	}
 	
 
-	public static void viewAllCourseCategory(ArrayList<Course> CategoryList) {
+	public static void viewAllCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Viewing Course Category");
 		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
 				);
 		boolean exist= false;
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getName(),CategoryList.get(i).getDescription());
 			
 		}
 		System.out.println(output);
 		
 		String categoryChoose=Helper.readString("Enter the category name to view category");
 		for (int i = 0; i < CategoryList.size(); i++) {
-			if(CategoryList.get(i).getCategory().equalsIgnoreCase(categoryChoose)) {
+			if(CategoryList.get(i).getName().equalsIgnoreCase(categoryChoose)) {
 				System.out.println("Category Found !");
-				System.out.println("Category name:"+CategoryList.get(i).getCategory()+"\n"+"Category description:"+CategoryList.get(i).getDescription());
+				System.out.println("Category name:"+CategoryList.get(i).getName()+"\n"+"Category description:"+CategoryList.get(i).getDescription());
 				exist=true;
 			}
 			
@@ -207,21 +208,21 @@ public class C206_CaseStudy {
 		}
 
 	
-	public static void DeleteACourseCategory(ArrayList<Course> CategoryList) {
+	public static void DeleteACourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Deleting Course Category");
 		String result="";
 		boolean exist=false;
 		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
 				);
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getName(),CategoryList.get(i).getDescription());
 			
 		}
 		System.out.println(output);
 		int numberToDelete=0;
 		String category=Helper.readString("Enter a  category name to delete from ");
 		for (int i = 0; i < CategoryList.size(); i++) {
-			if(CategoryList.get(i).getCategory().equalsIgnoreCase(category)) {
+			if(CategoryList.get(i).getName().equalsIgnoreCase(category)) {
 				numberToDelete=i;
 				exist=true;
 			}
