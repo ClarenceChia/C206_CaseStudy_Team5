@@ -1,11 +1,40 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
+	
+	private static final int OPTION_QUIT = 5;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
+		int option = 0;
+
+		while (option != OPTION_QUIT) {
+
+			//menu
+			option = Helper.readInt("Enter an option > ");
+
+			if (option == 1) {
+				//
+				
+			} else if (option == 2) {
+				// 
+
+			} else if (option == 3) {
+				//
+
+			} else if (option == 4) {
+				//
+
+			} else if (option == OPTION_QUIT) {
+				System.out.println("Bye!");
+				
+			} else {
+				System.out.println("Invalid option");
+			}
+
+		}
+
 	} //main
 	
 	private static ArrayList<Course> courses = new ArrayList<>();
