@@ -74,9 +74,9 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 	
-	//Member 1
+	//Member 1 - Clarence
 	 
-	//Member 2
+	//Member 2 - Caven
 	ArrayList<Course> CategoryList = new ArrayList<Course>();
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
 		String category=Helper.readString("Enter a new category name");
@@ -192,7 +192,7 @@ public class C206_CaseStudy {
 	
 	//Delete course schedule
 	
-	//- Member 5
+	//Member 5 - Rongxin 
 	
 	
 
