@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-=======
 import java.util.ArrayList;
->>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
 
 public class C206_CaseStudy {
 	
