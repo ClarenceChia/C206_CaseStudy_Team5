@@ -22,7 +22,6 @@ public class registerSchedule {
 	public registerSchedule(String registrationNumber,
 	String scheduleId,
 	String memberEmail,
-	String status,
 	Date registerDate) {
 		this.registrationNumber = registrationNumber;
 		this.scheduleId = scheduleId;
