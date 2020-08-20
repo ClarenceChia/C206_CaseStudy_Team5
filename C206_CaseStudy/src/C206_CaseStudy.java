@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+=======
 import java.util.ArrayList;
+>>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
 
 public class C206_CaseStudy {
 	
@@ -93,13 +98,21 @@ public class C206_CaseStudy {
 	}
 	
 	
-	//Member 4
-	
+	//Member 4 - Sabrina
 	//Add course schedule with the following information
 	//course schedule id, price, start date/time, end date/time, location
+	String scheduleid = Helper.readString("Course schedule ID > ");
+	double price = Helper.readDouble("Price > ");
+	String start = Helper.readString("Start date/time (DD/MM/YYYY)");
+	String end = Helper.readString("End date/time (DD/MM/YYYY)");
+	String location = Helper.readString("Course location > ");
 	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
 	
 	//View course schedule
+	
+	
+	
 	
 	//Delete course schedule
 	
