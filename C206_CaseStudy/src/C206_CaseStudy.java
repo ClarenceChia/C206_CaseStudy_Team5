@@ -540,7 +540,7 @@ public class C206_CaseStudy {
 
 				System.out.println("Registration number existed");
 			}
-
+  
 		}
 	}
 

@@ -108,7 +108,7 @@ public class C206_CaseStudyTest {
 						assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
 						
 				
-		
+		   
 	}
 	public void delrTest() {
 		// reglist is not null, so that can add a new item
