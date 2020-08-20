@@ -2,6 +2,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class C206_CaseStudy {
 	
@@ -10,6 +11,8 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		ArrayList<Course> courses = new ArrayList<>();
+		
 		int option = 0;
 
 		while (option != OPTION_QUIT) {
@@ -41,7 +44,6 @@ public class C206_CaseStudy {
 
 	} //main
 	
-	private static ArrayList<Course> courses = new ArrayList<>();
 	
 	private static void menu() {
 		setHeader("COURSE APP");
@@ -60,11 +62,11 @@ public class C206_CaseStudy {
 	}
 	
 	//Member 1
-	
+	 
 	//Member 2
 	
 	//Member 3
-	public static String retrieveCourses() {
+	public static String retrieveCourses(List<Course> courses) {
 		String output =  String.format("%-10s %-10s %-10s %-10s %-10.2f %-10s\n", 
 				"Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		Helper.line(20, "-");
@@ -74,10 +76,9 @@ public class C206_CaseStudy {
 		return output;
 	}
 	
-	public static void viewCourses() {
+	public static void viewCourses(List<Course> courses) {
 		setHeader("Courses");
-		System.out.println(retrieveCourses();
-		System.out.println(output);
+		System.out.println(retrieveCourses(courses));
 	}
 	
 	public static void addCourse() {
