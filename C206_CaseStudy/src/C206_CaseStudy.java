@@ -303,24 +303,57 @@ public class C206_CaseStudy {
 	}
 	
 	
-	//Member 4 - Sabrina
-	//Add course schedule with the following information
-	//course schedule id, price, start date/time, end date/time, location
-	String scheduleid = Helper.readString("Course schedule ID > ");
-	double price = Helper.readDouble("Price > ");
-	String start = Helper.readString("Start date/time (DD/MM/YYYY)");
-	String end = Helper.readString("End date/time (DD/MM/YYYY)");
-	String location = Helper.readString("Course location > ");
-	
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
-	
-	//View course schedule
-	
-	
-	
-	
-	//Delete course schedule
-	
+	// Member 4 - Sabrina
+	public static String retrieveCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = "";
+
+		for (int i = 0; i < scheduleList.size(); i++) {
+
+			output += String.format("%-15s %-15d %-15s %-15s %-15s\n", scheduleList.get(i).getScheduleID(),
+					scheduleList.get(i).getPrice(), scheduleList.get(i).getStartDateTime(),
+					scheduleList.get(i).getEndDateTime(), scheduleList.get(i).getLocation());
+		}
+		return output;
+	}
+
+	// Add course schedule with the following information
+	public static void addCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String scheduleid = Helper.readString("Course schedule ID > ");
+		double price = Helper.readDouble("Price > ");
+		String start = Helper.readString("Start date/time (DD/MMM/YYY  HH:MM)");
+		String end = Helper.readString("End date/time (DD/MMM/YYY  HH:MM)");
+		String location = Helper.readString("Course location > ");
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
+		LocalDateTime startDT = LocalDateTime.parse(start, formatter);
+		LocalDateTime endDT = LocalDateTime.parse(end, formatter);
+
+		CourseSchedule cc = new CourseSchedule(scheduleid, price, startDT, endDT, location);
+		scheduleList.add(cc);
+		System.out.println("Schedule added");
+	}
+
+	// View course schedule
+	public static void viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = String.format("%-15s %-15s %-15s %-15s %-15s\n", "COURSE SCHEDULE ID", "PRICE",
+				"START DATE TIME", "END DATE TIME", "LOCATION");
+		output += retrieveCourseSchedule(scheduleList);
+		System.out.println(output);
+	}
+
+	// Delete course schedule
+	public static void deleteCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String scheduleid = Helper.readString("Course schedule ID > ");
+		char yOrN = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
+
+		if (yOrN == 'Y' && yOrN == 'y') {
+			for (int i = 0; i < scheduleList.size(); i++) {
+				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
+					scheduleList.remove(i);
+				}
+			}
+		}
+	}
 	//Member 5 - Rongxin 
 public static void regSche() {
 		
