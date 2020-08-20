@@ -2,18 +2,28 @@ import java.time.LocalDateTime;
 
 public class CourseSchedule {
 	
+	String scheduleID;
 	double price;
 	LocalDateTime startDateTime;
 	LocalDateTime endDateTime; 
 	String location;
 	
-	public CourseSchedule(double price, LocalDateTime startDateTime, LocalDateTime endDateTime, String location) {
+	public CourseSchedule(String scheduleID, double price, LocalDateTime startDateTime, LocalDateTime endDateTime, String location) {
+		this.scheduleID = scheduleID;
 		this.price = price;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.location = location;
 	}
 	
+	public String getScheduleID() {
+		return scheduleID;
+	}
+
+	public void setScheduleID(String scheduleID) {
+		this.scheduleID = scheduleID;
+	}
+
 	public double getPrice() {
 		return price;
 	}
