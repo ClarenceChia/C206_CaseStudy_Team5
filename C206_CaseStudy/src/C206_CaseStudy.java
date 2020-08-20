@@ -22,7 +22,8 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				//
+				//view courses
+				viewCourses(courses);
 				
 			} else if (option == 2) {
 				// 
@@ -66,10 +67,9 @@ public class C206_CaseStudy {
 	//Member 2
 	
 	//Member 3
-	public static String retrieveCourses(List<Course> courses) {
-		String output =  String.format("%-10s %-10s %-10s %-10s %-10.2f %-10s\n", 
+	private static String retrieveCourses(List<Course> courses) {
+		String output =  String.format("%-10s %-10s %-10s %-10s %-10s %-10s\n", 
 				"Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-		Helper.line(20, "-");
 		for (Course c : courses) {
 			output += c.toString() + "\n";
 		}
