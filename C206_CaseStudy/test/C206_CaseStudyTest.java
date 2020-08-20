@@ -8,13 +8,14 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 	
-	//member2-caven
+	//Member 2 - Caven
 	private Category c1;
 	private Category c2;
 	private Category c3;
 	private Category c4;
 	private ArrayList<Category> categoryList;
 	
+	//Member 3 - Daryl
 	private Course c001;
 	private Course c002;
 	private ArrayList<Course> courseList;
@@ -22,18 +23,19 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
-		//member 2- caven
+		//Member 2 - Caven
 		categoryList = new ArrayList<Category>();
 		c1 = new Category("Math","All about solving painful question");
 		c2 = new Category("English Life","All about reading english history");
-		 
+		
+		//Member 3 - Daryl
 		courseList = new ArrayList<Course>();
 		c001 = new Course("C001", "Software Devpt", "Infocomm", "Develo..", 120, "Math"); 
 		c002 = new Course("C002", "Applied Chem", "Applied Science", "pharmace..", 120, "Chemistry"); 
 	
 	}
 	
-	// member 2 - caven
+	//Member 2 - Caven
 	@Test
 	public void addCategoryTest() {
 		categoryList.add(c1);
@@ -78,7 +80,7 @@ public class C206_CaseStudyTest {
 		
 	}
 	
-	//member - 3
+	//Member 3 - Daryl
 	@Test
 	public void retrieveCoursesTest() {
 		//Boundary
@@ -164,10 +166,18 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
-		//member 2 -caven
+		//Member 2 - Caven 
 		c1 = null;
 		c2 = null;
-		categoryList=null;
+		categoryList = null;
+		
+		//Member 3 - Daryl
+		c3 = null;
+		c4 = null;
+		c001 = null;
+		c002 = null;
+		courseList = null;
+		
 	}
 
 	@Test
