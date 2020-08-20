@@ -19,7 +19,9 @@ import java.util.List;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_QUIT = 5;
+	private static final int OPTION_QUIT = 6;
+	private static final int OPTION1_QUIT = 4;
+
 	static ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
@@ -27,59 +29,167 @@ public class C206_CaseStudy {
 
 		ArrayList<Course> courses = new ArrayList<>();
 		ArrayList<Course> CategoryList = new ArrayList<Course>();
+		ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 		
 		int option = 0;
-
 		while (option != OPTION_QUIT) {
-
-			//menu
-			menu();
+			mainMenu();
 			option =  Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				//view courses
-				viewCourses(courses);
-				
+				//member 1 menu
+				int option1 = 0;
+				while (option1 != OPTION1_QUIT) {
+					//insert menu
+					option1 =  Helper.readInt("Enter an option > ");
+					if (option1 == 1) {
+						viewMembers(members);
+					} else if (option1 == 2) {
+						addMembers(members);
+					} else if (option1 == 3) {
+						deleteMember(members);
+					} else if (option1 == OPTION1_QUIT) {
+							System.out.println("Bye!");
+					} else {
+							System.out.println("Invalid option");
+					}
+				} 
 			} else if (option == 2) {
-
-				//
-				// add course
-				addCourse(courses);
-
-
+				//member 2 menu
+				int option2 = 0;
+				while (option2 != OPTION1_QUIT) {
+					//insert menu
+					option2 =  Helper.readInt("Enter an option > ");
+					if (option2 == 1) {
+						
+					} else if (option2 == 2) {
+						
+					} else if (option2 == 3) {
+						
+					} else if (option2 == OPTION1_QUIT) {
+							System.out.println("Bye!");
+					} else {
+							System.out.println("Invalid option");
+				}
 			} else if (option == 3) {
-				// delete course
-				deleteCourse(courses);
-
+				//member 3 menu
+				int option3 = 0;
+				while (option3 != OPTION1_QUIT) {
+					//insert menu
+					option3 =  Helper.readInt("Enter an option > ");
+					if (option3 == 1) {
+						
+					} else if (option3 == 2) {
+						
+					} else if (option3 == 3) {
+						
+					} else if (option3 == OPTION1_QUIT) {
+							System.out.println("Bye!");
+					} else {
+							System.out.println("Invalid option");
+				}
 			} else if (option == 4) {
-				//d
-				regSche();
-				viewAllr();
-
+				//member 4 menu
+				int option4 = 0;
+				while (option4 != OPTION1_QUIT) {
+					//insert menu
+					courseScheduleMenu();
+					option4 =  Helper.readInt("Enter an option > ");
+					if (option4 == 1) {
+						viewCourseSchedule(scheduleList);
+					} else if (option4 == 2) {
+						addCourseSchedule(scheduleList);
+					} else if (option4 == 3) {
+						deleteCourseSchedule(scheduleList);
+					} else if (option4 == OPTION1_QUIT) {
+							System.out.println("Bye!");
+					} else {
+							System.out.println("Invalid option");
+					}
+				}
+			} else if (option == 5) {
+				//member 5 menu
+				int option5 = 0;
+				while (option5 != OPTION1_QUIT) {
+					//insert menu
+					option5 =  Helper.readInt("Enter an option > ");
+					if (option5 == 1) {
+						
+					} else if (option5 == 2) {
+						
+					} else if (option5 == 3) {
+						
+					} else if (option5 == OPTION1_QUIT) {
+							System.out.println("Bye!");
+					} else {
+							System.out.println("Invalid option");
+				}
 			} 
-			
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
-				
 			} else {
 				System.out.println("Invalid option");
 			}
-
 		}
 
 	} //main
 	
-	
-	private static void menu() {
-		setHeader("COURSE APP");
-		System.out.println("1. View Courses");
-		System.out.println("2. Add Course");
-		System.out.println("3. Delete Course");
-		System.out.println("4. Register ");
+	private static void mainMenu() {
+		setHeader("MAIN MENU");
+		System.out.println("1. Members Menu");
+		System.out.println("2. Course Category Menu");
+		System.out.println("3. Courses App");
+		System.out.println("4. Course Schedule Menu ");
+		System.out.println("5. ");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
 	}
+		
+	private static void membersMenu() {
+		setHeader("MEMBERS APP");
+		System.out.println("1. View Members");
+		System.out.println("2. Add Members");
+		System.out.println("3. Delete Members");
+		System.out.println("4. Quit ");
+		Helper.line(80, "-");
+	}
 	
+	private static void courseCategoryMenu() {
+		setHeader("COURSE CATEGORY APP");
+		System.out.println("1. View Course Categories");
+		System.out.println("2. Add Course Category");
+		System.out.println("3. Delete Course Category");
+		System.out.println("4. Quit");
+		Helper.line(80, "-");
+	}
+	
+	private static void courseMenu() {
+		setHeader("COURSES APP");
+		System.out.println("1. View Courses");
+		System.out.println("2. Add Course");
+		System.out.println("3. Delete Course");
+		System.out.println("4. Quit");
+		Helper.line(80, "-");
+	}
+	
+	private static void courseScheduleMenu() {
+		setHeader("COURSE SCHEDULE APP");
+		System.out.println("1. View Course Schedules");
+		System.out.println("2. Add Course Schedule");
+		System.out.println("3. Delete Course Schedule");
+		System.out.println("4. Quit");
+		Helper.line(80, "-");
+	}
+	
+	private static void registerScheduleMenu() {
+		setHeader("COURSE SCHEDULE APP");
+		System.out.println("1. ");
+		System.out.println("2. ");
+		System.out.println("3. ");
+		System.out.println("4. Quit");
+		Helper.line(80, "-");
+	}
+
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
 		System.out.println(header);
@@ -354,6 +464,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	
 	//Member 5 - Rongxin 
 public static void regSche() {
 		
