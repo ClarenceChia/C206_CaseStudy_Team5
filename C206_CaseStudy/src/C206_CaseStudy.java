@@ -12,6 +12,7 @@ public class C206_CaseStudy {
 		while (option != OPTION_QUIT) {
 
 			//menu
+			menu();
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
@@ -39,6 +40,22 @@ public class C206_CaseStudy {
 	
 	private static ArrayList<Course> courses = new ArrayList<>();
 	
+	private static void menu() {
+		setHeader("COURSE APP");
+		System.out.println("1. View Courses");
+		System.out.println("2. Add Course");
+		System.out.println("3. Delete Course");
+		//System.out.println("4. ");
+		System.out.println("5. Quit");
+		Helper.line(80, "-");
+	}
+	
+	public static void setHeader(String header) {
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+	
 	//Member 1
 	
 	//Member 2
@@ -55,8 +72,8 @@ public class C206_CaseStudy {
 	}
 	
 	public static void viewCourses() {
-		String output = "Courses\n";
-		output += retrieveCourses();
+		setHeader("Courses");
+		System.out.println(retrieveCourses();
 		System.out.println(output);
 	}
 	
