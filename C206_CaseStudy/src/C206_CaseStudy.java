@@ -164,7 +164,7 @@ public class C206_CaseStudy {
 	}
 	
 	private static void courseMenu() {
-		setHeader("COURSES APP");
+		setHeader("MANAGES COURSES");
 		System.out.println("1. View Courses");
 		System.out.println("2. Add Course");
 		System.out.println("3. Delete Course");
