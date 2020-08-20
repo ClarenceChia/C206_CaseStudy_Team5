@@ -22,6 +22,7 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 
 		ArrayList<Course> courses = new ArrayList<>();
+		ArrayList<Course> CategoryList = new ArrayList<Course>();
 		
 		int option = 0;
 
@@ -36,7 +37,8 @@ public class C206_CaseStudy {
 				viewCourses(courses);
 				
 			} else if (option == 2) {
-				// 
+				//
+				
 
 			} else if (option == 3) {
 				//
@@ -75,7 +77,7 @@ public class C206_CaseStudy {
 	//Member 1
 	 
 	//Member 2
-	ArrayList<Course> CategoryList = new ArrayList<Course>();
+	
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
@@ -113,6 +115,31 @@ public class C206_CaseStudy {
 		
 			
 		}
+	
+	public static void DeleteACourseCategory(ArrayList<Course> CategoryList) {
+		for (int i = 0; i < CategoryList.size(); i++) {
+			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+					);
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			System.out.println(output);
+		}
+		String category=Helper.readString("Enter a  category name to delete from ");
+		for (int i = 0; i < CategoryList.size(); i++) {
+			if(CategoryList.get(i).getCategory().equalsIgnoreCase(category)) {
+				CategoryList.remove(i);
+			}
+		}
+		for (int i = 0; i < CategoryList.size(); i++) {
+			String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+					);
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getDescription(),CategoryList.get(i).getDescription());
+			System.out.println(output);
+		}
+		
+		
+	}
+		
+
 	
 	
 	
