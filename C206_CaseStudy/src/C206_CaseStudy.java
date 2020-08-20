@@ -1,6 +1,10 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
@@ -16,6 +20,7 @@ import java.util.List;
 public class C206_CaseStudy {
 	
 	private static final int OPTION_QUIT = 5;
+	ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
