@@ -19,7 +19,7 @@ import java.util.List;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_QUIT = 10;
+	private static final int OPTION_QUIT = 5;
 	static ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
@@ -56,20 +56,7 @@ public class C206_CaseStudy {
 				regSche();
 				viewAllr();
 
-			}
-			else if (option == 5) {
-				//Add new Course Category
-				AddCourseCategory(CategoryList);
-			}
-			else if (option == 6) {
-				//View all Course Category
-				viewAllCourseCategory(CategoryList);
-			}
-			else if (option == 7) {
-				//Delete Course Category
-				DeleteACourseCategory(CategoryList);
-			}
-			
+			} 
 			
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
@@ -89,10 +76,7 @@ public class C206_CaseStudy {
 		System.out.println("2. Add Course");
 		System.out.println("3. Delete Course");
 		System.out.println("4. Register ");
-		System.out.println("5. Add new Course Category ");
-		System.out.println("6. View Course Category ");
-		System.out.println("7. Delete Course Category ");
-		System.out.println("10. Quit");
+		System.out.println("5. Quit");
 		Helper.line(80, "-");
 	}
 	
@@ -103,11 +87,62 @@ public class C206_CaseStudy {
 	}
 	
 	//Member 1 - Clarence
-	 
+	private static String retrieveMembers(List<Member> members) {
+		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s", "Name", "Gender", "Mobile", "Email", "Date of Birth", "Country");
+		for (Member m : members) {
+			output+= m.toString();
+		}
+		return output;
+	}
+	
+	public static void viewMembers(List<Member> members) {
+		setHeader("Members");
+		System.out.println(retrieveMembers(members));
+	}
+	
+	public static void addMembers(List<Member> members) {
+		setHeader("Register Member");
+		System.out.println("\n");
+		
+		String name = Helper.readString("Enter name > ");
+		char gender = Helper.readChar("Enter gender (M/F) > ");
+		int mobile = Helper.readInt("Enter mobile number > ");
+		String email = Helper.readString("Enter email > ");
+		String dob = Helper.readString("Enter date of birth(DD/MM/YYYY) > ");
+		String country = Helper.readString("Enter Country of residence > ");
+		
+		Member newMember = new Member(name, gender, mobile, email, dob, country);
+		members.add(newMember);
+		System.out.println("Member added");
+	}
+	
+	public static void deleteMember(List<Member> members) {
+		setHeader("Delete Member");
+		viewMembers(members);
+		
+		String name = Helper.readString("Name > ");
+		boolean isFound = false;
+		Member member = null;
+		for (Member m : members) {
+			if(m.getName().equals(name)) {
+				isFound = true;
+				member = m;
+				break;
+			}
+		}
+		if (isFound) {
+			members.remove(member);
+			System.out.println("Member Deleted");
+		} else {
+			System.out.println("Invalid Member");
+		}
+	}
 
 
 	//Member 2 - Caven
+	ArrayList<Course> CategoryList = new ArrayList<Course>();
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
+
 		setHeader("Add Course Category");
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
@@ -146,9 +181,26 @@ public class C206_CaseStudy {
 	}
 	
 
+
+		String category=Helper.readString("Enter a new category name");
+		String description=Helper.readString("Enter description for the new category");
+		Course newCategory= new Course(category,description);
+		CategoryList.add(newCategory);
+		for (int i = 0; i < CategoryList.size(); i++) {
+			String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION"
+					);
+			output+=String.format("%10s %30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			System.out.println(output);
+		}
+		
+	}
+	
+
+
 	public static void viewAllCourseCategory(ArrayList<Course> CategoryList) {
 		setHeader("Viewing Course Category");
 		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+
 				);
 		boolean exist= false;
 		for (int i = 0; i < CategoryList.size(); i++) {
@@ -171,6 +223,27 @@ public class C206_CaseStudy {
 		}
 		
 			
+
+				);
+		for (int i = 0; i < CategoryList.size(); i++) {
+			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
+			System.out.println(output);
+		}
+		
+		String categoryChoose=Helper.readString("Enter the category name to view category");
+		for (int i = 0; i < CategoryList.size(); i++) {
+			if(CategoryList.get(i).getCategory().equalsIgnoreCase(categoryChoose)) {
+				System.out.println("Category Found !");
+				System.out.println("Category name:"+CategoryList.get(i).getCategory()+"\n"+"Category description:"+CategoryList.get(i).getDescription());
+				
+			}
+			else {
+				System.out.println("No such Category Found !");
+			}
+		}
+		
+			
+
 		}
 
 	
@@ -206,6 +279,7 @@ public class C206_CaseStudy {
 		
 		
 	}
+		
 
 	
 	
