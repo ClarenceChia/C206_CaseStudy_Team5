@@ -138,7 +138,7 @@ public class C206_CaseStudy {
 		setHeader("MAIN MENU");
 		System.out.println("1. Members Menu");
 		System.out.println("2. Course Category Menu");
-		System.out.println("3. Courses App");
+		System.out.println("3. Manage Courses");
 		System.out.println("4. Course Schedule Menu ");
 		System.out.println("5. Register Menu");
 		System.out.println("6. Quit");
