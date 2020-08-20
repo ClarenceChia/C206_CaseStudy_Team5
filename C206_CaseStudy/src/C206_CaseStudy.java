@@ -26,10 +26,11 @@ public class C206_CaseStudy {
 				viewCourses(courses);
 				
 			} else if (option == 2) {
-				// 
+				// add course
+				addCourse(courses);
 
 			} else if (option == 3) {
-				//
+				// delete course
 
 			} else if (option == 4) {
 				//
@@ -68,10 +69,10 @@ public class C206_CaseStudy {
 	
 	//Member 3 - Daryl
 	private static String retrieveCourses(List<Course> courses) {
-		String output =  String.format("%-10s %-10s %-10s %-10s %-10s %-10s\n", 
+		String output =  String.format("%-10s %-20s %-20s %-20s %-10s %-20s\n", 
 				"Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		for (Course c : courses) {
-			output += c.toString() + "\n";
+			output += c.toString();
 		}
 		return output;
 	}
@@ -81,7 +82,8 @@ public class C206_CaseStudy {
 		System.out.println(retrieveCourses(courses));
 	}
 	
-	public static void addCourse() {
+	public static void addCourse(List<Course> courses) {
+		setHeader("Add Course");
 		System.out.println("Enter Course Information\n");
 		//course information
 		String id = Helper.readString("ID : ");
@@ -90,10 +92,9 @@ public class C206_CaseStudy {
 		String desc = Helper.readString("Description : ");
 		double duration = Helper.readDouble("Duration : ");
 		String preCourse = Helper.readString("Pre-requisite Course : ");
-		//insert course
+		//add course
 		Course newCourse = new Course(id, title, category, desc, duration, preCourse);
-		
-		
+		courses.add(newCourse);
 	}
 	
 	
