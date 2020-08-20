@@ -140,9 +140,7 @@ public class C206_CaseStudy {
 
 
 	//Member 2 - Caven
-	ArrayList<Course> CategoryList = new ArrayList<Course>();
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
-
 		setHeader("Add Course Category");
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
@@ -181,26 +179,9 @@ public class C206_CaseStudy {
 	}
 	
 
-
-		String category=Helper.readString("Enter a new category name");
-		String description=Helper.readString("Enter description for the new category");
-		Course newCategory= new Course(category,description);
-		CategoryList.add(newCategory);
-		for (int i = 0; i < CategoryList.size(); i++) {
-			String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION"
-					);
-			output+=String.format("%10s %30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
-			System.out.println(output);
-		}
-		
-	}
-	
-
-
 	public static void viewAllCourseCategory(ArrayList<Course> CategoryList) {
 		setHeader("Viewing Course Category");
 		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
-
 				);
 		boolean exist= false;
 		for (int i = 0; i < CategoryList.size(); i++) {
@@ -223,27 +204,6 @@ public class C206_CaseStudy {
 		}
 		
 			
-
-				);
-		for (int i = 0; i < CategoryList.size(); i++) {
-			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getCategory(),CategoryList.get(i).getDescription());
-			System.out.println(output);
-		}
-		
-		String categoryChoose=Helper.readString("Enter the category name to view category");
-		for (int i = 0; i < CategoryList.size(); i++) {
-			if(CategoryList.get(i).getCategory().equalsIgnoreCase(categoryChoose)) {
-				System.out.println("Category Found !");
-				System.out.println("Category name:"+CategoryList.get(i).getCategory()+"\n"+"Category description:"+CategoryList.get(i).getDescription());
-				
-			}
-			else {
-				System.out.println("No such Category Found !");
-			}
-		}
-		
-			
-
 		}
 
 	
@@ -279,7 +239,6 @@ public class C206_CaseStudy {
 		
 		
 	}
-		
 
 	
 	
