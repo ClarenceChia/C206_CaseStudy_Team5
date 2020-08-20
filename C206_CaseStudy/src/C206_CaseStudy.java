@@ -1,7 +1,10 @@
 
 import java.util.ArrayList;
-
-
+import java.util.Date;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
@@ -17,6 +20,7 @@ import java.util.List;
 public class C206_CaseStudy {
 	
 	private static final int OPTION_QUIT = 5;
+	ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -80,12 +84,17 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 	
-	//Member 1
+	//Member 1 - Clarence
 	 
+
 	//Member 2
 	
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
 		setHeader("Add Course Category");
+
+	//Member 2 - Caven
+	ArrayList<Course> CategoryList = new ArrayList<Course>();
+	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
 		Course newCategory= new Course(category,description);
@@ -229,8 +238,74 @@ public class C206_CaseStudy {
 	
 	//Delete course schedule
 	
-	//- Member 5
+	//Member 5 - Rongxin 
+public static void regSche() {
+		
+		String rn = Helper.readString("Enter a registration number > ");
+		String sid = Helper.readString("Enter a course schedule id > ");
+		String memail = Helper.readString("Enter your email > ");
+		Date rdate = Helper.readDate("Enter a today's date > " );
+		boolean flag = false;
+		String op = "";
+		
+		for(registerSchedule i :list) {
+			if(!rn.equalsIgnoreCase(i.getRegistrationNumber())) {
+			i.setRegistrationNumber(rn);
+			i.setScheduleId(sid);
+			i.setMemberEmail(memail);
+			i.setRegisterDate(rdate);
+			op+= String.format("\n%s\n%s\n%s\n%s\n%s", i.getRegistrationNumber(),i.getScheduleId(),
+					i.getMemberEmail(),i.getStatus(),i.getRegisterDate());
+			flag = true;
+			System.out.println("Register triumph");
+			}else {
+				System.out.println("Registration number existed");
+			}
+		}
+		if(flag == true) {
+			saveDetail(op);
+		}
+	}
 	
+	static void saveDetail(String result) {
+		System.out.println("Saving to file...");
+		try {
+			File file = new File("RegistrationDetails.txt");
+			FileWriter fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			bw.write(result);
+			bw.close();
+			
+			System.out.println("Detail saved successful!");
+
+		} catch (IOException io) {
+			System.out.println("There was an error saving to the detail.");
+		}
+	}
+	static void viewAllr() {
+		System.out.printf("%-30s %-20s %-20s %-35s %-20s","Registration Number",
+				"Schedule ID","Member Email","Status","Registerion Date");
+		for(registerSchedule i :list) {
+			System.out.printf("%-30s %-20s %-20s %-35s %-20s",i.getRegistrationNumber(),i.getScheduleId(),
+					i.getMemberEmail(),i.getStatus(),i.getRegisterDate());
+		}
+	}
+	static void delr() {
+		String del = Helper.readString("Enter the registration number to delete > ");
+		for(registerSchedule i :list) {
+			if(del.equalsIgnoreCase(i.registrationNumber)) {
+				i.setRegistrationNumber(null);
+				i.setScheduleId(null);
+				i.setMemberEmail(null);
+				i.setStatus("Deleted");
+				i.setRegisterDate(null);
+				
+			}else {
+				System.out.println("Invalid registration numbe entered");
+			}
+		}
+	}
 	
 
 }
