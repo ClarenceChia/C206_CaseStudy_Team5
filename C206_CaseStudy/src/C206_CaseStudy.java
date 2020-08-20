@@ -16,6 +16,14 @@ public class C206_CaseStudy {
 	
 	//Member 4
 	
+	//Add course schedule with the following information
+	//course schedule id, price, start date/time, end date/time, location
+	
+	
+	//View course schedule
+	
+	//Delete course schedule
+	
 	//- Member 5
 	
 	
