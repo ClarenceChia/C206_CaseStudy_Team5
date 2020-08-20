@@ -417,27 +417,15 @@ public class C206_CaseStudy {
 	}
 
 	// Member 4 - Sabrina
-	public static String retrieveCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
-		String output = "";
-
-		for (int i = 0; i < scheduleList.size(); i++) {
-
-			output += String.format("%-15s %-15d %-15s %-15s %-15s\n", scheduleList.get(i).getScheduleID(),
-					scheduleList.get(i).getPrice(), scheduleList.get(i).getStartDateTime(),
-					scheduleList.get(i).getEndDateTime(), scheduleList.get(i).getLocation());
-		}
-		return output;
-	}
-
-	// Add course schedule with the following information
+	// Add course schedule
 	public static void addCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID > ");
 		double price = Helper.readDouble("Price > ");
-		String start = Helper.readString("Start date/time (DD/MMM/YYY  HH:MM)");
-		String end = Helper.readString("End date/time (DD/MMM/YYY  HH:MM)");
+		String start = Helper.readString("Start date/time (yyyy-MM-dd HH:mm) > ");
+		String end = Helper.readString("End date/time (yyyy-MM-dd HH:mm) > ");
 		String location = Helper.readString("Course location > ");
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime startDT = LocalDateTime.parse(start, formatter);
 		LocalDateTime endDT = LocalDateTime.parse(end, formatter);
 
@@ -448,9 +436,19 @@ public class C206_CaseStudy {
 
 	// View course schedule
 	public static void viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
-		String output = String.format("%-15s %-15s %-15s %-15s %-15s\n", "COURSE SCHEDULE ID", "PRICE",
+		String output = String.format("%-20s %-10s %-20s %-20s %-15s\n", 
+				"COURSE SCHEDULE ID", "PRICE",
 				"START DATE TIME", "END DATE TIME", "LOCATION");
-		output += retrieveCourseSchedule(scheduleList);
+		
+		for (int i = 0; i < scheduleList.size(); i++) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			String start = scheduleList.get(i).getStartDateTime().format(formatter);
+			String end = scheduleList.get(i).getEndDateTime().format(formatter);
+
+			output += String.format("%-20s $%-10.2f %-20s %-20s %-15s\n", scheduleList.get(i).getScheduleID(),
+					scheduleList.get(i).getPrice(), start, end, 
+					scheduleList.get(i).getLocation());
+		}
 		System.out.println(output);
 	}
 
@@ -467,7 +465,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	
+
 	// Member 5 - Rongxin
 	public static void regSche() {
 
