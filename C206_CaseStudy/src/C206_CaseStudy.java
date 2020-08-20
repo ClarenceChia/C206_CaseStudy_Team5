@@ -263,8 +263,8 @@ public class C206_CaseStudy {
 	}
 	
 	public static void addCourse(List<Course> courses) {
-		setHeader("Add Course");
-		System.out.println("Enter Course Information\n");
+		setHeader("Add Course\nEnter Course Information\n");
+		
 		//course information
 		String id = Helper.readString("ID : ");
 		String title = Helper.readString("Title : ");
@@ -272,17 +272,33 @@ public class C206_CaseStudy {
 		String desc = Helper.readString("Description : ");
 		double duration = Helper.readDouble("Duration : ");
 		String preCourse = Helper.readString("Pre-requisite Course : ");
+		
+		//check duplicates
+		boolean isDuplicate = false;
+		for (Course c : courses) {
+			if (c.getId().equals(id)) {
+				isDuplicate = true;
+				break;
+			}
+		}
+		
 		//add course
-		Course newCourse = new Course(id, title, category, desc, duration, preCourse);
-		courses.add(newCourse);
-		System.out.println("Course Added.");
+		if (!isDuplicate) {
+			Course newCourse = new Course(id, title, category, desc, duration, preCourse);
+			courses.add(newCourse);
+			System.out.println("Course Added.");
+		} else {
+			System.out.println("Course Already Exists.");
+		}
 	}
 	
 	public static void deleteCourse(List<Course> courses) {
 		setHeader("Delete Course");
 		viewCourses(courses);
+		
 		//course id 
 		String id = Helper.readString("Course ID : ");
+		
 		//check course id is valid
 		boolean isFound = false;
 		Course course = null;
@@ -293,6 +309,7 @@ public class C206_CaseStudy {
 				break;
 			}
 		}
+		
 		//delete course
 		if (isFound) {
 			courses.remove(course);
