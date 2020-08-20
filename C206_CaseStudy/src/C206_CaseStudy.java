@@ -14,7 +14,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 6;
 	private static final int OPTION1_QUIT = 4;
 
-	static ArrayList<registerSchedule> list = new ArrayList<registerSchedule>();
+	static ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
