@@ -20,7 +20,7 @@ import java.util.List;
 public class C206_CaseStudy {
 	
 	private static final int OPTION_QUIT = 5;
-	ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
+	static ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -48,7 +48,9 @@ public class C206_CaseStudy {
 				deleteCourse(courses);
 
 			} else if (option == 4) {
-				//
+				//d
+				regSche();
+				viewAllr();
 
 			} else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
@@ -67,7 +69,7 @@ public class C206_CaseStudy {
 		System.out.println("1. View Courses");
 		System.out.println("2. Add Course");
 		System.out.println("3. Delete Course");
-		//System.out.println("4. ");
+		System.out.println("4. Register ");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
 	}
@@ -222,6 +224,7 @@ public static void regSche() {
 		}
 		if(flag == true) {
 			saveDetail(op);
+		
 		}
 	}
 	
@@ -242,10 +245,10 @@ public static void regSche() {
 		}
 	}
 	static void viewAllr() {
-		System.out.printf("%-30s %-20s %-20s %-35s %-20s","Registration Number",
+		System.out.printf("%-30s %-20s %-20s %-35s %-20s\n","Registration Number",
 				"Schedule ID","Member Email","Status","Registerion Date");
 		for(registerSchedule i :list) {
-			System.out.printf("%-30s %-20s %-20s %-35s %-20s",i.getRegistrationNumber(),i.getScheduleId(),
+			System.out.printf("%-30s %-20s %-20s %-35s %-20s\n",i.getRegistrationNumber(),i.getScheduleId(),
 					i.getMemberEmail(),i.getStatus(),i.getRegisterDate());
 		}
 	}
