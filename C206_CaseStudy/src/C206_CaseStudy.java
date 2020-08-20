@@ -445,12 +445,8 @@ public class C206_CaseStudy {
 		System.out.println("Schedule added");
 	}
 
-	// View course schedule
-	public static void viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
-		String output = String.format("%-20s %-10s %-20s %-20s %-15s\n", 
-				"COURSE SCHEDULE ID", "PRICE",
-				"START DATE TIME", "END DATE TIME", "LOCATION");
-		
+	public static String retrieveCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = "";
 		for (int i = 0; i < scheduleList.size(); i++) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			String start = scheduleList.get(i).getStartDateTime().format(formatter);
@@ -460,6 +456,15 @@ public class C206_CaseStudy {
 					scheduleList.get(i).getPrice(), start, end, 
 					scheduleList.get(i).getLocation());
 		}
+		return output;
+	}
+	
+	// View course schedule
+	public static void viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = String.format("%-20s %-10s %-20s %-20s %-15s\n", 
+				"COURSE SCHEDULE ID", "PRICE",
+				"START DATE TIME", "END DATE TIME", "LOCATION");
+		output += retrieveCourseSchedule(scheduleList);
 		System.out.println(output);
 	}
 
