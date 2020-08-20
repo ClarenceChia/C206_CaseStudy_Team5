@@ -19,8 +19,8 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		ArrayList<Course> courses = new ArrayList<>();
-		ArrayList<Member> members = new ArrayList<>();
+		ArrayList<Course> courseList = new ArrayList<>();
+		ArrayList<Member> memberList = new ArrayList<>();
 		ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 		ArrayList<Category> CategoryList = new ArrayList<Category>();
 		
@@ -37,11 +37,11 @@ public class C206_CaseStudy {
 					membersMenu();
 					option1 =  Helper.readInt("Enter an option > ");
 					if (option1 == 1) {
-						viewMembers(members);
+						viewMembers(memberList);
 					} else if (option1 == 2) {
-						addMembers(members);
+						addMembers(memberList);
 					} else if (option1 == 3) {
-						deleteMember(members);
+						deleteMember(memberList);
 					} else if (option1 == OPTION1_QUIT) {
 							System.out.println("Bye!");
 					} else {
@@ -75,11 +75,11 @@ public class C206_CaseStudy {
 					courseMenu();
 					option3 =  Helper.readInt("Enter an option > ");
 					if (option3 == 1) {
-						viewCourses(courses);
+						viewCourses(courseList);
 					} else if (option3 == 2) {
-						addCourse(courses);
+						addCourse(courseList, CategoryList);
 					} else if (option3 == 3) {
-						deleteCourse(courses);
+						deleteCourse(courseList);
 					} else if (option3 == OPTION1_QUIT) {
 							System.out.println("Bye!");
 					} else {
@@ -358,15 +358,15 @@ public class C206_CaseStudy {
 		System.out.println(retrieveCourses(courses));
 	}
 
-	public static void addCourse(List<Course> courses) {
+	public static void addCourse(List<Course> courses, List<Category> categories) {
 		setHeader("Add Course\nEnter Course Information\n");
 
 		// course information
-		String id = Helper.readString("ID : ");
-		String title = Helper.readString("Title : ");
-		String category = Helper.readString("Category Name : ");
-		String desc = Helper.readString("Description : ");
-		double duration = Helper.readDouble("Duration : ");
+		String id        = Helper.readString("ID : ");
+		String title     = Helper.readString("Title : ");
+		String category  = Helper.readString("Category Name : ");
+		String desc      = Helper.readString("Description : ");
+		double duration  = Helper.readDouble("Duration : ");
 		String preCourse = Helper.readString("Pre-requisite Course : ");
 
 		// check duplicates
@@ -377,14 +377,25 @@ public class C206_CaseStudy {
 				break;
 			}
 		}
+		
+		//check category exists
+		boolean isFound = false;
+		for (Category cat : categories) {
+			if (cat.name.equalsIgnoreCase(category)) {
+				isFound = true;
+				break;
+			} 
+		}
 
 		// add course
-		if (!isDuplicate) {
+		if (!isDuplicate && isFound) {
 			Course newCourse = new Course(id, title, category, desc, duration, preCourse);
 			courses.add(newCourse);
 			System.out.println("Course Added.");
-		} else {
+		} else if (isDuplicate) {
 			System.out.println("Course Already Exists.");
+		} else {
+			System.out.println("Invalid Category");
 		}
 	}
 
