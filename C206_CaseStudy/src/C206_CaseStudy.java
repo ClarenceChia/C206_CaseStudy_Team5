@@ -542,7 +542,7 @@ public class C206_CaseStudy {
 			}
   
 		}   
-	}
+	} 
 
 	static String viewAllr(ArrayList<registerSchedule> reglist) {
 		String op = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",

@@ -114,7 +114,7 @@ public class C206_CaseStudyTest {
 		// reglist is not null, so that can add a new item
 					assertNotNull("Test if there is valid a arraylist to add to", reglist);
 					
-					//add
+			 		//add
 					C206_CaseStudy.regSche(reglist,newReg);
 					//after delete, the size of the list should remain one
 					assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
