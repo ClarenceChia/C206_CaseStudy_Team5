@@ -19,42 +19,42 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		ArrayList<Course> courses = new ArrayList<>();
-		ArrayList<Member> members = new ArrayList<>();
+		ArrayList<Course> courseList = new ArrayList<>();
+		ArrayList<Member> memberList = new ArrayList<>();
 		ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 		ArrayList<Category> CategoryList = new ArrayList<Category>();
-		
+
 		int option = 0;
 		while (option != OPTION_QUIT) {
 			mainMenu();
-			option =  Helper.readInt("Enter an option > ");
+			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				//member 1 menu
+				// member 1 menu
 				int option1 = 0;
 				while (option1 != OPTION1_QUIT) {
-					//insert menu
+					// insert menu
 					membersMenu();
-					option1 =  Helper.readInt("Enter an option > ");
+					option1 = Helper.readInt("Enter an option > ");
 					if (option1 == 1) {
-						viewMembers(members);
+						viewMembers(memberList);
 					} else if (option1 == 2) {
-						addMembers(members);
+						addMembers(memberList);
 					} else if (option1 == 3) {
-						deleteMember(members);
+						deleteMember(memberList);
 					} else if (option1 == OPTION1_QUIT) {
-							System.out.println("Bye!");
+						System.out.println("Bye!");
 					} else {
-							System.out.println("Invalid option");
+						System.out.println("Invalid option");
 					}
-				} 
+				}
 			} else if (option == 2) {
-				//member 2 menu
+				// member 2 menu
 				int option2 = 0;
 				while (option2 != OPTION1_QUIT) {
-					//insert menu
+					// insert menu
 					courseCategoryMenu();
-					option2 =  Helper.readInt("Enter an option > ");
+					option2 = Helper.readInt("Enter an option > ");
 					if (option2 == 1) {
 						viewAllCourseCategory(CategoryList);
 					} else if (option2 == 2) {
@@ -62,37 +62,37 @@ public class C206_CaseStudy {
 					} else if (option2 == 3) {
 						DeleteACourseCategory(CategoryList);
 					} else if (option2 == OPTION1_QUIT) {
-							System.out.println("Bye!");
+						System.out.println("Bye!");
 					} else {
-							System.out.println("Invalid option");
+						System.out.println("Invalid option");
 					}
 				}
 			} else if (option == 3) {
-				//member 3 menu
+				// member 3 menu
 				int option3 = 0;
 				while (option3 != OPTION1_QUIT) {
-					//insert menu
+					// insert menu
 					courseMenu();
-					option3 =  Helper.readInt("Enter an option > ");
+					option3 = Helper.readInt("Enter an option > ");
 					if (option3 == 1) {
-						viewCourses(courses);
+						viewCourses(courseList);
 					} else if (option3 == 2) {
-						addCourse(courses);
+						addCourse(courseList, CategoryList);
 					} else if (option3 == 3) {
-						deleteCourse(courses);
+						deleteCourse(courseList);
 					} else if (option3 == OPTION1_QUIT) {
-							System.out.println("Bye!");
+						System.out.println("Bye!");
 					} else {
-							System.out.println("Invalid option");
+						System.out.println("Invalid option");
 					}
 				}
 			} else if (option == 4) {
-				//member 4 menu
+				// member 4 menu
 				int option4 = 0;
 				while (option4 != OPTION1_QUIT) {
-					//insert menu
+					// insert menu
 					courseScheduleMenu();
-					option4 =  Helper.readInt("Enter an option > ");
+					option4 = Helper.readInt("Enter an option > ");
 					if (option4 == 1) {
 						viewCourseSchedule(scheduleList);
 					} else if (option4 == 2) {
@@ -100,18 +100,18 @@ public class C206_CaseStudy {
 					} else if (option4 == 3) {
 						deleteCourseSchedule(scheduleList);
 					} else if (option4 == OPTION1_QUIT) {
-							System.out.println("Bye!");
+						System.out.println("Bye!");
 					} else {
-							System.out.println("Invalid option");
+						System.out.println("Invalid option");
 					}
 				}
 			} else if (option == 5) {
-				//member 5 menu
+				// member 5 menu
 				int option5 = 0;
 				while (option5 != OPTION1_QUIT) {
-					//insert menu
+					// insert menu
 					registerScheduleMenu();
-					option5 =  Helper.readInt("Enter an option > ");
+					option5 = Helper.readInt("Enter an option > ");
 					if (option5 == 1) {
 						viewAllr();
 					} else if (option5 == 2) {
@@ -119,32 +119,31 @@ public class C206_CaseStudy {
 					} else if (option5 == 3) {
 						delr();
 					} else if (option5 == OPTION1_QUIT) {
-							System.out.println("Bye!");
+						System.out.println("Bye!");
 					} else {
-							System.out.println("Invalid option");
-					}	
-				} 
-			}
-			else if (option == OPTION_QUIT) {
+						System.out.println("Invalid option");
+					}
+				}
+			} else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
 				System.out.println("Invalid option");
 			}
 		}
 
-	} //main
-	
+	} // main
+
 	private static void mainMenu() {
 		setHeader("MAIN MENU");
 		System.out.println("1. Members Menu");
 		System.out.println("2. Course Category Menu");
-		System.out.println("3. Courses App");
+		System.out.println("3. Manage Courses");
 		System.out.println("4. Course Schedule Menu ");
 		System.out.println("5. Register Menu");
 		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}
-		
+
 	private static void membersMenu() {
 		setHeader("MEMBERS APP");
 		System.out.println("1. View Members");
@@ -153,7 +152,7 @@ public class C206_CaseStudy {
 		System.out.println("4. Quit ");
 		Helper.line(80, "-");
 	}
-	
+
 	private static void courseCategoryMenu() {
 		setHeader("COURSE CATEGORY APP");
 		System.out.println("1. View Course Categories");
@@ -162,16 +161,16 @@ public class C206_CaseStudy {
 		System.out.println("4. Quit");
 		Helper.line(80, "-");
 	}
-	
+
 	private static void courseMenu() {
-		setHeader("COURSES APP");
+		setHeader("MANAGES COURSES");
 		System.out.println("1. View Courses");
 		System.out.println("2. Add Course");
 		System.out.println("3. Delete Course");
 		System.out.println("4. Quit");
 		Helper.line(80, "-");
 	}
-	
+
 	private static void courseScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
 		System.out.println("1. View Course Schedules");
@@ -180,7 +179,7 @@ public class C206_CaseStudy {
 		System.out.println("4. Quit");
 		Helper.line(80, "-");
 	}
-	
+
 	private static void registerScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
 		System.out.println("1. View Register");
@@ -195,7 +194,7 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
-	
+
 	// Member 1 - Clarence
 
 	private static String retrieveMembers(List<Member> members) {
@@ -342,7 +341,7 @@ public class C206_CaseStudy {
 		System.out.println(result);
 
 	}
-	
+
 	// Member 3 - Daryl
 	private static String retrieveCourses(List<Course> courses) {
 		String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
@@ -358,7 +357,7 @@ public class C206_CaseStudy {
 		System.out.println(retrieveCourses(courses));
 	}
 
-	public static void addCourse(List<Course> courses) {
+	public static void addCourse(List<Course> courses, List<Category> categories) {
 		setHeader("Add Course\nEnter Course Information\n");
 
 		// course information
@@ -378,13 +377,24 @@ public class C206_CaseStudy {
 			}
 		}
 
+		// check category exists
+		boolean isFound = false;
+		for (Category cat : categories) {
+			if (cat.name.equalsIgnoreCase(category)) {
+				isFound = true;
+				break;
+			}
+		}
+
 		// add course
-		if (!isDuplicate) {
+		if (!isDuplicate && isFound) {
 			Course newCourse = new Course(id, title, category, desc, duration, preCourse);
 			courses.add(newCourse);
 			System.out.println("Course Added.");
-		} else {
+		} else if (isDuplicate) {
 			System.out.println("Course Already Exists.");
+		} else {
+			System.out.println("Invalid Category");
 		}
 	}
 
@@ -473,15 +483,16 @@ public class C206_CaseStudy {
 		String sid = Helper.readString("Enter a course schedule id > ");
 		String memail = Helper.readString("Enter your email > ");
 		Date rdate = Helper.readDate("Enter a today's date > ");
-		if (reglist.isEmpty()) {
-			registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
-			reglist.add(newReg);
-		}
+
+		registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
+		reglist.add(newReg);
+
 		for (registerSchedule i : reglist) {
-			if (!rn.equalsIgnoreCase(i.getRegistrationNumber())) {
+			if (!i.getRegistrationNumber().equalsIgnoreCase(rn)) {
 
 				System.out.println("Register triumph");
 			} else {
+
 				System.out.println("Registration number existed");
 			}
 
@@ -503,7 +514,7 @@ public class C206_CaseStudy {
 			if (del.equalsIgnoreCase(i.registrationNumber)) {
 				i.setStatus("Deleted");
 				System.out.println("Deleted !");
-
+ 
 			} else {
 				System.out.println("Invalid registration numbe entered");
 			}
