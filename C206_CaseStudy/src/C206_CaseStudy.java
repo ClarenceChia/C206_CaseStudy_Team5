@@ -19,7 +19,7 @@ import java.util.List;
 
 public class C206_CaseStudy {
 	
-	private static final int OPTION_QUIT = 5;
+	private static final int OPTION_QUIT = 10;
 	static ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
 
 	public static void main(String[] args) {
@@ -56,7 +56,20 @@ public class C206_CaseStudy {
 				regSche();
 				viewAllr();
 
-			} 
+			}
+			else if (option == 5) {
+				//Add new Course Category
+				AddCourseCategory(CategoryList);
+			}
+			else if (option == 6) {
+				//View all Course Category
+				viewAllCourseCategory(CategoryList);
+			}
+			else if (option == 7) {
+				//Delete Course Category
+				DeleteACourseCategory(CategoryList);
+			}
+			
 			
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
@@ -76,7 +89,10 @@ public class C206_CaseStudy {
 		System.out.println("2. Add Course");
 		System.out.println("3. Delete Course");
 		System.out.println("4. Register ");
-		System.out.println("5. Quit");
+		System.out.println("5. Add new Course Category ");
+		System.out.println("6. View Course Category ");
+		System.out.println("7. Delete Course Category ");
+		System.out.println("10. Quit");
 		Helper.line(80, "-");
 	}
 	
@@ -91,8 +107,8 @@ public class C206_CaseStudy {
 
 
 	//Member 2 - Caven
-	ArrayList<Course> CategoryList = new ArrayList<Course>();
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
+		setHeader("Add Course Category");
 		String category=Helper.readString("Enter a new category name");
 		String description=Helper.readString("Enter description for the new category");
 		Course newCategory= new Course(category,description);
@@ -153,7 +169,6 @@ public class C206_CaseStudy {
 		
 		
 	}
-		
 
 	
 	
