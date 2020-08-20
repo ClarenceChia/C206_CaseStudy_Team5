@@ -41,6 +41,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 3) {
 				// delete course
+				deleteCourse(courses);
 
 			} else if (option == 4) {
 				//
@@ -144,6 +145,32 @@ public class C206_CaseStudy {
 		//add course
 		Course newCourse = new Course(id, title, category, desc, duration, preCourse);
 		courses.add(newCourse);
+		System.out.println("Course Added.");
+	}
+	
+	public static void deleteCourse(List<Course> courses) {
+		setHeader("Delete Course");
+		viewCourses(courses);
+		//course id 
+		String id = Helper.readString("Course ID : ");
+		//check course id is valid
+		boolean isFound = false;
+		Course course = null;
+		for (Course c : courses) {
+			if (c.getId() == id) {
+				isFound = true;
+				course = c;
+				break;
+			}
+		}
+		//delete course
+		if (isFound) {
+			courses.remove(course);
+			System.out.println("Course Deleted.");
+		} else {
+			System.out.println("Invalid Course.");
+		}
+		
 	}
 	
 	
