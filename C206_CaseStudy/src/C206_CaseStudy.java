@@ -541,7 +541,7 @@ public class C206_CaseStudy {
 				System.out.println("Registration number existed");
 			}
   
-		}
+		}   
 	}
 
 	static String viewAllr(ArrayList<registerSchedule> reglist) {
