@@ -26,6 +26,11 @@ public class Course {
 		this.endDateTime = endDateTime;
 		this.location = location;
 	}
+	public Course(String category,String description) {
+        this.category=category;
+        this.description=description;
+    }
+	
 
 	public String getId() {
 		return id;
