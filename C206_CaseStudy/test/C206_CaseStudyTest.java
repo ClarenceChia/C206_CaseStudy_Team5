@@ -59,7 +59,9 @@ public class C206_CaseStudyTest {
 		assertEquals("check if the first Category math has been deleted",categoryList.get(0).getName(),"English Life");
 		//Error:test if list is not null 
 		assertNotNull(categoryList);
-		
+		//test boundary: no more to delete
+		int size=categoryList.size();
+		assertEquals("check if size of list is 0",0,size);
 		
 		
 	}
