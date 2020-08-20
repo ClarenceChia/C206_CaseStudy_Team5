@@ -1,4 +1,3 @@
-import java.time.LocalDateTime;
 
 public class Course {
 
@@ -8,24 +7,16 @@ public class Course {
 	String description;
 	double duration;
 	String preCourse;
-	double price;
-	LocalDateTime startDateTime;
-	LocalDateTime endDateTime; 
-	String location;
 	
-	public Course(String id, String title, String category, String description, double duration, String preCourse,
-			double price, LocalDateTime startDateTime, LocalDateTime endDateTime, String location) {
+	public Course(String id, String title, String category, String description, double duration, String preCourse) {
 		this.id = id;
 		this.title = title;
 		this.category = category;
 		this.description = description;
 		this.duration = duration;
 		this.preCourse = preCourse;
-		this.price = price;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
-		this.location = location;
 	}
+	
 	public Course(String category,String description) {
         this.category=category;
         this.description=description;
@@ -80,38 +71,11 @@ public class Course {
 		this.preCourse = preCourse;
 	}
 
-	public double getPrice() {
-		return price;
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.format("%-10s %-20s %-20s %-20s %-10.2f %-20s", 
+				getId(), getTitle(), getCategory(), getDescription(), getDuration(),
+				getPreCourse() );
 	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public LocalDateTime getStartDateTime() {
-		return startDateTime;
-	}
-
-	public void setStartDateTime(LocalDateTime startDateTime) {
-		this.startDateTime = startDateTime;
-	}
-
-	public LocalDateTime getEndDateTime() {
-		return endDateTime;
-	}
-
-	public void setEndDateTime(LocalDateTime endDateTime) {
-		this.endDateTime = endDateTime;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	
-	
-	
 }
