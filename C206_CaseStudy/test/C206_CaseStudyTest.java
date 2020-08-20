@@ -9,10 +9,17 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 
-	// member2-caven
+	// member 2 - caven
 	private Category c1;
 	private Category c2;
 	private ArrayList<Category> categoryList;
+	
+	// member 3 - daryl
+	private Course c001;
+	private Course c002;
+	private Category c3;
+	private Category c4;
+	private ArrayList<Course> courseList;
 
 	// member 4 - sabrina
 	private CourseSchedule cs1;
@@ -20,7 +27,7 @@ public class C206_CaseStudyTest {
 	private ArrayList<CourseSchedule> scheduleList;
 	// member 4 ends
 
-	// rongxin part
+	// member 5 - rongxin
 	ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
 	String rn = Helper.readString("Enter a registration number > ");
 	String sid = Helper.readString("Enter a course schedule id > ");
@@ -36,13 +43,18 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
-		//member 2- caven
+		//member 2 - caven
 		categoryList= new ArrayList<Category>();
 		c1= new Category("Math","All about solving painful question");
 		c2= new Category("English Life","All about reading english history");
 		categoryList.add(c1);
 		categoryList.add(c2);
 		
+		//member 3 - daryl
+		courseList = new ArrayList<Course>();
+		c001 = new Course("C001", "Software Devpt", "Infocomm", "Develo..", 120, "Math"); 
+		c002 = new Course("C002", "Applied Chem", "Applied Science", "pharmace..", 120, "Chemistry"); 
+			
 		//member 4 - sabrina
 		scheduleList= new ArrayList<CourseSchedule>();
 		
@@ -87,7 +99,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void deleteACategory() {
+	public void deleteACategoryTest() {
 		// Normal Condition: test if delete works in case of deleting "Math"Category
 		C206_CaseStudy.DeleteACourseCategory(categoryList);
 		assertEquals("check if the first Category math has been deleted", categoryList.get(0).getName(),
@@ -98,57 +110,89 @@ public class C206_CaseStudyTest {
 		int size = categoryList.size();
 		assertEquals("check if size of list is 0", 0, size);
 	}
-
+	
+	//member 3 - daryl
 	@Test
-	public void regScheTest() {
-
-		// reglist is not null, so that can add a new item
-		assertNotNull("Test if there is valid a arraylist to add to", reglist);
-
-		// Given an empty list, after adding 1 item, the size of the list is 1
-
-		C206_CaseStudy.regSche(reglist, newReg);
-		assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
-
-		// The reg info just added is as same as the first item of the list
-		assertSame("Test that Camcorder is added same as 1st item of the list?", newReg, reglist.get(0));
-
-		// Add another item. test The size of the list is 2?
-		C206_CaseStudy.regSche(reglist, newReg);
-		assertEquals("Test that Camcorder arraylist size is 2?", 2, reglist.size());
+	public void retrieveCoursesTest() {
+		//Boundary
+		assertNotNull("Test if there is a valid courseList to retrieve course from", true);
+		
+		String courses = C206_CaseStudy.retrieveCourses(courseList);
+		String expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+				                 "Duration", "Pre-requisite Course");
+		assertEquals("Test that the retrieved Chromebooklist is empty", expectedCourses, courses);
+		System.out.println(courses);
+		
+		//Normal
+		//--- Add Courses - C001 C002
+		courseList.add(c001);  
+		courseList.add(c002);  
+		assertEquals("Test that courseList size is 2", 2, courseList.size());
+		
+		courses = C206_CaseStudy.retrieveCourses(courseList);
+		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", 
+				           "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
+		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", 
+				           "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
+		assertEquals("Test that the retrieved Chromebooklist is empty", expectedCourses, courses);
+		
 	}
-
+	
 	@Test
-	public void viewAllrTest() {
-		// reglist is not null, so that can add a new item
-		assertNotNull("Test if there is valid a arraylist to add to", reglist);
-
-		// test if the list of registerSchedule retrieved from the CaseStudy is empty
-		String allr = C206_CaseStudy.viewAllr(reglist);
-		String testOutput = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID",
-				"Member Email", "Status", "Registerion Date");
-		assertEquals("Check that ViewAllCamcorderlist", testOutput, allr);
-
-		// Given an empty list, after adding 2 items, test if the size of the list is 2
-		C206_CaseStudy.regSche(reglist, newReg);
-		assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
+	public void addCourseTest() {
+		//Boundary
+		assertNotNull("Test if there is a valid courseList to add to", true);
+		
+		//--- Add C001
+		//Normal 
+		categoryList.add(c3);                                                         //add course category
+		boolean isValid = C206_CaseStudy.addCourse(courseList, categoryList, c001);   //add course
+		assertEquals("Test that courseList size is 1", 1, courseList.size());
+		assertSame("Test that Course is added", c001, courseList.get(0));
+		
+		//Error 
+		assertTrue("Test course ID C001 is unique", isValid);
+		
+		//--- Add C002
+		//Normal
+		categoryList.add(c4);                                                       //add another course category
+		isValid = C206_CaseStudy.addCourse(courseList, categoryList, c002);         //add another course
+		assertEquals("Test that courseList size is 2", 2, courseList.size());
+		assertSame("Test that Course is added", c002, courseList.get(1));
+	
+		//Error 
+		assertTrue("Test course ID C002 is unique", isValid);
 
 	}
-
-	public void delrTest() {
-		// reglist is not null, so that can add a new item
-		assertNotNull("Test if there is valid a arraylist to add to", reglist);
-
-		// add
-		C206_CaseStudy.regSche(reglist, newReg);
-		// after delete, the size of the list should remain one
-		assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
-		// after delete, the size of the list should remain two if another
-		C206_CaseStudy.regSche(reglist, newReg);
-		assertEquals("Test if that reg arraylist size is 2?", 2, reglist.size());
-
-		String x = reglist.get(0).status;
-		assertSame("Test has the record status setted to deleted", x, "Deleted");
+	
+	@Test
+	public void deleteCourseTest() {
+		//Boundary
+		assertNotNull("Test if there is a valid courseList to delete from", true);
+		
+		//--- Add Courses - C001 C002
+		courseList.add(c001);  
+		courseList.add(c002);  
+		assertEquals("Test that courseList size is 2", 2, courseList.size());
+		
+		//--- Delete C001
+		//Normal    
+		boolean isDeleted = C206_CaseStudy.deleteCourse(courseList, "C001");            
+		assertEquals("Test that courseList size is 1", 1, courseList.size());
+		assertFalse("Test that Course ID C002 is deleted", courseList.contains(c001));
+		
+		//Error
+		assertTrue("Test that Course ID C002 exists in courseList", isDeleted);
+		
+		//--- Delete C002
+		//Normal    
+		isDeleted = C206_CaseStudy.deleteCourse(courseList, "C002");            
+		assertEquals("Test that courseList size is 0", 0, courseList.size());
+		assertFalse("Test that Course ID C001 is deleted", courseList.contains(c002));
+				
+		//Error
+		assertTrue("Test that Course ID C001 exists in courseList", isDeleted);
+	
 	}
 
 	//member 4 - sabrina
@@ -202,12 +246,72 @@ public class C206_CaseStudyTest {
 	
 	//member 4 ends
 	
+	// member 5 - rongxin
+		@Test
+		public void regScheTest() {
+
+			// reglist is not null, so that can add a new item
+			assertNotNull("Test if there is valid a arraylist to add to", reglist);
+
+			// Given an empty list, after adding 1 item, the size of the list is 1
+
+			C206_CaseStudy.regSche(reglist, newReg);
+			assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
+
+			// The reg info just added is as same as the first item of the list
+			assertSame("Test that Camcorder is added same as 1st item of the list?", newReg, reglist.get(0));
+
+			// Add another item. test The size of the list is 2?
+			C206_CaseStudy.regSche(reglist, newReg);
+			assertEquals("Test that Camcorder arraylist size is 2?", 2, reglist.size());
+		}
+
+		@Test
+		public void viewAllrTest() {
+			// reglist is not null, so that can add a new item
+			assertNotNull("Test if there is valid a arraylist to add to", reglist);
+
+			// test if the list of registerSchedule retrieved from the CaseStudy is empty
+			String allr = C206_CaseStudy.viewAllr(reglist);
+			String testOutput = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID",
+					"Member Email", "Status", "Registerion Date");
+			assertEquals("Check that ViewAllCamcorderlist", testOutput, allr);
+
+			// Given an empty list, after adding 2 items, test if the size of the list is 2
+			C206_CaseStudy.regSche(reglist, newReg);
+			assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
+
+		}
+
+		public void delrTest() {
+			// reglist is not null, so that can add a new item
+			assertNotNull("Test if there is valid a arraylist to add to", reglist);
+
+			// add
+			C206_CaseStudy.regSche(reglist, newReg);
+			// after delete, the size of the list should remain one
+			assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
+			// after delete, the size of the list should remain two if another
+			C206_CaseStudy.regSche(reglist, newReg);
+			assertEquals("Test if that reg arraylist size is 2?", 2, reglist.size());
+
+			String x = reglist.get(0).status;
+			assertSame("Test has the record status setted to deleted", x, "Deleted");
+		}
+	
 	@After
 	public void tearDown() throws Exception {
 		// member 2 -caven
 		c1 = null;
 		c2 = null;
 		categoryList = null;
+		
+		//member 3 - daryl
+		c3 = null;
+		c4 = null;
+		c001 = null;
+		c002 = null;
+		courseList = null;
 
 		// member 4 - sabrina
 		cs1 = null;
