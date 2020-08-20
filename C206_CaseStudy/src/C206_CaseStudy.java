@@ -19,7 +19,7 @@ public class C206_CaseStudy {
 
 			//menu
 			menu();
-			option = Helper.readInt("Enter an option > ");
+			option =  Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
 				//view courses
