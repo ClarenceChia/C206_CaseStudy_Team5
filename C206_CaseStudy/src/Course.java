@@ -26,6 +26,17 @@ public class Course {
 		this.endDateTime = endDateTime;
 		this.location = location;
 	}
+	
+	public Course(String id, String title, String category, String description, double duration, String preCourse) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.category = category;
+		this.description = description;
+		this.duration = duration;
+		this.preCourse = preCourse;
+	}
+	
 	public Course(String category,String description) {
         this.category=category;
         this.description=description;
@@ -119,6 +130,7 @@ public class Course {
 				getId(), getTitle(), getCategory(), getDescription(), getDuration(),
 				getPreCourse() );
 	}
+
 	
 	
 	
