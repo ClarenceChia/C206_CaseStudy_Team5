@@ -157,7 +157,7 @@ public class C206_CaseStudy {
 		boolean isFound = false;
 		Course course = null;
 		for (Course c : courses) {
-			if (c.getId() == id) {
+			if (c.getId().equals(id)) {
 				isFound = true;
 				course = c;
 				break;
