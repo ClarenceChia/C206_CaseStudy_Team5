@@ -22,6 +22,7 @@ public class C206_CaseStudyTest {
 		 c2= new Category("English Life","All about reading english history");
 		 categoryList.add(c1);
 		 categoryList.add(c2);
+		 
 		
 	}
 	
