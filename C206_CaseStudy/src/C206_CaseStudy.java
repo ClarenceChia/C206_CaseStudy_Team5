@@ -7,12 +7,9 @@ import java.util.List;
 
 public class C206_CaseStudy {
 	
-<<<<<<< HEAD
 	private static final int OPTION_QUIT = 5;
-=======
 	private static final int OPTION_QUIT = 10;
 	static ArrayList <registerSchedule> list = new ArrayList<registerSchedule>();
->>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -23,7 +20,6 @@ public class C206_CaseStudy {
 		int option = 0;
 
 		while (option != OPTION_QUIT) {
-
 			//menu
 			menu();
 			option =  Helper.readInt("Enter an option > ");
@@ -31,18 +27,17 @@ public class C206_CaseStudy {
 			if (option == 1) {
 				//view courses
 				viewCourses(courses);
-				
 			} else if (option == 2) {
 				// add course
-				addCourse(courses);
-
+				addCourse(courses)
 			} else if (option == 3) {
 				// delete course
 
 			} else if (option == 4) {
-				//
+				//course schedule app
+				scheduleMenu();
 
-<<<<<<< HEAD
+
 			} else if (option == OPTION_QUIT) {
 =======
 			}
@@ -58,12 +53,8 @@ public class C206_CaseStudy {
 				//Delete Course Category
 				DeleteACourseCategory(CategoryList);
 			}
-			
-			
 			else if (option == OPTION_QUIT) {
->>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
 				System.out.println("Bye!");
-				
 			} else {
 				System.out.println("Invalid option");
 			}
@@ -78,17 +69,22 @@ public class C206_CaseStudy {
 		System.out.println("1. View Courses");
 		System.out.println("2. Add Course");
 		System.out.println("3. Delete Course");
-<<<<<<< HEAD
-		//System.out.println("4. ");
+		System.out.println("4. Course Schedule");
 		System.out.println("5. Quit");
-=======
 		System.out.println("4. Register ");
 		System.out.println("5. Add new Course Category ");
 		System.out.println("6. View Course Category ");
 		System.out.println("7. Delete Course Category ");
 		System.out.println("10. Quit");
->>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
 		Helper.line(80, "-");
+	}
+	
+	private static void scheduleMenu() {
+		setHeader("COURSE SCHEDULE APP");
+		System.out.println("1. View Course Schedule");
+		System.out.println("2. Add Course Schedule");
+		System.out.println("3. Delete Course Schedule");
+		System.out.println("4. Quit");
 	}
 	
 	public static void setHeader(String header) {
@@ -99,7 +95,6 @@ public class C206_CaseStudy {
 	
 	//Member 1
 	 
-<<<<<<< HEAD
 	//Member 2
 	ArrayList<Course> CategoryList = new ArrayList<Course>();
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
@@ -134,12 +129,7 @@ public class C206_CaseStudy {
 			}
 			else {
 				System.out.println("No such Category Found !");
-			}
-		}
-		
-			
-=======
-
+			}}}
 
 	//Member 2 - Caven
 	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
@@ -178,12 +168,7 @@ public class C206_CaseStudy {
 				System.out.println("No such Category Found !");
 			}
 		}
-		
-			
->>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
-		}
-<<<<<<< HEAD
-=======
+	}
 
 	
 	public static void DeleteACourseCategory(ArrayList<Course> CategoryList) {
@@ -212,7 +197,6 @@ public class C206_CaseStudy {
 	
 	
 
->>>>>>> branch 'master' of https://github.com/ClarenceChia/C206_CaseStudy_Team5.git
 	
 
 	//Member 3 - Daryl
@@ -263,16 +247,18 @@ public class C206_CaseStudy {
 	}
 	
 	//Add course schedule with the following information
-	public static void addCourseSchedule() {
+	public static void addCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID > ");
 		double price = Helper.readDouble("Price > ");
-		String start = Helper.readString("Start date/time (day/month/year  hour:min)");
-		String end = Helper.readString("End date/time (DD/MM/YYYY)");
+		String start = Helper.readString("Start date/time (DD/MMM/YYY  HH:MM)");
+		String end = Helper.readString("End date/time (DD/MMM/YYY  HH:MM)");
 		String location = Helper.readString("Course location > ");
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, hh:mm a");
+		LocalDateTime startDT = LocalDateTime.parse(start, formatter);
+		LocalDateTime endDT = LocalDateTime.parse(end, formatter);
 		
-		CourseSchedule cc= new CourseSchedule(scheduleid, price, start, end, location);
+		CourseSchedule cc= new CourseSchedule(scheduleid, price, startDT, endDT, location);
 		scheduleList.add(cc);
 		System.out.println("Schedule added");	
 	}
@@ -292,18 +278,12 @@ public class C206_CaseStudy {
 		
 		if (yOrN == 'Y' && yOrN == 'y') {
 			for (int i = 0; i < scheduleList.size(); i++) {
-				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
-							scheduleList.get(i).getScheduleID(),
-							scheduleList.get(i).getPrice(),
-							scheduleList.get(i).getStartDateTime(),
-							scheduleList.get(i).getEndDateTime(),
-							scheduleList.get(i).getLocation());
-				
-				}
-			}	
-		}
+				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) 
+				{scheduleList.remove(i);}
+			}
+		}	
 	}
-		
+	
 	//- Member 5
 	
 	
