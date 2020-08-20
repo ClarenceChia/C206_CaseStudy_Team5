@@ -106,6 +106,16 @@ public class Course {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.format("%-10s %-10s %-10s %-10s %-10.2f %-10s", 
+				getId(), getTitle(), getCategory(), getDescription(), getDuration(),
+				getPreCourse());
+	}
+	
+	
 	
 	
 	
