@@ -473,10 +473,13 @@ public class C206_CaseStudy {
 		String scheduleid = Helper.readString("Course schedule ID > ");
 		char yOrN = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
 
-		if (yOrN == 'Y' && yOrN == 'y') {
+		if (yOrN == 'Y' || yOrN == 'y') {
 			for (int i = 0; i < scheduleList.size(); i++) {
 				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
 					scheduleList.remove(i);
+					System.out.println("Deleted!");
+				} else {
+					System.out.println("Delete failed");
 				}
 			}
 		}
