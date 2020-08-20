@@ -78,9 +78,31 @@ public class C206_CaseStudy {
 					if (option3 == 1) {
 						viewCourses(courseList);
 					} else if (option3 == 2) {
-						addCourse(courseList, CategoryList);
+						
+						//add course
+						setHeader("Add Course\nEnter Course Information\n");
+						
+						Course newCourse = inputCourseInfo();
+						boolean isAdded = addCourse(courseList, CategoryList, newCourse);
+						
+						if (isAdded) 
+						   	System.out.println("Course Added.");
+						else 
+							System.out.println("Invalid Course.");
+						
 					} else if (option3 == 3) {
-						deleteCourse(courseList);
+						
+						//delete course
+						setHeader("Delete Course");
+						
+						String id = inputCourse();
+						boolean isDeleted = deleteCourse(courseList, id);
+						
+						if (isDeleted) 
+							System.out.println("Course Deleted.");
+						else
+							System.out.println("Invalid Course");
+						
 					} else if (option3 == OPTION1_QUIT) {
 						System.out.println("Bye!");
 					} else {
@@ -344,88 +366,98 @@ public class C206_CaseStudy {
 	}
 
 	// Member 3 - Daryl
-	private static String retrieveCourses(List<Course> courses) {
-		String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
-				"Duration", "Pre-requisite Course");
-		for (Course c : courses) {
-			output += c.toString();
-		}
-		return output;
-	}
-
-	public static void viewCourses(List<Course> courses) {
-		setHeader("Courses");
-		System.out.println(retrieveCourses(courses));
-	}
-
-	public static void addCourse(List<Course> courses, List<Category> categories) {
-		setHeader("Add Course\nEnter Course Information\n");
-
-		// course information
-		String id = Helper.readString("ID : ");
-		String title = Helper.readString("Title : ");
-		String category = Helper.readString("Category Name : ");
-		String desc = Helper.readString("Description : ");
-		double duration = Helper.readDouble("Duration : ");
-		String preCourse = Helper.readString("Pre-requisite Course : ");
-
-		// check duplicates
-		boolean isDuplicate = false;
-		for (Course c : courses) {
-			if (c.getId().equals(id)) {
-				isDuplicate = true;
-				break;
+	   
+		//--- Retrieve Courses
+		public static String retrieveCourses(List<Course> courses) {
+			String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+					"Duration", "Pre-requisite Course");
+			for (Course c : courses) {
+				output += c.toString();
 			}
+			return output;
+		}
+		
+		//--- View Courses
+		public static void viewCourses(List<Course> courses) {
+			setHeader("Courses");
+			System.out.println(retrieveCourses(courses));
 		}
 
-		// check category exists
-		boolean isFound = false;
-		for (Category cat : categories) {
-			if (cat.name.equalsIgnoreCase(category)) {
-				isFound = true;
-				break;
+		//--- Add Course
+		public static boolean addCourse(List<Course> courses, List<Category> categories, Course newCourse) {
+			
+			// check duplicates
+			boolean isDuplicate = false;
+			for (Course c : courses) {
+				if (c.getId().equals(newCourse.getId())) {
+					isDuplicate = true;
+					break;
+				}
 			}
-		}
 
-		// add course
-		if (!isDuplicate && isFound) {
+			// check category exists
+			boolean isFound = false;
+			for (Category cat : categories) {
+				if (cat.name.equalsIgnoreCase(newCourse.getCategory())) {
+					isFound = true;
+					break;
+				}
+			}
+
+			// add course if valid 
+			boolean isAdded = false;
+			
+			if (!isDuplicate && isFound) {
+				courses.add(newCourse);
+				isAdded = true;
+			} 
+			
+			return isAdded;
+		}
+		
+		public static Course inputCourseInfo() {
+			
+			// course information
+			String id = Helper.readString("ID : ");
+			String title = Helper.readString("Title : ");
+			String category = Helper.readString("Category Name : ");
+			String desc = Helper.readString("Description : ");
+			double duration = Helper.readDouble("Duration : ");
+			String preCourse = Helper.readString("Pre-requisite Course : ");
 			Course newCourse = new Course(id, title, category, desc, duration, preCourse);
-			courses.add(newCourse);
-			System.out.println("Course Added.");
-		} else if (isDuplicate) {
-			System.out.println("Course Already Exists.");
-		} else {
-			System.out.println("Invalid Category");
+			
+			return newCourse;
+			
 		}
-	}
 
-	public static void deleteCourse(List<Course> courses) {
-		setHeader("Delete Course");
-		viewCourses(courses);
+		//--- Delete Course
+		public static boolean deleteCourse(List<Course> courses, String id) {
 
-		// course id
-		String id = Helper.readString("Course ID : ");
-
-		// check course id is valid
-		boolean isFound = false;
-		Course course = null;
-		for (Course c : courses) {
-			if (c.getId().equals(id)) {
-				isFound = true;
-				course = c;
-				break;
+			// check course id is valid
+			boolean isFound = false;
+			Course course = null;
+			for (Course c : courses) {
+				if (c.getId().equals(id)) {
+					isFound = true;
+					course = c;
+					break;
+				}
 			}
+			// delete course if valid
+			boolean isDeleted = false;
+			
+			if (isFound) {
+				courses.remove(course);
+				isDeleted = true;
+			}
+			return isDeleted;
 		}
-
-		// delete course
-		if (isFound) {
-			courses.remove(course);
-			System.out.println("Course Deleted.");
-		} else {
-			System.out.println("Invalid Course.");
+		
+		public static String inputCourse() {
+			// course id
+		    String id = Helper.readString("Course ID : ");
+		    return id;
 		}
-
-	}
 
 	// Member 4 - Sabrina
 	// Add course schedule
