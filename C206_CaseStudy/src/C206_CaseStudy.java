@@ -196,18 +196,13 @@ public class C206_CaseStudy {
 
 	//Member 2 - Caven
 	public static void AddCourseCategory(ArrayList<Category> CategoryList) {
-
-	// Member 2 - Caven
-	public static void AddCourseCategory(ArrayList<Course> CategoryList) {
-
 		setHeader("Add Course Category");
-		String category = Helper.readString("Enter a new category name");
-		String description = Helper.readString("Enter description for the new category");
-		String newCat = "";
-		Boolean duplicateName = false;
-
+		String category=Helper.readString("Enter a new category name");
+		String description=Helper.readString("Enter description for the new category");
+		String newCat="";
+		Boolean duplicateName=false;
+		
 		// check for duplicates name
-
 		for(int i=0 ;i<CategoryList.size();i++) {
 			if(CategoryList.get(i).getName().equalsIgnoreCase(category)) {
 				duplicateName=true;
@@ -230,79 +225,41 @@ public class C206_CaseStudy {
 		
 		String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION"
 				);
-
-
 		for (int i = 0; i < CategoryList.size(); i++) {
-
 			output+=String.format("%10s %30s\n",CategoryList.get(i).getName(),CategoryList.get(i).getDescription());
 			
-
-			if (CategoryList.get(i).getCategory().equalsIgnoreCase(category)) {
-				duplicateName = true;
-				System.out.println("Duplicate names Found!");
-				newCat += Helper.readString("Enter another non-duplicate category name");
-			} else {
-				duplicateName = false;
-			}
-		}
-		// create constructor based on whether there is duplicate
-		if (duplicateName == true) {
-			Course newCategory = new Course(newCat, description);
-			CategoryList.add(newCategory);
-		} else if (duplicateName == false) {
-			Course newCategory = new Course(category, description);
-			CategoryList.add(newCategory);
-		}
-
-		String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION");
-		for (int i = 0; i < CategoryList.size(); i++) {
-			output += String.format("%10s %30s\n", CategoryList.get(i).getCategory(),
-					CategoryList.get(i).getDescription());
-
-
 		}
 		System.out.println(output);
-
+		
 	}
+	
 
 	public static void viewAllCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Viewing Course Category");
-		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
-		boolean exist = false;
+		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION"
+				);
+		boolean exist= false;
 		for (int i = 0; i < CategoryList.size(); i++) {
-
 			output+=String.format("%-10s %-30s\n",CategoryList.get(i).getName(),CategoryList.get(i).getDescription());
 			
-
-			output += String.format("%-10s %-30s\n", CategoryList.get(i).getCategory(),
-					CategoryList.get(i).getDescription());
-
-
 		}
 		System.out.println(output);
-
-		String categoryChoose = Helper.readString("Enter the category name to view category");
+		
+		String categoryChoose=Helper.readString("Enter the category name to view category");
 		for (int i = 0; i < CategoryList.size(); i++) {
-
 			if(CategoryList.get(i).getName().equalsIgnoreCase(categoryChoose)) {
-
-			if (CategoryList.get(i).getCategory().equalsIgnoreCase(categoryChoose)) {
-
 				System.out.println("Category Found !");
-
 				System.out.println("Category name:"+CategoryList.get(i).getName()+"\n"+"Category description:"+CategoryList.get(i).getDescription());
 				exist=true;
-	System.out.println("Category name:" + CategoryList.get(i).getCategory() + "\n" + "Category description:"
-						+ CategoryList.get(i).getDescription());
-				exist = true;
-
 			}
-
+			
 		}
-		if (exist == false) {
+		if(exist== false) {
 			System.out.println("No such category name!");
 		}
-
+		
+			
+		}
 
 	
 	public static void DeleteACourseCategory(ArrayList<Category> CategoryList) {
@@ -336,37 +293,6 @@ public class C206_CaseStudy {
 		
 		
 		
-
-	}
-
-	public static void DeleteACourseCategory(ArrayList<Course> CategoryList) {
-		setHeader("Deleting Course Category");
-		String result = "";
-		boolean exist = false;
-		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
-		for (int i = 0; i < CategoryList.size(); i++) {
-			output += String.format("%-10s %-30s\n", CategoryList.get(i).getCategory(),
-					CategoryList.get(i).getDescription());
-
-		}
-		System.out.println(output);
-		int numberToDelete = 0;
-		String category = Helper.readString("Enter a  category name to delete from ");
-		for (int i = 0; i < CategoryList.size(); i++) {
-			if (CategoryList.get(i).getCategory().equalsIgnoreCase(category)) {
-				numberToDelete = i;
-				exist = true;
-			}
-
-		}
-		if (exist == true) {
-			CategoryList.remove(numberToDelete);
-			result += "Category removed!";
-		} else {
-			result += "No such category found!";
-		}
-		System.out.println(result);
-
 	}
 
 	// Member 3 - Daryl
