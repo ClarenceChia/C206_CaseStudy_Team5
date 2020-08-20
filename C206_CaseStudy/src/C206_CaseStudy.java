@@ -66,7 +66,7 @@ public class C206_CaseStudy {
 	 
 	//Member 2
 	
-	//Member 3
+	//Member 3 - Daryl
 	private static String retrieveCourses(List<Course> courses) {
 		String output =  String.format("%-10s %-10s %-10s %-10s %-10s %-10s\n", 
 				"Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
@@ -83,14 +83,14 @@ public class C206_CaseStudy {
 	
 	public static void addCourse() {
 		System.out.println("Enter Course Information\n");
-		//read
+		//course information
 		String id = Helper.readString("ID : ");
 		String title = Helper.readString("Title : ");
 		String category = Helper.readString("Category Name : ");
 		String desc = Helper.readString("Description : ");
 		double duration = Helper.readDouble("Duration : ");
 		String preCourse = Helper.readString("Pre-requisite Course : ");
-		//insert
+		//insert course
 		Course newCourse = new Course(id, title, category, desc, duration, preCourse);
 		
 		
