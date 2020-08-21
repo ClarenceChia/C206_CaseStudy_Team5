@@ -62,7 +62,11 @@ public class C206_CaseStudy {
 						AddCourseCategory(CategoryList);
 					} else if (option2 == 3) {
 						DeleteACourseCategory(CategoryList);
-					} else if (option2 == OPTION1_QUIT) {
+					} 
+					else if(option2 ==4) {
+						UpdateCourseCategory(CategoryList);
+					}
+					else if (option2 == 5) {
 						System.out.println("Bye!");
 					} else {
 						System.out.println("Invalid option");
@@ -182,7 +186,8 @@ public class C206_CaseStudy {
 		System.out.println("1. View Course Categories");
 		System.out.println("2. Add Course Category");
 		System.out.println("3. Delete Course Category");
-		System.out.println("4. Quit");
+		System.out.println("4. Update Course Category");
+		System.out.println("5. Quit");
 		Helper.line(80, "-");
 	}
 
@@ -307,6 +312,35 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 
+	}
+	// update coure category description
+	public static void UpdateCourseCategory(ArrayList<Category> CategoryList) {
+		setHeader("Updating Course Category");
+		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
+		for (int i = 0; i < CategoryList.size(); i++) {
+			output += String.format("%-10s %-30s\n", CategoryList.get(i).getName(),
+					CategoryList.get(i).getDescription());
+
+		}
+		System.out.println(output);
+		int numberToUpdate=0;
+		boolean exist=false;
+		String categoryChoose = Helper.readString("Enter the category name to update category description");
+		String newDescription = Helper.readString("Enter a new category description");
+		for (int i = 0; i < CategoryList.size(); i++) {
+			if (CategoryList.get(i).getName().equalsIgnoreCase(categoryChoose)) {
+				numberToUpdate = i;
+				exist = true;
+			}
+	}
+		if(exist == true) {
+			CategoryList.get(numberToUpdate).setDescription(newDescription);
+			System.out.println("Category Description updated!");
+			
+		}
+		else {
+			System.out.println("No such category found");
+		}
 	}
 
 	public static void viewAllCourseCategory(ArrayList<Category> CategoryList) {
