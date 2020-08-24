@@ -31,7 +31,7 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
-				// member 1 menu
+				//--- M e m b e r  1   M E N U ---
 				int option1 = 0;
 				while (option1 != OPTION1_QUIT) {
 					// insert menu
@@ -50,7 +50,7 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 2) {
-				// member 2 menu
+				//--- M e m b e r  2   M E N U ---
 				int option2 = 0;
 				while (option2 != OPTION1_QUIT) {
 					// insert menu
@@ -73,18 +73,20 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 3) {
-				// member 3 menu
+				//--- M e m b e r  3   M E N U ---
 				int option3 = 0;
 				while (option3 != OPTION1_QUIT) {
 					// insert menu
 					courseMenu();
 					option3 = Helper.readInt("Enter an option > ");
 					if (option3 == 1) {
+						
+						setHeader("View a Course");
 						viewCourses(courseList);
+						
 					} else if (option3 == 2) {
 						
-						//add course
-						setHeader("Add Course\nEnter Course Information\n");
+						setHeader("Add a Course\nEnter Course Information\n");
 						
 						Course newCourse = inputCourseInfo();
 						boolean isAdded = addCourse(courseList, CategoryList, newCourse);
@@ -96,8 +98,7 @@ public class C206_CaseStudy {
 						
 					} else if (option3 == 3) {
 						
-						//delete course
-						setHeader("Delete Course");
+						setHeader("Delete a Course");
 						
 						String id = inputCourse();
 						boolean isDeleted = deleteCourse(courseList, id);
@@ -107,14 +108,38 @@ public class C206_CaseStudy {
 						else
 							System.out.println("Invalid Course");
 						
-					} else if (option3 == OPTION1_QUIT) {
+					} else if (option3 == 4) {
+						
+						setHeader("Update a Course");
+						
+						/*String id = inputCourse();
+						boolean isDeleted = deleteCourse(courseList, id);
+						
+						if (isDeleted) 
+							System.out.println("Course Deleted.");
+						else
+							System.out.println("Invalid Course");*/
+						
+					} else if (option3 == 5) {
+						
+						setHeader("Search a Course by Category");
+						
+						/*String id = inputCourse();
+						boolean isDeleted = deleteCourse(courseList, id);
+						
+						if (isDeleted) 
+							System.out.println("Course Deleted.");
+						else
+							System.out.println("Invalid Course");*/
+						
+					} else if (option3 == 6) {
 						System.out.println("Bye!");
 					} else {
 						System.out.println("Invalid option");
 					}
 				}
 			} else if (option == 4) {
-				// member 4 menu
+				//--- M e m b e r  4   M E N U ---
 				int option4 = 0;
 				while (option4 != OPTION1_QUIT) {
 					// insert menu
@@ -133,7 +158,7 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 5) {
-				// member 5 menu
+				//--- M e m b e r  5   M E N U ---
 				int option5 = 0;
 				while (option5 != OPTION1_QUIT) {
 					// insert menu
@@ -159,8 +184,10 @@ public class C206_CaseStudy {
 			}
 		}
 
-	} // main
+	} // - END OF MAIN METHOD -
+	
 
+	//--- MAIN  MENU ---
 	private static void mainMenu() {
 		setHeader("MAIN MENU");
 		System.out.println("1. Members Menu");
@@ -171,7 +198,8 @@ public class C206_CaseStudy {
 		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}
-
+ 
+	//--- Member 1 MENU ---
 	private static void membersMenu() {
 		setHeader("MEMBERS APP");
 		System.out.println("1. View Members");
@@ -181,6 +209,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
+	//--- Member 2 MENU ---
 	private static void courseCategoryMenu() {
 		setHeader("COURSE CATEGORY APP");
 		System.out.println("1. View Course Categories");
@@ -191,15 +220,19 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
+	//--- Member 3 MENU ---
 	private static void courseMenu() {
 		setHeader("MANAGES COURSES");
-		System.out.println("1. View Courses");
-		System.out.println("2. Add Course");
-		System.out.println("3. Delete Course");
-		System.out.println("4. Quit");
+		System.out.println("1. View a Course");
+		System.out.println("2. Add a Course");
+		System.out.println("3. Delete a Course");
+		System.out.println("4. Update a Course");
+		System.out.println("5. Search a Course by Category");
+		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}
 
+	//--- Member 4 MENU ---
 	private static void courseScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
 		System.out.println("1. View Course Schedules");
@@ -209,6 +242,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
+	//--- Member 5 MENU ---
 	private static void registerScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
 		System.out.println("1. View Register");
