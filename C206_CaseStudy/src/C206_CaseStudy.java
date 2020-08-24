@@ -52,7 +52,7 @@ public class C206_CaseStudy {
 			} else if (option == 2) {
 				//--- M e m b e r  2   M E N U ---
 				int option2 = 0;
-				while (option2 != OPTION1_QUIT) {
+				while (option2 != 5) {
 					// insert menu
 					courseCategoryMenu();
 					option2 = Helper.readInt("Enter an option > ");
@@ -75,7 +75,7 @@ public class C206_CaseStudy {
 			} else if (option == 3) {
 				//--- M e m b e r  3   M E N U ---
 				int option3 = 0;
-				while (option3 != OPTION1_QUIT) {
+				while (option3 != 6) {
 					// insert menu
 					courseMenu();
 					option3 = Helper.readInt("Enter an option > ");
@@ -94,31 +94,34 @@ public class C206_CaseStudy {
 						if (isAdded) 
 						   	System.out.println("Course Added.");
 						else 
-							System.out.println("Invalid Course.");
+							System.out.println("Invalid Course / Category Name.");
 						
 					} else if (option3 == 3) {
 						
 						setHeader("Delete a Course");
 						
+						viewCourses(courseList);
 						String id = inputCourse();
 						boolean isDeleted = deleteCourse(courseList, id);
 						
 						if (isDeleted) 
 							System.out.println("Course Deleted.");
 						else
-							System.out.println("Invalid Course");
+							System.out.println("Invalid Course.");
 						
 					} else if (option3 == 4) {
 						
 						setHeader("Update a Course");
 						
-						/*String id = inputCourse();
-						boolean isDeleted = deleteCourse(courseList, id);
+						viewCourses(courseList);
+						String id = inputCourse();
+						String[] newCourseInfo = inputNewCourseInfo();
+						boolean isUpdated = updateCourse(courseList, id, newCourseInfo);
 						
-						if (isDeleted) 
-							System.out.println("Course Deleted.");
+						if (isUpdated) 
+							System.out.println("Course Update.");
 						else
-							System.out.println("Invalid Course");*/
+							System.out.println("Invalid Course.");
 						
 					} else if (option3 == 5) {
 						
@@ -436,7 +439,7 @@ public class C206_CaseStudy {
 
 	//--- Member 3 - Daryl METHODS ---
 	   
-		//Retrieve Courses
+		// Retrieve Courses
 		public static String retrieveCourses(List<Course> courses) {
 			String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
 					"Duration", "Pre-requisite Course");
@@ -446,13 +449,13 @@ public class C206_CaseStudy {
 			return output;
 		}
 		
-		//View Courses
+		// View Courses
 		public static void viewCourses(List<Course> courses) {
 			setHeader("Courses");
 			System.out.println(retrieveCourses(courses));
 		}
 
-		//Add Course
+		// Add Course
 		public static boolean addCourse(List<Course> courses, List<Category> categories, Course newCourse) {
 			
 			// check duplicates
@@ -499,9 +502,8 @@ public class C206_CaseStudy {
 			
 		}
 
-		//--- Delete Course
+		// Delete Course
 		public static boolean deleteCourse(List<Course> courses, String id) {
-
 			// check course id is valid
 			boolean isFound = false;
 			Course course = null;
@@ -527,6 +529,68 @@ public class C206_CaseStudy {
 		    String id = Helper.readString("Course ID : ");
 		    return id;
 		}
+		
+		// Update Course
+		public static boolean updateCourse(List<Course> courses, String id, String[] infoList) {
+			
+			// check course id is valid
+			boolean isFound = false;
+			Course course = null;
+			for (Course c : courses) {
+				if (c.getId().equals(id)) {
+					isFound = true;
+					course = c;
+					break;
+				}
+			}
+			
+			// check new info are is valid (no empty fields)
+			boolean areValid = true;
+			for (String info : infoList) {
+				if (info.isEmpty())  {
+					//end loop
+					areValid = false;
+					break;	
+			    } 
+			}
+			
+			// update course if course id is valid and new info are valid
+			boolean isUpdated = false;
+			
+			if (isFound && areValid) {
+				course.setTitle(infoList[0]);
+				course.setCategory(infoList[1]);
+				course.setDescription(infoList[2]);
+				course.setDuration(Double.parseDouble(infoList[3]));
+				course.setPreCourse(infoList[4]);
+				isUpdated = true;
+			} 
+			
+			return isUpdated;
+		}
+		
+		public static String[] inputNewCourseInfo() {
+			
+			String[] infoList = new String[5];
+			
+			// course information
+			String title     = Helper.readString("Title : ");
+			String category  = Helper.readString("Category Name : ");
+			String desc      = Helper.readString("Description : ");
+			double duration  = Helper.readDouble("Duration : ");
+			String preCourse = Helper.readString("Pre-requisite Course : ");
+			
+			//add to course information list
+			infoList[0] = title;
+			infoList[1] = category;
+			infoList[2] = desc;
+			infoList[3] = String.valueOf(duration);
+			infoList[4] = preCourse;
+			
+			return infoList;
+		}
+		
+		// Search Course By Category
 
 	//--- Member 4 - Sabrina METHODS ---
 	// Add course schedule
