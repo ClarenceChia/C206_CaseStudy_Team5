@@ -31,7 +31,9 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
+				
 				//--- M e m b e r  1   M E N U ---
+				
 				int option1 = 0;
 				while (option1 != OPTION1_QUIT) {
 					// insert menu
@@ -50,7 +52,9 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 2) {
+				
 				//--- M e m b e r  2   M E N U ---
+				
 				int option2 = 0;
 				while (option2 != 5) {
 					// insert menu
@@ -73,15 +77,17 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 3) {
+				
 				//--- M e m b e r  3   M E N U ---
+				
 				int option3 = 0;
 				while (option3 != 6) {
 					// insert menu
 					courseMenu();
 					option3 = Helper.readInt("Enter an option > ");
 					if (option3 == 1) {
-						
-						setHeader("View a Course");
+
+						setHeader("View Courses");
 						viewCourses(courseList);
 						
 					} else if (option3 == 2) {
@@ -127,13 +133,9 @@ public class C206_CaseStudy {
 						
 						setHeader("Search a Course by Category");
 						
-						/*String id = inputCourse();
-						boolean isDeleted = deleteCourse(courseList, id);
-						
-						if (isDeleted) 
-							System.out.println("Course Deleted.");
-						else
-							System.out.println("Invalid Course");*/
+						viewCategories(CategoryList);
+						String category = inputCategoryName();
+						viewCoursesByCat(courseList, category);
 						
 					} else if (option3 == 6) {
 						System.out.println("Bye!");
@@ -142,7 +144,9 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 4) {
+				
 				//--- M e m b e r  4   M E N U ---
+				
 				int option4 = 0;
 				while (option4 != OPTION1_QUIT) {
 					// insert menu
@@ -161,7 +165,9 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if (option == 5) {
+				
 				//--- M e m b e r  5   M E N U ---
+				
 				int option5 = 0;
 				while (option5 != OPTION1_QUIT) {
 					// insert menu
@@ -281,7 +287,7 @@ public class C206_CaseStudy {
 		setHeader("Register Member");
 		System.out.println("\n");
 
-		String name = Helper.readString("Enter name > ");
+		String name  = Helper.readString("Enter name > ");
 		char gender = Helper.readChar("Enter gender (M/F) > ");
 		int mobile = Helper.readInt("Enter mobile number > ");
 		String email = Helper.readString("Enter email > ");
@@ -439,8 +445,9 @@ public class C206_CaseStudy {
 
 	//--- Member 3 - Daryl METHODS ---
 	   
-		// Retrieve Courses
+		// View Courses
 		public static String retrieveCourses(List<Course> courses) {
+
 			String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
 					"Duration", "Pre-requisite Course");
 			for (Course c : courses) {
@@ -449,9 +456,7 @@ public class C206_CaseStudy {
 			return output;
 		}
 		
-		// View Courses
 		public static void viewCourses(List<Course> courses) {
-			setHeader("Courses");
 			System.out.println(retrieveCourses(courses));
 		}
 
@@ -591,6 +596,36 @@ public class C206_CaseStudy {
 		}
 		
 		// Search Course By Category
+		public static String retrieveCategories(List<Category> categories) {
+			String output = "";
+			for (Category cat : categories) {
+				output += cat.getName() + "\n";
+			}
+			return output;
+		}
+		
+		public static void viewCategories(List<Category> categories) {
+			System.out.println(retrieveCategories(categories));
+		}
+		
+		public static String inputCategoryName() {
+			String catName = Helper.readString("Category Name : ");
+			return catName;
+		}
+		
+		public static String retrieveCoursesByCat(List<Course> courses, String category) {
+			String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+					        "Duration", "Pre-requisite Course");
+			for (Course c : courses) {
+				if (c.getCategory().equalsIgnoreCase(category)) 
+					output += c.toString();
+			}
+			return output;
+		}
+		
+		public static void viewCoursesByCat(List<Course> courses, String category) {
+			System.out.println(retrieveCoursesByCat(courses, category));
+		}
 
 	//--- Member 4 - Sabrina METHODS ---
 	// Add course schedule
