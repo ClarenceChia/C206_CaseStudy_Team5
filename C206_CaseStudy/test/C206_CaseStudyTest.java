@@ -47,8 +47,6 @@ public class C206_CaseStudyTest {
 		categoryList= new ArrayList<Category>();
 		c1= new Category("Math","All about solving painful question");
 		c2= new Category("English Life","All about reading english history");
-		categoryList.add(c1);
-		categoryList.add(c2);
 		
 		//member 3 - daryl
 		courseList = new ArrayList<Course>();
@@ -75,6 +73,8 @@ public class C206_CaseStudyTest {
 	// member 2 - caven
 	@Test
 	public void addCategoryTest() {
+		categoryList.add(c1);
+		categoryList.add(c2);
 		// Error:Category list is not null, so that admin can add a new category -
 		// boundary
 		assertNotNull("Check if  Category arraylist is empty", categoryList);
@@ -92,6 +92,8 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void viewAllCategoryTest() {
+		categoryList.add(c1);
+		categoryList.add(c2);
 		// Normal condition: test if view can work
 		C206_CaseStudy.viewAllCourseCategory(categoryList);
 		// Error: error in viewing or retrieving Course Category
@@ -100,6 +102,8 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void deleteACategoryTest() {
+		categoryList.add(c1);
+		categoryList.add(c2);
 		// Normal Condition: test if delete works in case of deleting "Math"Category
 		C206_CaseStudy.DeleteACourseCategory(categoryList);
 		assertEquals("check if the first Category math has been deleted", categoryList.get(0).getName(),
