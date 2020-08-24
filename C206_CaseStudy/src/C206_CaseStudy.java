@@ -258,7 +258,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	// Member 1 - Clarence
+	//--- Member 1 - Clarence METHODS ---
 
 	private static String retrieveMembers(List<Member> members) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s", "Name", "Gender", "Mobile", "Email",
@@ -312,7 +312,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	// Member 2 - Caven
+	//--- Member 2 - Caven METHODS ---
 	public static void AddCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Add Course Category");
 		String category = Helper.readString("Enter a new category name");
@@ -347,7 +347,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
-	// update coure category description
+	// update course category description
 	public static void UpdateCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Updating Course Category");
 		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
@@ -434,9 +434,9 @@ public class C206_CaseStudy {
 
 	}
 
-	// Member 3 - Daryl
+	//--- Member 3 - Daryl METHODS ---
 	   
-		//--- Retrieve Courses
+		//Retrieve Courses
 		public static String retrieveCourses(List<Course> courses) {
 			String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
 					"Duration", "Pre-requisite Course");
@@ -446,13 +446,13 @@ public class C206_CaseStudy {
 			return output;
 		}
 		
-		//--- View Courses
+		//View Courses
 		public static void viewCourses(List<Course> courses) {
 			setHeader("Courses");
 			System.out.println(retrieveCourses(courses));
 		}
 
-		//--- Add Course
+		//Add Course
 		public static boolean addCourse(List<Course> courses, List<Category> categories, Course newCourse) {
 			
 			// check duplicates
@@ -528,7 +528,7 @@ public class C206_CaseStudy {
 		    return id;
 		}
 
-	// Member 4 - Sabrina
+	//--- Member 4 - Sabrina METHODS ---
 	// Add course schedule
 	public static void addCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID > ");
@@ -586,7 +586,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	// Member 5 - Rongxin
+	//--- Member 5 - Rongxin METHODS ---
 	public static registerSchedule add() {
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
