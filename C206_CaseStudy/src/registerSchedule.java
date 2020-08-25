@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -17,12 +18,12 @@ public class registerSchedule {
 	String scheduleId; 
 	String memberEmail;
 	String status;
-	Date registerDate;
+	LocalDate registerDate;
 	
 	public registerSchedule(String registrationNumber,
 	String scheduleId,
 	String memberEmail,
-	Date registerDate) {
+	LocalDate registerDate) {
 		this.registrationNumber = registrationNumber;
 		this.scheduleId = scheduleId;
 		this.memberEmail = memberEmail;
@@ -89,14 +90,14 @@ public class registerSchedule {
 	/**
 	 * @return the registerDate
 	 */
-	public Date getRegisterDate() {
+	public LocalDate getRegisterDate() {
 		return registerDate;
 	}
 
 	/**
 	 * @param registerDate the registerDate to set
 	 */
-	public void setRegisterDate(Date registerDate) {
+	public void setRegisterDate(LocalDate registerDate) {
 		this.registerDate = registerDate;
 	}
 	

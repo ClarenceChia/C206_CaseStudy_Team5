@@ -1,4 +1,6 @@
 import static org.junit.Assert.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,13 +34,10 @@ public class C206_CaseStudyTest {
 	// member 4 ends
 
 	// member 5 - rongxin
-	ArrayList<registerSchedule> reglist = new ArrayList<registerSchedule>();
-	String rn = Helper.readString("Enter a registration number > ");
-	String sid = Helper.readString("Enter a course schedule id > ");
-	String memail = Helper.readString("Enter your email > ");
-	Date rdate = Helper.readDate("Enter a today's date > ");
-
-	registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
+	
+	registerSchedule r1;
+	registerSchedule r2;
+	ArrayList<registerSchedule> reglist;
 	// ends here
 	 
 	 
@@ -75,6 +74,13 @@ public class C206_CaseStudyTest {
 		cs2 = new CourseSchedule("DBIM1", 10, cs2StartDT, cs2EndDT, "E22M");			
 		//member 4 ends		
 		
+		//member 5 - Rongxin
+		reglist = new ArrayList <registerSchedule>();
+		LocalDate d1 =LocalDate.now();
+		LocalDate d2 =LocalDate.now();
+		r1 = new registerSchedule("N1","S1","a1@yahoo.com",d1);
+		r2 = new registerSchedule("N2","S2","a2@yahoo.com",d2);
+		//member 5 ends
 		
 	}
 
@@ -287,14 +293,14 @@ public class C206_CaseStudyTest {
 
 			// Given an empty list, after adding 1 item, the size of the list is 1
 
-			C206_CaseStudy.regSche(reglist, newReg);
+			C206_CaseStudy.regSche(reglist, r1);
 			assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
 
 			// The reg info just added is as same as the first item of the list
-			assertSame("Test that Camcorder is added same as 1st item of the list?", newReg, reglist.get(0));
+			assertSame("Test that Camcorder is added same as 1st item of the list?", r1, reglist.get(0));
 
 			// Add another item. test The size of the list is 2?
-			C206_CaseStudy.regSche(reglist, newReg);
+			C206_CaseStudy.regSche(reglist, r2);
 			assertEquals("Test that Camcorder arraylist size is 2?", 2, reglist.size());
 		}
 
@@ -310,7 +316,7 @@ public class C206_CaseStudyTest {
 			assertEquals("Check that ViewAllCamcorderlist", testOutput, allr);
 
 			// Given an empty list, after adding 2 items, test if the size of the list is 2
-			C206_CaseStudy.regSche(reglist, newReg);
+			C206_CaseStudy.regSche(reglist, r1);
 			assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
 
 		}
@@ -320,11 +326,11 @@ public class C206_CaseStudyTest {
 			assertNotNull("Test if there is valid a arraylist to add to", reglist);
 
 			// add
-			C206_CaseStudy.regSche(reglist, newReg);
+			C206_CaseStudy.regSche(reglist, r1);
 			// after delete, the size of the list should remain one
 			assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
 			// after delete, the size of the list should remain two if another
-			C206_CaseStudy.regSche(reglist, newReg);
+			C206_CaseStudy.regSche(reglist, r1);
 			assertEquals("Test if that reg arraylist size is 2?", 2, reglist.size());
 
 			String x = reglist.get(0).status;
@@ -350,6 +356,11 @@ public class C206_CaseStudyTest {
 		cs1 = null;
 		cs2 = null;
 		scheduleList = null;
+		
+		//member 5 -Rongxin
+		r1 = null;
+		r2 = null;
+		reglist = null;
 		
 	}
 
