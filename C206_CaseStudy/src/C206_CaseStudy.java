@@ -366,6 +366,7 @@ public class C206_CaseStudy {
 					CategoryList.get(i).getDescription());
 
 		}
+		
 		System.out.println(output);
 		int numberToUpdate=0;
 		boolean exist=false;
