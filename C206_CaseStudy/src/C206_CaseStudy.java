@@ -149,17 +149,21 @@ public class C206_CaseStudy {
 				//--- M e m b e r  4   M E N U ---
 				
 				int option4 = 0;
-				while (option4 != OPTION1_QUIT) {
+				while (option4 != OPTION_QUIT) {
 					// insert menu
 					courseScheduleMenu();
 					option4 = Helper.readInt("Enter an option > ");
 					if (option4 == 1) {
 						viewCourseSchedule(scheduleList);
 					} else if (option4 == 2) {
-						addCourseSchedule(scheduleList);
+						searchPriceCourseSchedule(scheduleList);
 					} else if (option4 == 3) {
+						addCourseSchedule(scheduleList);
+					} else if (option4 == 4) {
 						deleteCourseSchedule(scheduleList);
-					} else if (option4 == OPTION1_QUIT) {
+					} else if (option4 == 5) {
+						updateCourseSchedule(scheduleList);
+					} else if (option4 == OPTION_QUIT) {
 						System.out.println("Bye!");
 					} else {
 						System.out.println("Invalid option");
@@ -245,10 +249,12 @@ public class C206_CaseStudy {
 	//--- Member 4 MENU ---
 	private static void courseScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
-		System.out.println("1. View Course Schedules");
-		System.out.println("2. Add Course Schedule");
-		System.out.println("3. Delete Course Schedule");
-		System.out.println("4. Quit");
+		System.out.println("1. View Course Schedule");
+		System.out.println("2. Search Course Schedule by Price");
+		System.out.println("3. Add Course Schedule");
+		System.out.println("4. Delete Course Schedule");
+		System.out.println("5. Update Course Schedule");
+		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}
 
@@ -685,6 +691,38 @@ public class C206_CaseStudy {
 				}
 			}
 		}
+	}
+	
+	//searchPriceCourseSchedule
+	public static void searchPriceCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+			double price = Helper.readDouble("Enter price > ");
+			
+			for (int a = 0; a < scheduleList.size(); a++) {
+				if (price == scheduleList.get(a).getPrice()) {
+					viewCourseSchedule(scheduleList);
+				}		
+			}
+	}
+			
+	//updateCourseSchedule
+	public static void updateCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String scheduleid = Helper.readString("Course schedule ID to update > ");
+		
+		for (int i = 0; i < scheduleList.size(); i++) {
+			if (scheduleid.equalsIgnoreCase(scheduleList.get(i).getScheduleID())) {
+				scheduleList.get(i).setPrice(Helper.readDouble("Price > "));
+				
+				String start = Helper.readString("Start date/time (yyyy-MM-dd HH:mm) > ");
+				String end = Helper.readString("End date/time (yyyy-MM-dd HH:mm) > ");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime startDT = LocalDateTime.parse(start, formatter);
+				LocalDateTime endDT = LocalDateTime.parse(end, formatter);
+				
+				scheduleList.get(i).setStartDateTime(startDT);
+				scheduleList.get(i).setEndDateTime(endDT);
+				scheduleList.get(i).setLocation(Helper.readString("Course location > "));
+			}
+		}	
 	}
 
 	//--- Member 5 - Rongxin METHODS ---
