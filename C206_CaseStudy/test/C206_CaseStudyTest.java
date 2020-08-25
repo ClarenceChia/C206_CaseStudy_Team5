@@ -373,8 +373,14 @@ public class C206_CaseStudyTest {
 	@Test
 	public void deleteCourseScheduleTest() {
 		
+		//test if after deleting, the list is 0
+		C206_CaseStudy.addCourseSchedule(scheduleList);
+		scheduleList.add(cs1);
+		String testOutput = String.format("%-20s $%-10.2f %-20s %-20s %-15s\n","DBIS1", 20, "2020-08-20 12:15", "2020-08-20 13:15", "E22K");
+		
+		C206_CaseStudy.deleteCourseSchedule(scheduleList);
+		assertEquals("Check that scheduleList is deleted", testOutput, scheduleList);
 	}
-	
 	//member 4 ends
 	
 	// member 5 - rongxin
