@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -690,7 +691,7 @@ public class C206_CaseStudy {
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
 		String memail = Helper.readString("Enter your email > ");
-		Date rdate = Helper.readDate("Enter a today's date > ");
+		LocalDate rdate = LocalDate.now();
 
 		registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
 		return newReg;
