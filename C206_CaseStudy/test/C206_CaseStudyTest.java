@@ -8,11 +8,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
+	
+	
 
 	// member 2 - caven
 	private Category c1;
 	private Category c2;
 	private ArrayList<Category> categoryList;
+	
+	
 	
 	// member 3 - daryl
 	private Course c001;
@@ -36,6 +40,8 @@ public class C206_CaseStudyTest {
 
 	registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
 	// ends here
+	 
+	 
 
 	public C206_CaseStudyTest() {
 		super();
@@ -47,6 +53,7 @@ public class C206_CaseStudyTest {
 		categoryList= new ArrayList<Category>();
 		c1= new Category("Math","All about solving painful question");
 		c2= new Category("English Life","All about reading english history");
+		
 		
 		//member 3 - daryl
 		courseList = new ArrayList<Course>();
@@ -68,20 +75,24 @@ public class C206_CaseStudyTest {
 		cs2 = new CourseSchedule("DBIM1", 10, cs2StartDT, cs2EndDT, "E22M");			
 		//member 4 ends		
 		
+		
 	}
 
 	// member 2 - caven
 	@Test
 	public void addCategoryTest() {
-		categoryList.add(c1);
-		categoryList.add(c2);
+		
 		// Error:Category list is not null, so that admin can add a new category -
 		// boundary
 		assertNotNull("Check if  Category arraylist is empty", categoryList);
 		// Normal: check if a valid category name and category description is provided,
 		// new course category should be added
+		categoryList.add(c1);
+		categoryList.add(c2);
 		C206_CaseStudy.AddCourseCategory(categoryList);
-		assertSame("Check that Category is added", c1, categoryList.get(0));
+		
+		assertSame("Check that Category 1 is added", c1, categoryList.get(0));
+		assertSame("Check that Category 2 is added", c2, categoryList.get(1));
 		// test for error: when duplicate category name is added
 		Boolean can = categoryList.add(new Category("Math", "hello"));
 		assertFalse("Test if an same category name can be added?", can);
@@ -104,7 +115,7 @@ public class C206_CaseStudyTest {
 	public void deleteACategoryTest() {
 		categoryList.add(c1);
 		categoryList.add(c2);
-		// Normal Condition: test if delete works in case of deleting "Math"Category
+		// Normal Condition: test if delete works in case of deleting "Math" Category
 		C206_CaseStudy.DeleteACourseCategory(categoryList);
 		assertEquals("check if the first Category math has been deleted", categoryList.get(0).getName(),
 				"English Life");
@@ -114,6 +125,23 @@ public class C206_CaseStudyTest {
 		int size = categoryList.size();
 		assertEquals("check if size of list is 0", 0, size);
 	}
+	
+	@Test
+	public void UpdateCategoryDescriptionTest() {
+		categoryList.add(c1);
+		categoryList.add(c2);
+		// Normal Condition: test if update  works when Math description is chose to be changed
+		C206_CaseStudy.UpdateCourseCategory(categoryList);
+		assertNotEquals("check if the first Category math has been deleted","All about solving painful question" ,
+				categoryList.get(0).getDescription());
+		// Error:test if no such category description is still the same , which shouldn't happen if no error
+		assertEquals("check if category description is still the same  in category list","All about solving painful question",categoryList.get(0).getDescription());
+		// test boundary: no more to delete
+		int size = categoryList.size();
+		assertEquals("check if size of list is 0", 0, size);
+	}
+	
+	
 	
 	//member 3 - daryl
 	@Test
@@ -310,6 +338,7 @@ public class C206_CaseStudyTest {
 		c2 = null;
 		categoryList = null;
 		
+		
 		//member 3 - daryl
 		c3 = null;
 		c4 = null;
@@ -321,6 +350,7 @@ public class C206_CaseStudyTest {
 		cs1 = null;
 		cs2 = null;
 		scheduleList = null;
+		
 	}
 
 	@Test
