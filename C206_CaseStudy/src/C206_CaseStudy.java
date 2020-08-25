@@ -698,6 +698,7 @@ public class C206_CaseStudy {
 			double price = Helper.readDouble("Enter price > ");
 			
 			for (int a = 0; a < scheduleList.size(); a++) {
+				
 				if (price == scheduleList.get(a).getPrice()) {
 					String output = String.format("%-20s %-10s %-20s %-20s %-15s\n", 
 							"COURSE SCHEDULE ID", "PRICE",
