@@ -699,7 +699,19 @@ public class C206_CaseStudy {
 			
 			for (int a = 0; a < scheduleList.size(); a++) {
 				if (price == scheduleList.get(a).getPrice()) {
-					viewCourseSchedule(scheduleList);
+					String output = String.format("%-20s %-10s %-20s %-20s %-15s\n", 
+							"COURSE SCHEDULE ID", "PRICE",
+							"START DATE TIME", "END DATE TIME", "LOCATION");
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+						String start = scheduleList.get(a).getStartDateTime().format(formatter);
+						String end = scheduleList.get(a).getEndDateTime().format(formatter);
+
+						output += String.format("%-20s $%-10.2f %-20s %-20s %-15s\n", 
+								scheduleList.get(a).getScheduleID(),
+								scheduleList.get(a).getPrice(), start, end, 
+								scheduleList.get(a).getLocation());
+						
+						System.out.println(output);
 				}		
 			}
 	}
