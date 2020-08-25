@@ -320,7 +320,7 @@ public class C206_CaseStudy {
 			System.out.println("Invalid Member");
 		}
 	}
-
+	
 	//--- Member 2 - Caven METHODS ---
 	public static void AddCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Add Course Category");
@@ -348,9 +348,9 @@ public class C206_CaseStudy {
 			CategoryList.add(newCategory);
 		}
 
-		String output = String.format("%10s %30s\n", "Category name ", "DESCRIPTION");
+		String output = String.format("%-20s %-40s\n", "Category name ", "DESCRIPTION");
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output += String.format("%10s %30s\n", CategoryList.get(i).getName(), CategoryList.get(i).getDescription());
+			output += String.format("%-20s %-40s\n", CategoryList.get(i).getName(), CategoryList.get(i).getDescription());
 
 		}
 		System.out.println(output);
@@ -359,9 +359,9 @@ public class C206_CaseStudy {
 	// update course category description
 	public static void UpdateCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Updating Course Category");
-		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
+		String output = String.format("%-20s %-40s\n", "Category name ", "DESCRIPTION");
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output += String.format("%-10s %-30s\n", CategoryList.get(i).getName(),
+			output += String.format("%-20s %-40s\n", CategoryList.get(i).getName(),
 					CategoryList.get(i).getDescription());
 
 		}
@@ -388,10 +388,10 @@ public class C206_CaseStudy {
 
 	public static void viewAllCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Viewing Course Category");
-		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
+		String output = String.format("%-20s %-40s\n", "Category name ", "DESCRIPTION");
 		boolean exist = false;
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output += String.format("%-10s %-30s\n", CategoryList.get(i).getName(),
+			output += String.format("%-20s %-40s\n", CategoryList.get(i).getName(),
 					CategoryList.get(i).getDescription());
 
 		}
@@ -417,9 +417,9 @@ public class C206_CaseStudy {
 		setHeader("Deleting Course Category");
 		String result = "";
 		boolean exist = false;
-		String output = String.format("%-10s %-30s\n", "Category name ", "DESCRIPTION");
+		String output = String.format("%-20s %-40s\n", "Category name ", "DESCRIPTION");
 		for (int i = 0; i < CategoryList.size(); i++) {
-			output += String.format("%-10s %-30s\n", CategoryList.get(i).getName(),
+			output += String.format("%-20s %-40s\n", CategoryList.get(i).getName(),
 					CategoryList.get(i).getDescription());
 
 		}
