@@ -608,7 +608,7 @@ public class C206_CaseStudyTest {
 		scheduleList.add(cs1);
 		String testOutput = String.format("%-20s $%-10.2f %-20s %-20s %-15s\n","DBIS1", 20, "2020-08-20 12:15", "2020-08-20 13:15", "E22K");
 		
-		C206_CaseStudy.deleteCourseSchedule(scheduleList);
+		C206_CaseStudy.deleteCourseSchedule(scheduleList, reglist);
 		assertEquals("Check that scheduleList is deleted", testOutput, scheduleList);
 	}
 	//member 4 ends
