@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 	
-	//member 1 - Clarence
+	// member 1 - Clarence
 	private Member m1;
 	private Member m2;
 	private ArrayList<Member> memberList;
@@ -57,7 +57,7 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		//member 1 - Clarence
+		// member 1 - Clarence
 		memberList = new ArrayList<Member>();
 		m1 = new Member("Anna Bell", 'F', 92225555, "annabell@gmail.com", "06072000", "Australia");
 		m2 = new Member("Mike Chang", 'M', 93338888, "mikechang@gmail.com", "21031999", "Singapore");
@@ -66,13 +66,13 @@ public class C206_CaseStudyTest {
 		searchCountry03 = "Brazil";
 		
 		
-		//member 2 - caven
+		// member 2 - caven
 		categoryList= new ArrayList<Category>();
 		c1= new Category("Math","All about solving painful question");
 		c2= new Category("English Life","All about reading english history");
 		
 		
-		//member 3 - daryl
+		// member 3 - daryl
 		courseList = new ArrayList<Course>();
 		c001 = new Course("C001", "Software Devpt", "Infocomm", "Develo..", 120, "Math"); 
 		c002 = new Course("C002", "Applied Chem", "Applied Science", "pharmace..", 120, "Chemistry"); 
@@ -90,7 +90,7 @@ public class C206_CaseStudyTest {
 		searchCat03 = "Medical";
 		searchCat04 = "Food";
 			
-		//member 4 - sabrina
+		// member 4 - sabrina
 		scheduleList= new ArrayList<CourseSchedule>();
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -103,9 +103,9 @@ public class C206_CaseStudyTest {
 		
 		cs1 = new CourseSchedule("DBIS1", 20, cs1StartDT, cs1EndDT, "E22K");
 		cs2 = new CourseSchedule("DBIM1", 10, cs2StartDT, cs2EndDT, "E22M");			
-		//member 4 ends		
+		// member 4 ends		
 		
-		//member 5 - Rongxin
+		// member 5 - Rongxin
 		reglist = new ArrayList <registerSchedule>();
 
 		LocalDate d1 =LocalDate.now();
@@ -113,11 +113,11 @@ public class C206_CaseStudyTest {
 		r1 = new registerSchedule("N1","S1","a1@yahoo.com","Pending",d1);
 		r2 = new registerSchedule("N2","S2","a2@yahoo.com","Pending",d2);
 		rf1 = new registerSchedule("N1 ","S1","a1@yahoo.com","Pending",d1);
-		//member 5 ends
+		// member 5 ends
 		
 	}
-
-	//member 1 - Clarence
+	
+	// member 1 - Clarence
 	@Test
 	public void retrieveMemberTest() {
 		//Boundary - Test Valid Member List to Retrieve Members From
@@ -323,7 +323,6 @@ public class C206_CaseStudyTest {
 		assertEquals("check if size of list is 0", 0, size);
 	}
 	
-	
     //member 3 - daryl
 	@Test
 	public void retrieveCoursesTest() {
@@ -488,8 +487,8 @@ public class C206_CaseStudyTest {
 		assertEquals(courseList.get(0).getPreCourse(),                    newCourseinfo01[4]);
 		assertEquals("Course updated.", result);
 				
-		//--- Update C002
-		//Normal - Test Course - C002 have the same information after Update
+		// --- Update C002
+		// Normal - Test Course - C002 have the same information after Update
 		result = C206_CaseStudy.doUpdateCourse(courseList, "C002", newCourseinfo02);  
 		assertEquals(courseList.get(1).getTitle(),                        newCourseinfo02[0]);
 		assertEquals(courseList.get(1).getCategory(),                     newCourseinfo02[1]);
@@ -498,13 +497,13 @@ public class C206_CaseStudyTest {
 		assertEquals(courseList.get(1).getPreCourse(),                    newCourseinfo02[4]);
 		assertEquals("Course updated.", result);
 		
-		//--- Update C003
+		// --- Update C003
 		//Error - Test Course ID C003 doesn't exist in the Course List 
 		result = C206_CaseStudy.doUpdateCourse(courseList, "C003", newCourseinfo02);     //non-existent course
 		assertEquals("Course not found.", result);             
 		
-		//--- Update C002
-		//Normal - Test Course - C002 still have the same information after Failed Update
+		// --- Update C002
+		// Normal - Test Course - C002 still have the same information after Failed Update
 		result = C206_CaseStudy.doUpdateCourse(courseList, "C002", newCourseinfo03);      
 		assertEquals(courseList.get(1).getTitle(),                        newCourseinfo02[0]);
 		assertEquals(courseList.get(1).getCategory(),                     newCourseinfo02[1]);
@@ -512,7 +511,7 @@ public class C206_CaseStudyTest {
 		assertEquals(String.valueOf(courseList.get(1).getDuration()),     newCourseinfo02[3]);
 		assertEquals(courseList.get(1).getPreCourse(),                    newCourseinfo02[4]);
 		
-		//Error - Test new course information is/are empty 
+		// Error - Test new course information is/are empty 
 		assertEquals("Empty field/s found.", result);
 	}
 			
@@ -560,7 +559,7 @@ public class C206_CaseStudyTest {
 		expectedCourses = "Category not found.";
 		assertEquals(expectedCourses, result);
 	}
-
+	
 	//member 4 - sabrina
 	@Test
 	public void addCourseScheduleTest() {
@@ -683,10 +682,10 @@ public class C206_CaseStudyTest {
 					
 					
 	}
-		
+
 	@After
 	public void tearDown() throws Exception {
-		//member 1 - Clarence
+		// member 1 - Clarence
 		m1 = null;
 		m2 = null;
 		memberList = null;
@@ -694,12 +693,12 @@ public class C206_CaseStudyTest {
 		searchCountry02 = null;
 		searchCountry03 = null;
 		
-		// member 2 -caven
+		// member 2 - caven
 		c1 = null;
 		c2 = null;
 		categoryList = null;
 		
-		//member 3 - daryl
+		// member 3 - daryl
 	    c3 = null;
 	    c4 = null;
 	    c5 = null;
@@ -720,7 +719,7 @@ public class C206_CaseStudyTest {
 		cs2 = null;
 		scheduleList = null;
 		
-		//member 5 -Rongxin
+		// member 5 -Rongxin
 		r1 = null;
 		r2 = null;
 		reglist = null;
