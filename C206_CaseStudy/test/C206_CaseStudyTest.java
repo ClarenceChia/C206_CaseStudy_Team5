@@ -729,7 +729,6 @@ public class C206_CaseStudyTest {
 					
 					
 	}
-
 	@After
 	public void tearDown() throws Exception {
 		// member 1 - Clarence
