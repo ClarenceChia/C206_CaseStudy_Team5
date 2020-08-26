@@ -16,8 +16,6 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 6;
 	private static final int OPTION1_QUIT = 4;
 
-
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -218,7 +216,7 @@ public class C206_CaseStudy {
 	} // - END OF MAIN METHOD -
 	
 
-	//--- MAIN  MENU ---
+	// --- MAIN  MENU ---
 	private static void mainMenu() {
 		setHeader("MAIN MENU");
 		System.out.println("1. Members Menu");
@@ -230,7 +228,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
  
-	//--- Member 1 MENU ---
+	// --- Member 1 MENU ---
 	private static void membersMenu() {
 		setHeader("MEMBERS APP");
 		System.out.println("1. View Members");
@@ -242,7 +240,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	//--- Member 2 MENU ---
+	// --- Member 2 MENU ---
 	private static void courseCategoryMenu() {
 		setHeader("COURSE CATEGORY APP");
 		System.out.println("1. View Course Categories");
@@ -253,7 +251,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	//--- Member 3 MENU ---
+	// --- Member 3 MENU ---
 	private static void courseMenu() {
 		setHeader("MANAGES COURSES");
 		System.out.println("1. Add a Course");
@@ -265,7 +263,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	//--- Member 4 MENU ---
+	// --- Member 4 MENU ---
 	private static void courseScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
 		System.out.println("1. View Course Schedule");
@@ -277,7 +275,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	//--- Member 5 MENU ---
+	// --- Member 5 MENU ---
 	private static void registerScheduleMenu() {
 		setHeader("COURSE SCHEDULE APP");
 		System.out.println("1. View Register");
@@ -296,7 +294,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	//--- Member 1 - Clarence METHODS ---
+	// --- Member 1 - Clarence METHODS ---
 
 	public static String retrieveMembers(List<Member> members) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s", "Name", "Gender", "Mobile", "Email",
@@ -375,7 +373,7 @@ public class C206_CaseStudy {
 		return newMember;
 	}
 	
-	//update Member
+	// Update Member
 	public static boolean updateMember(List<Member> members, String countryName, String[] infoList) {
 		boolean isFound = false;
 		Member member = null;
@@ -421,7 +419,7 @@ public class C206_CaseStudy {
 		return infoList;
 	}
 	
-	//Search Member by Country
+	// Search Member by Country
 
 	public static String retrieveMember(List<Member> members) {
 		String output = "";
@@ -451,7 +449,8 @@ public class C206_CaseStudy {
 		System.out.println(retrieveMembersByCountry(members, country));
 	}
 	
-	//--- Member 2 - Caven METHODS ---
+	// --- Member 2 - Caven METHODS ---
+	
 	public static void AddCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Add Course Category");
 		String category = Helper.readString("Enter a new category name");
@@ -486,6 +485,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
+	
 	// update course category description
 	public static void UpdateCourseCategory(ArrayList<Category> CategoryList) {
 		setHeader("Updating Course Category");
@@ -574,7 +574,7 @@ public class C206_CaseStudy {
 
 	}
 
-    //--- Member 3 - Daryl METHODS ---
+    // --- Member 3 - Daryl METHODS ---
    
 	// 3.2 : View a Course
 
@@ -843,7 +843,8 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	//--- Member 4 - Sabrina METHODS ---
+	// --- Member 4 - Sabrina METHODS ---
+	
 	// Add course schedule
 	public static void addCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID > ");
@@ -908,7 +909,7 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	//searchPriceCourseSchedule
+	// SearchPriceCourseSchedule
 	public static void searchPriceCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 			double price = Helper.readDouble("Enter price > ");
 			
@@ -932,7 +933,7 @@ public class C206_CaseStudy {
 			}
 	}
 			
-	//updateCourseSchedule
+	// UpdateCourseSchedule
 	public static void updateCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID to update > ");
 		
@@ -953,7 +954,7 @@ public class C206_CaseStudy {
 		}	
 	}
 
-	//--- Member 5 - Rongxin METHODS ---
+	// --- Member 5 - Rongxin METHODS ---
 	public static registerSchedule add() {
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
@@ -972,7 +973,8 @@ public class C206_CaseStudy {
 		registerSchedule newReg = new registerSchedule(rn, sid, memail,status, LocalDate.now());
 		return newReg;
 	}
-	public static void regSche(ArrayList<registerSchedule> reglist, registerSchedule newReg) {
+	
+    public static void regSche(ArrayList<registerSchedule> reglist, registerSchedule newReg) {
 		for (registerSchedule i : reglist) {
 			// check for same registrationNumber
 			if(i.getRegistrationNumber().equalsIgnoreCase(newReg.getRegistrationNumber())){
@@ -985,7 +987,7 @@ public class C206_CaseStudy {
 		System.out.println("Register triumph");
 			}
   
-   // update 2(sprint 2)
+    // update 2(sprint 2)
 	public static void selRegisterScheduleByScheduleId(ArrayList<registerSchedule> reglist){
 		String scheduleId = Helper.readString("Enter the schedule id > ");
 		registerSchedule rr=null;
@@ -1022,7 +1024,6 @@ public class C206_CaseStudy {
 			System.out.println(rr.toString());
 		}
 	}
-
 
 	public static void setStatusByScheduleId(ArrayList<registerSchedule> reglist){
 	
@@ -1065,9 +1066,6 @@ public class C206_CaseStudy {
 			System.out.println("Invalid input");
 		}
 	}
-
-	
-	
 
 	static String viewAllr(ArrayList<registerSchedule> reglist) {
 		String op = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",
