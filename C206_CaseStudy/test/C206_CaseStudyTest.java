@@ -620,6 +620,14 @@ public class C206_CaseStudyTest {
 	
 	@After
 	public void tearDown() throws Exception {
+		//member 1 - Clarence
+		m1 = null;
+		m2 = null;
+		memberList = null;
+		searchCountry01 = null;
+		searchCountry02 = null;
+		searchCountry03 = null;
+		
 		// member 2 -caven
 		c1 = null;
 		c2 = null;
