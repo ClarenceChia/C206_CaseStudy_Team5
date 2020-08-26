@@ -41,11 +41,45 @@ public class C206_CaseStudy {
 					membersMenu();
 					option1 = Helper.readInt("Enter an option > ");
 					if (option1 == 1) {
+						setHeader("View Members");
 						viewMembers(memberList);
 					} else if (option1 == 2) {
-						addMembers(memberList);
+						Member newMember = inputMemberInfo();
+						boolean isAdded = addMembers(memberList, newMember);
+						
+						if(isAdded) {
+							System.out.println("Member Added.");
+						} else {
+							System.out.println("Invalid Member Details.");
+						}
 					} else if (option1 == 3) {
-						deleteMember(memberList);
+						setHeader("Delete a Member");
+						String countryName = inputCountryName();
+						boolean isDeleted = deleteMember(memberList, countryName);
+						if(isDeleted) {
+							System.out.println("Member Deleted");
+						} else {
+							System.out.println("Invalid Member");
+						}
+					} else if (option1 == 4) {
+						setHeader("Update a Member");
+						
+						viewMembers(memberList);
+						String countryName = inputCountryName();
+						String[] newMemberInfo = inputNewMemberInfo();
+						boolean isUpdated = updateMember(memberList, countryName, newMemberInfo);
+						
+						if(isUpdated) {
+							System.out.println("Member Updated");
+						} else {
+							System.out.println("Invalid Member");
+						}
+					} else if (option1 == 5) {
+						setHeader("Search a Member by Country");
+						
+						viewMembers(memberList);
+						String countryName = inputCountryName();
+						viewMembersByCountry(memberList, countryName);
 					} else if (option1 == OPTION1_QUIT) {
 						System.out.println("Bye!");
 					} else {
@@ -219,7 +253,9 @@ public class C206_CaseStudy {
 		System.out.println("1. View Members");
 		System.out.println("2. Add Members");
 		System.out.println("3. Delete Members");
-		System.out.println("4. Quit ");
+		System.out.println("4. Update Member");
+		System.out.println("5. Search Member by Country");
+		System.out.println("6. Quit ");
 		Helper.line(80, "-");
 	}
 
@@ -276,7 +312,9 @@ public class C206_CaseStudy {
 
 	//--- Member 1 - Clarence METHODS ---
 
-	private static String retrieveMembers(List<Member> members) {
+	//--- Member 1 - Clarence METHODS ---
+
+	public static String retrieveMembers(List<Member> members) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s", "Name", "Gender", "Mobile", "Email",
 				"Date of Birth", "Country");
 		for (Member m : members) {
@@ -290,7 +328,55 @@ public class C206_CaseStudy {
 		System.out.println(retrieveMembers(members));
 	}
 
-	public static void addMembers(List<Member> members) {
+	public static boolean addMembers(List<Member> members, Member newMember) {
+		//check duplicate
+		boolean isDuplicate = false;
+		for (Member m : members) {
+			if(m.getName().equals(newMember.getName())) {
+				isDuplicate = true;
+				break;
+			}
+		}
+		
+		//add member if valid
+		boolean isAdded = false;
+		if(!isDuplicate) {
+			members.add(newMember);
+			isAdded =true;
+		}
+		return isAdded;
+	}
+
+	public static boolean deleteMember(List<Member> members, String countryName) {
+		setHeader("Delete Member");
+		viewMembers(members);
+
+		String name = Helper.readString("Name > ");
+		//check if member name is valid
+		boolean isFound = false;
+		Member member = null;
+		for (Member m : members) {
+			if (m.getName().equals(name)) {
+				isFound = true;
+				member = m;
+				break;
+			}
+		}
+		
+		boolean isDeleted = false;
+		if(isFound) {
+			members.remove(member);
+			isDeleted = true;
+		}
+		return isDeleted;
+	}
+	
+	public static String inputMember() {
+		String name = Helper.readString("Enter name: ");
+		return name;
+	}
+	
+	public static Member inputMemberInfo() {
 		setHeader("Register Member");
 		System.out.println("\n");
 
@@ -302,30 +388,83 @@ public class C206_CaseStudy {
 		String country = Helper.readString("Enter Country of residence > ");
 
 		Member newMember = new Member(name, gender, mobile, email, dob, country);
-		members.add(newMember);
-		System.out.println("Member added");
+		return newMember;
 	}
-
-	public static void deleteMember(List<Member> members) {
-		setHeader("Delete Member");
-		viewMembers(members);
-
-		String name = Helper.readString("Name > ");
+	
+	//update Member
+	public static boolean updateMember(List<Member> members, String countryName, String[] infoList) {
 		boolean isFound = false;
 		Member member = null;
-		for (Member m : members) {
-			if (m.getName().equals(name)) {
+		for(Member m : members) {
+			if(m.getCountry().equals(countryName)) {
 				isFound = true;
 				member = m;
 				break;
 			}
 		}
-		if (isFound) {
-			members.remove(member);
-			System.out.println("Member Deleted");
-		} else {
-			System.out.println("Invalid Member");
+		
+		//check if new info is valid
+		boolean isValid = true;
+		for(String info : infoList) {
+			if(info.isEmpty()) {
+				isValid = false;
+				break;
+			}
 		}
+		
+		//update member if member name and new info is valid
+		boolean isUpdated = false;
+		if(isFound && isValid) {
+			member.setMobile(Integer.parseInt(infoList[0]));
+			member.setCountry(infoList[1]);
+			
+			isUpdated = true;
+		}
+		return isUpdated;
+	}
+	
+	public static String[] inputNewMemberInfo() {
+		String[] infoList = new String [3];
+		
+		//member info
+		int mobile = Helper.readInt("Mobile: ");
+		String country = Helper.readString("Country of Residence: ");
+		
+		//add into member info list
+		infoList[0] = String.valueOf(mobile);
+		infoList[1] = country;
+		
+		return infoList;
+	}
+	
+	//Search Member by Country
+
+	public static String retrieveMember(List<Member> members) {
+		String output = "";
+		for(Member m: members) {
+			output += m.getCountry() + "\n";
+		}
+		return output;
+	}
+	
+	public static String inputCountryName() {
+		String countryName = Helper.readString("Enter country name: ");
+		return countryName;
+	}
+	
+	public static String retrieveMembersByCountry(List<Member> members, String country) {
+		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s", "Name", "Gender", "Mobile", "Email",
+				"Date of Birth", "Country");
+		for(Member m: members) {
+			if(m.getCountry().equalsIgnoreCase(country)) {
+				output += m.toString();
+			}
+		}
+		return output;
+	}
+	
+	public static void viewMembersByCountry(List<Member> members, String country) {
+		System.out.println(retrieveMembersByCountry(members, country));
 	}
 	
 	//--- Member 2 - Caven METHODS ---

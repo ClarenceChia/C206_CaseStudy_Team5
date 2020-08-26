@@ -51,4 +51,29 @@ public class Member {
 	public String toString() {
 		return String.format("%-30s %-10s %-10d %-30s %-10s %-20s", getName(), getGender(), getMobile(), getEmail(), getDob(), getCountry());
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+
+	public void setMobile(int mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
 }
