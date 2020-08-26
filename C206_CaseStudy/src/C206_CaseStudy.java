@@ -570,243 +570,243 @@ public class C206_CaseStudy {
 
 	//--- Member 3 - Daryl METHODS ---
 	   
-			// 3.2 : View a Course
+	// 3.2 : View a Course
+
+    // View all Courses
+	public static String retrieveCourses(List<Course> courses) {
+		String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+				"Duration", "Pre-requisite Course");
+		for (Course c : courses) {
+			output += c.toString();
+		}
+		return output;
+	}
+	
+	public static void viewCourses(List<Course> courses) {
+		String output = retrieveCourses(courses);
+		System.out.println(output);
+	}
+	
+	// View a Course
+	public static String retrieveCourse(List<Course> courses, Course course) {
+		String output = "";
+		if (course != null) {
+			output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+					"Duration", "Pre-requisite Course");
+			output += course.toString();
+		} else {
+			output = "Course not found.";
+		}
+		return output;
+	}
+	
+	public static void viewCourse(List<Course> courses) {
+		String id = inputCourse();
+		Course course = findCourse(courses, id);
+		String output = retrieveCourse(courses, course);
+		System.out.println(output);
+	}
+	
+	public static String inputCourse() {
+		String id = Helper.readString("Course ID : "); 
+		return id;
+	}
+	
+	public static Course findCourse(List<Course> courses, String id) {
+		Course course = null;
+		for (Course c : courses) {
+			if (c.getId().equals(id)) {
+				course = c;
+				break;
+			}
+		}
+		return course;
+	}
+	
+	// 3.1 : Add a Course
+	
+	public static void addCourse(List<Course> courses, List<Category> categories) {
+		Course newCourse = inputCourseInfo();
+		String output = doAddCourse(courses, categories, newCourse);
+		System.out.println(output);
+	}
+	
+	public static String doAddCourse(List<Course> courses, List<Category> categories, Course newCourse) {
 		
-		    // View all Courses
-			public static String retrieveCourses(List<Course> courses) {
-				String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
-						"Duration", "Pre-requisite Course");
-				for (Course c : courses) {
-					output += c.toString();
-				}
-				return output;
+		String output = "";
+		String category = searchCategory(categories, newCourse);
+		Course courseResult = findCourse(courses, newCourse.getId());
+		
+		//courseResult == null -> no duplicate
+		//category     == ""   -> no category
+		if (courseResult != null && category != "") {
+			output = "Course ID not unique.";
+		} else if (category == "" && courseResult == null) {
+			output = "Category not found.";
+		} else if (category == "" && courseResult != null) {
+			output = "Category not found. Course ID not unique.";
+		} else {
+			courses.add(newCourse);
+			output = "Course added.";
+		}
+		
+		return output;
+	}
+	
+	public static String searchCategory(List<Category> categories, Course newCourse) {
+		// check category exists
+		String category = "";
+		for (Category cat : categories) {
+			if (cat.name.equalsIgnoreCase(newCourse.getCategory())) {
+				category = cat.name;
+				break;
 			}
-			
-			public static void viewCourses(List<Course> courses) {
-				String output = retrieveCourses(courses);
-				System.out.println(output);
-			}
-			
-			// View a Course
-			public static String retrieveCourse(List<Course> courses, Course course) {
-				String output = "";
-				if (course != null) {
-					output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
-							"Duration", "Pre-requisite Course");
-					output += course.toString();
-				} else {
-					output = "Course not found.";
-				}
-				return output;
-			}
-			
-			public static void viewCourse(List<Course> courses) {
-				String id = inputCourse();
-				Course course = findCourse(courses, id);
-				String output = retrieveCourse(courses, course);
-				System.out.println(output);
-			}
-			
-			public static String inputCourse() {
-				String id = Helper.readString("Course ID : "); 
-				return id;
-			}
-			
-			public static Course findCourse(List<Course> courses, String id) {
-				Course course = null;
-				for (Course c : courses) {
-					if (c.getId().equals(id)) {
-						course = c;
-						break;
-					}
-				}
-				return course;
-			}
-			
-			// 3.1 : Add a Course
-			
-			public static void addCourse(List<Course> courses, List<Category> categories) {
-				Course newCourse = inputCourseInfo();
-				String output = doAddCourse(courses, categories, newCourse);
-				System.out.println(output);
-			}
-			
-			public static String doAddCourse(List<Course> courses, List<Category> categories, Course newCourse) {
-				
-				String output = "";
-				String category = searchCategory(categories, newCourse);
-				Course courseResult = findCourse(courses, newCourse.getId());
-				
-				//courseResult == null -> no duplicate
-				//category     == ""   -> no category
-				if (courseResult != null && category != "") {
-					output = "Course ID not unique.";
-				} else if (category == "" && courseResult == null) {
-					output = "Category not found.";
-				} else if (category == "" && courseResult != null) {
-					output = "Category not found. Course ID not unique.";
-				} else {
-					courses.add(newCourse);
-					output = "Course added.";
-				}
-				
-				return output;
-			}
-			
-			public static String searchCategory(List<Category> categories, Course newCourse) {
-				// check category exists
-				String category = "";
-				for (Category cat : categories) {
-					if (cat.name.equalsIgnoreCase(newCourse.getCategory())) {
-						category = cat.name;
-						break;
-					}
-				}
-				return category;
-			}
-			
-			public static Course inputCourseInfo() {
-				
-				// course information
-				String id = Helper.readString("ID : ");
-				String title = Helper.readString("Title : ");
-				String category = Helper.readString("Category Name : ");
-				String desc = Helper.readString("Description : ");
-				double duration = Helper.readDouble("Duration : ");
-				String preCourse = Helper.readString("Pre-requisite Course : ");
-				Course newCourse = new Course(id, title, category, desc, duration, preCourse);
-				
-				return newCourse;
-				
-			}
-			
-			// 3.3 : Delete a Course
-			
-			public static void deleteCourse(List<Course> courses) {
-				String id = inputCourse();
-				String output = doDeleteCourse(courses, id);
-				System.out.println(output);
-			}
-			
-	        public static String doDeleteCourse(List<Course> courses, String id) {
-				
-				String output = "";
-				Course courseResult = findCourse(courses, id);
-				
-				//courseResult == null -> course doesn't exist
-				if (courseResult == null) {
-					output = "Course not found.";
-				} else {
-					courses.remove(courseResult);
-					output = "Course deleted.";
-				}
-				
-				return output;
-			}
-			
-			// 3.4 : Update a Course
-	        
-			public static void updateCourse(List<Course> courses) {
-				String id = inputCourse();
-				String[] infoList = inputNewCourseInfo();
-				String output = doUpdateCourse(courses, id, infoList);
-				System.out.println(output);
-			}
-			
-			public static String doUpdateCourse(List<Course> courses, String id, String[] infoList) {
-				
-				String output = "";
-				Course courseResult = findCourse(courses, id);
-				boolean areValidInfo = areValidInfo(infoList);
-				
-				//courseResult == null -> course doesn't exist
-				if (courseResult == null && !areValidInfo) {
-					output = "Course not found. Empty field/s found.";
-				} else if (courseResult != null && !areValidInfo) {
-					output = "Empty field/s found.";
-				} else if (courseResult == null && areValidInfo) {
-					output = "Course not found.";
-				} else  {
-					courseResult.setTitle(infoList[0]);
-					courseResult.setCategory( infoList[1]);
-					courseResult.setDescription(infoList[2]);
-					courseResult.setDuration(Double.parseDouble(infoList[3]));
-					courseResult.setPreCourse(infoList[4]);
-					output = "Course updated.";
-				}
-				
-				return output;
-			}
-			
-			
-			public static String[] inputNewCourseInfo() {
-				
-				String[] infoList = new String[5];
-				
-				// course information
-				String title     = Helper.readString("Title : ");
-				String category  = Helper.readString("Category Name : ");
-				String desc      = Helper.readString("Description : ");
-				double duration  = Helper.readDouble("Duration : ");
-				String preCourse = Helper.readString("Pre-requisite Course : ");
-				
-				//add to course information list
-				infoList[0] = title;
-				infoList[1] = category;
-				infoList[2] = desc;
-				infoList[3] = String.valueOf(duration);
-				infoList[4] = preCourse;
-				
-				return infoList;
-			}
-			
-			public static boolean areValidInfo(String[] infoList) {
-	        	boolean areValid = true;
-	        	// check new info are valid (no empty fields)
-	        	for (String info : infoList) {
-	        		if (info.isEmpty())  {
-	        			//end loop
-	        			areValid = false;
-	        			break;	
-	        	    } 
-	          	}
-	        	return areValid;
-	        }
-			
-			// 3.5 : Search Course by Category
-			
-			
-			// Search Course By Category
-			public static String retrieveCategories(List<Category> categories) {
-				String output = "";
-				for (Category cat : categories) {
-					output += cat.getName() + "\n";
-				}
-				return output;
-			}
-			
-			public static void viewCategories(List<Category> categories) {
-				System.out.println(retrieveCategories(categories));
-			}
-			
-			public static String inputCategoryName() {
-				String catName = Helper.readString("Category Name : ");
-				return catName;
-			}
-			
-			public static String retrieveCoursesByCat(List<Course> courses, String category) {
-				String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
-						        "Duration", "Pre-requisite Course");
-				for (Course c : courses) {
-					if (c.getCategory().equalsIgnoreCase(category)) 
-						output += c.toString();
-				}
-				return output;
-			}
-			
-			public static void viewCoursesByCat(List<Course> courses, String category) {
-				System.out.println(retrieveCoursesByCat(courses, category));
-			}
+		}
+		return category;
+	}
+	
+	public static Course inputCourseInfo() {
+		
+		// course information
+		String id = Helper.readString("ID : ");
+		String title = Helper.readString("Title : ");
+		String category = Helper.readString("Category Name : ");
+		String desc = Helper.readString("Description : ");
+		double duration = Helper.readDouble("Duration : ");
+		String preCourse = Helper.readString("Pre-requisite Course : ");
+		Course newCourse = new Course(id, title, category, desc, duration, preCourse);
+		
+		return newCourse;
+		
+	}
+	
+	// 3.3 : Delete a Course
+	
+	public static void deleteCourse(List<Course> courses) {
+		String id = inputCourse();
+		String output = doDeleteCourse(courses, id);
+		System.out.println(output);
+	}
+	
+    public static String doDeleteCourse(List<Course> courses, String id) {
+		
+		String output = "";
+		Course courseResult = findCourse(courses, id);
+		
+		//courseResult == null -> course doesn't exist
+		if (courseResult == null) {
+			output = "Course not found.";
+		} else {
+			courses.remove(courseResult);
+			output = "Course deleted.";
+		}
+		
+		return output;
+	}
+	
+	// 3.4 : Update a Course
+    
+	public static void updateCourse(List<Course> courses) {
+		String id = inputCourse();
+		String[] infoList = inputNewCourseInfo();
+		String output = doUpdateCourse(courses, id, infoList);
+		System.out.println(output);
+	}
+	
+	public static String doUpdateCourse(List<Course> courses, String id, String[] infoList) {
+		
+		String output = "";
+		Course courseResult = findCourse(courses, id);
+		boolean areValidInfo = areValidInfo(infoList);
+		
+		//courseResult == null -> course doesn't exist
+		if (courseResult == null && !areValidInfo) {
+			output = "Course not found. Empty field/s found.";
+		} else if (courseResult != null && !areValidInfo) {
+			output = "Empty field/s found.";
+		} else if (courseResult == null && areValidInfo) {
+			output = "Course not found.";
+		} else  {
+			courseResult.setTitle(infoList[0]);
+			courseResult.setCategory( infoList[1]);
+			courseResult.setDescription(infoList[2]);
+			courseResult.setDuration(Double.parseDouble(infoList[3]));
+			courseResult.setPreCourse(infoList[4]);
+			output = "Course updated.";
+		}
+		
+		return output;
+	}
+	
+	
+	public static String[] inputNewCourseInfo() {
+		
+		String[] infoList = new String[5];
+		
+		// course information
+		String title     = Helper.readString("Title : ");
+		String category  = Helper.readString("Category Name : ");
+		String desc      = Helper.readString("Description : ");
+		double duration  = Helper.readDouble("Duration : ");
+		String preCourse = Helper.readString("Pre-requisite Course : ");
+		
+		//add to course information list
+		infoList[0] = title;
+		infoList[1] = category;
+		infoList[2] = desc;
+		infoList[3] = String.valueOf(duration);
+		infoList[4] = preCourse;
+		
+		return infoList;
+	}
+	
+	public static boolean areValidInfo(String[] infoList) {
+    	boolean areValid = true;
+    	// check new info are valid (no empty fields)
+    	for (String info : infoList) {
+    		if (info.isEmpty())  {
+    			//end loop
+    			areValid = false;
+    			break;	
+    	    } 
+      	}
+    	return areValid;
+    }
+	
+	// 3.5 : Search Course by Category
+	
+	
+	// Search Course By Category
+	public static String retrieveCategories(List<Category> categories) {
+		String output = "";
+		for (Category cat : categories) {
+			output += cat.getName() + "\n";
+		}
+		return output;
+	}
+	
+	public static void viewCategories(List<Category> categories) {
+		System.out.println(retrieveCategories(categories));
+	}
+	
+	public static String inputCategoryName() {
+		String catName = Helper.readString("Category Name : ");
+		return catName;
+	}
+	
+	public static String retrieveCoursesByCat(List<Course> courses, String category) {
+		String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+				        "Duration", "Pre-requisite Course");
+		for (Course c : courses) {
+			if (c.getCategory().equalsIgnoreCase(category)) 
+				output += c.toString();
+		}
+		return output;
+	}
+	
+	public static void viewCoursesByCat(List<Course> courses, String category) {
+		System.out.println(retrieveCoursesByCat(courses, category));
+	}
 
 	//--- Member 4 - Sabrina METHODS ---
 	// Add course schedule

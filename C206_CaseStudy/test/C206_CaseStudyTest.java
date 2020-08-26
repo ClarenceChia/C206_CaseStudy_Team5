@@ -119,7 +119,7 @@ public class C206_CaseStudyTest {
 		//member 5 ends
 		
 	}
-	/*
+
 	//member 1 - Clarence
 	@Test
 	public void retrieveMemberTest() {
@@ -325,239 +325,238 @@ public class C206_CaseStudyTest {
 		int size = categoryList.size();
 		assertEquals("check if size of list is 0", 0, size);
 	}
-	*/
 	
 	
 	//member 3 - daryl
-		@Test
-		public void retrieveCoursesTest() {
-			// Boundary - Test Valid Course List to Retrieve Courses From
-			assertNotNull(courseList);
-					
-			// Normal - Test Course List Size is 0
-			assertEquals(0, courseList.size());
-					
-			// VIEW ALL COURSES
-			// Boundary - Test Course Output Contains the Course Header when Course List is Empty (Size is 0)
-			String courses = C206_CaseStudy.retrieveCourses(courseList);
-			String expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-			assertEquals(expectedCourses, courses);
-					
-			// Normal - Test Course List Size is 2 after Adding 2 Courses
-			courseList.add(c001);  
-			courseList.add(c002);  
-			assertEquals(2, courseList.size());
-					
-			// Normal - Test Course Output Contains the 2 Formatted Course Information + Course Header after Adding 2 Courses
-			courses = C206_CaseStudy.retrieveCourses(courseList);
-			expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
-			expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
-			assertEquals(expectedCourses, courses);
-					
-			// VIEW A COURSE
-			// --- View C001
-			// Normal - Test Course Output Contains Course Header + Course Information of the Course Entered
-			Course courseId = C206_CaseStudy.findCourse(courseList, "C001");
-			String course = C206_CaseStudy.retrieveCourse(courseList, courseId);
-			String expectedCourse = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-			expectedCourse += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
-			assertEquals(expectedCourse, course);
-			
-			// --- View C002
-			// Normal - Test Course Output Contains Course Header + Course Information of the Course Entered 
-			courseId = C206_CaseStudy.findCourse(courseList, "C002");
-			course = C206_CaseStudy.retrieveCourse(courseList, courseId);
-			expectedCourse = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-			expectedCourse += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
-			assertEquals(expectedCourse, course);
-			
-			// --- View C003 (non-existent)
-			// Error - Test Output is "Course not found" when the Course is not found in Course List
-			courseId = C206_CaseStudy.findCourse(courseList, "C003");
-			course = C206_CaseStudy.retrieveCourse(courseList, courseId);
-			expectedCourse = "Course not found.";
-			assertEquals(expectedCourse, course);
-			
-		}
+	@Test
+	public void retrieveCoursesTest() {
+		// Boundary - Test Valid Course List to Retrieve Courses From
+		assertNotNull(courseList);
 				
+		// Normal - Test Course List Size is 0
+		assertEquals(0, courseList.size());
 				
-		@Test
-		public void addCourseTest() {
-			// Boundary - Test Valid Course List to Add Courses To
-			assertNotNull(courseList);
-					
-			// Normal - Test Course List Size is 0
-			assertEquals(0, courseList.size());
-					
-			// --- Add C001
-			// Normal - Test Course List Size is 1 after Adding 1 Course - C001
-			// Normal - Test Course - C001 is the First Course of the Course List
-			// Normal - Test it Displays Message After Successful Addition
-			categoryList.add(c3);                                                         //add course category
-			String result = C206_CaseStudy.doAddCourse(courseList, categoryList, c001);   //add course
-			assertEquals(1, courseList.size());
-			assertSame(c001, courseList.get(0));
-			assertEquals("Course added.", result);
-					
-			// --- Add C002
-			// Normal - Test Course List Size is 2 after Adding 1 Course - C002
-			// Normal - Test Course - C002 is the Second Course of the Course List
-			// Normal - Test it displays Message after Successful Addition
-			categoryList.add(c4);                                                        //add another course category
-			result = C206_CaseStudy.doAddCourse(courseList, categoryList, c002);         //add another course
-			assertEquals(2, courseList.size());
-			assertSame(c002, courseList.get(1));
-			assertEquals("Course added.", result);
+		// VIEW ALL COURSES
+		// Boundary - Test Course Output Contains the Course Header when Course List is Empty (Size is 0)
+		String courses = C206_CaseStudy.retrieveCourses(courseList);
+		String expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
+		assertEquals(expectedCourses, courses);
 				
-			// --- Add C001
-			// Normal - Test Course List Size is still 2 after Failed Addition of the new Course 
-			// Normal - Test Course - C002 is still the Second Course of the Course List
-			result = C206_CaseStudy.doAddCourse(courseList, categoryList, c001);         //add same course
-			assertEquals(2, courseList.size());
-			assertSame(c002, courseList.get(1));
+		// Normal - Test Course List Size is 2 after Adding 2 Courses
+		courseList.add(c001);  
+		courseList.add(c002);  
+		assertEquals(2, courseList.size());
+				
+		// Normal - Test Course Output Contains the 2 Formatted Course Information + Course Header after Adding 2 Courses
+		courses = C206_CaseStudy.retrieveCourses(courseList);
+		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
+		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
+		assertEquals(expectedCourses, courses);
+				
+		// VIEW A COURSE
+		// --- View C001
+		// Normal - Test Course Output Contains Course Header + Course Information of the Course Entered
+		Course courseId = C206_CaseStudy.findCourse(courseList, "C001");
+		String course = C206_CaseStudy.retrieveCourse(courseList, courseId);
+		String expectedCourse = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
+		expectedCourse += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
+		assertEquals(expectedCourse, course);
+		
+		// --- View C002
+		// Normal - Test Course Output Contains Course Header + Course Information of the Course Entered 
+		courseId = C206_CaseStudy.findCourse(courseList, "C002");
+		course = C206_CaseStudy.retrieveCourse(courseList, courseId);
+		expectedCourse = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
+		expectedCourse += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
+		assertEquals(expectedCourse, course);
+		
+		// --- View C003 (non-existent)
+		// Error - Test Output is "Course not found" when the Course is not found in Course List
+		courseId = C206_CaseStudy.findCourse(courseList, "C003");
+		course = C206_CaseStudy.retrieveCourse(courseList, courseId);
+		expectedCourse = "Course not found.";
+		assertEquals(expectedCourse, course);
+		
+	}
 			
-			// Error - Test Course ID - C003 doesn't exist and display Message
-			assertEquals("Course ID not unique.", result);
-					
-			// --- Add C003
-			// Normal - Test Course List Size is still 2 after Failed Addition of the new Course 
-			// Normal - Test Course - C002 is still the Second Course of the Course List
-			result = C206_CaseStudy.doAddCourse(courseList, categoryList, c003);         //add another course
-			assertEquals(2, courseList.size());
-			assertSame(c002, courseList.get(1));
-					
-			// Error - Test Category Name doesn't exist in the Category List and display Message
-			assertEquals("Category not found.", result);
+			
+	@Test
+	public void addCourseTest() {
+		// Boundary - Test Valid Course List to Add Courses To
+		assertNotNull(courseList);
+				
+		// Normal - Test Course List Size is 0
+		assertEquals(0, courseList.size());
+				
+		// --- Add C001
+		// Normal - Test Course List Size is 1 after Adding 1 Course - C001
+		// Normal - Test Course - C001 is the First Course of the Course List
+		// Normal - Test it Displays Message After Successful Addition
+		categoryList.add(c3);                                                         //add course category
+		String result = C206_CaseStudy.doAddCourse(courseList, categoryList, c001);   //add course
+		assertEquals(1, courseList.size());
+		assertSame(c001, courseList.get(0));
+		assertEquals("Course added.", result);
+				
+		// --- Add C002
+		// Normal - Test Course List Size is 2 after Adding 1 Course - C002
+		// Normal - Test Course - C002 is the Second Course of the Course List
+		// Normal - Test it displays Message after Successful Addition
+		categoryList.add(c4);                                                        //add another course category
+		result = C206_CaseStudy.doAddCourse(courseList, categoryList, c002);         //add another course
+		assertEquals(2, courseList.size());
+		assertSame(c002, courseList.get(1));
+		assertEquals("Course added.", result);
+			
+		// --- Add C001
+		// Normal - Test Course List Size is still 2 after Failed Addition of the new Course 
+		// Normal - Test Course - C002 is still the Second Course of the Course List
+		result = C206_CaseStudy.doAddCourse(courseList, categoryList, c001);         //add same course
+		assertEquals(2, courseList.size());
+		assertSame(c002, courseList.get(1));
+		
+		// Error - Test Course ID - C003 doesn't exist and display Message
+		assertEquals("Course ID not unique.", result);
+				
+		// --- Add C003
+		// Normal - Test Course List Size is still 2 after Failed Addition of the new Course 
+		// Normal - Test Course - C002 is still the Second Course of the Course List
+		result = C206_CaseStudy.doAddCourse(courseList, categoryList, c003);         //add another course
+		assertEquals(2, courseList.size());
+		assertSame(c002, courseList.get(1));
+				
+		// Error - Test Category Name doesn't exist in the Category List and display Message
+		assertEquals("Category not found.", result);
 
-		}
+	}
+			
+	@Test
+	public void deleteCourseTest() {
+		// Boundary - Test Valid Course List to Delete Courses From
+		assertNotNull(courseList);
 				
-		@Test
-		public void deleteCourseTest() {
-			// Boundary - Test Valid Course List to Delete Courses From
-			assertNotNull(courseList);
-					
-			// Normal - Test Course List Size is 0
-			// Normal - Test Course List Size is 2 after Adding 2 Courses
-			assertEquals(0, courseList.size());
-			courseList.add(c001);  
-			courseList.add(c002);  
-			assertEquals(2, courseList.size());
-					    
-			// --- Delete C001
-			// Normal - Test Course List Size is 1 after Deleting Course - C001
-			// Normal - Test Course - C001 doesn't exist in the Course List
-			// Normal - Test it displays Message after Successful Deletion
-			String result = C206_CaseStudy.doDeleteCourse(courseList, "C001");            
-			assertEquals(1, courseList.size());
-			assertFalse(courseList.contains(c001));
-			assertEquals("Course deleted.", result);
-					
-			// --- Delete C002
-			// Normal - Test Course List Size is 0 after Deleting Course - C002
-			// Normal - Test Course - C002 doesn't exist in the Course List
-			result = C206_CaseStudy.doDeleteCourse(courseList, "C002");            
-			assertEquals(0, courseList.size());
-			assertFalse(courseList.contains(c002));
-			assertEquals("Course deleted.", result);
-							
-			// --- Delete C003
-			// Normal - Test Course List Size is still 0 after Failed Deletion
-			result = C206_CaseStudy.doDeleteCourse(courseList, "C003");            
-			assertEquals(0, courseList.size());
-			
-			// Error - Test Course ID - C003 doesn't exist and display Message
-			assertEquals("Course not found.", result);
-		}
+		// Normal - Test Course List Size is 0
+		// Normal - Test Course List Size is 2 after Adding 2 Courses
+		assertEquals(0, courseList.size());
+		courseList.add(c001);  
+		courseList.add(c002);  
+		assertEquals(2, courseList.size());
+				    
+		// --- Delete C001
+		// Normal - Test Course List Size is 1 after Deleting Course - C001
+		// Normal - Test Course - C001 doesn't exist in the Course List
+		// Normal - Test it displays Message after Successful Deletion
+		String result = C206_CaseStudy.doDeleteCourse(courseList, "C001");            
+		assertEquals(1, courseList.size());
+		assertFalse(courseList.contains(c001));
+		assertEquals("Course deleted.", result);
 				
-		@Test
-		public void updateCourseTest() {
-			// Boundary - Test Valid Course List to Add Courses To
-			assertNotNull(courseList);
-							
-			// Normal - Test Course List Size is 0
-			// Normal - Test Course List Size is 2 after Adding 2 Courses
-			assertEquals(0, courseList.size());
-			courseList.add(c001);  
-			courseList.add(c002);  
-			assertEquals(2, courseList.size());
-					
-			// --- Update C001
-			// Normal - Test Course - C001 have the same information after Update
-			// Normal - Test it displays Message after Successful update
-			String result = C206_CaseStudy.doUpdateCourse(courseList, "C001", newCourseinfo01);  
-			assertEquals(courseList.get(0).getTitle(),                        newCourseinfo01[0]);
-			assertEquals(courseList.get(0).getCategory(),                     newCourseinfo01[1]);
-			assertEquals(courseList.get(0).getDescription(),                  newCourseinfo01[2]);
-			assertEquals(String.valueOf(courseList.get(0).getDuration()),     newCourseinfo01[3]);
-			assertEquals(courseList.get(0).getPreCourse(),                    newCourseinfo01[4]);
-			assertEquals("Course updated.", result);
-					
-			//--- Update C002
-			//Normal - Test Course - C002 have the same information after Update
-			result = C206_CaseStudy.doUpdateCourse(courseList, "C002", newCourseinfo02);  
-			assertEquals(courseList.get(1).getTitle(),                        newCourseinfo02[0]);
-			assertEquals(courseList.get(1).getCategory(),                     newCourseinfo02[1]);
-			assertEquals(courseList.get(1).getDescription(),                  newCourseinfo02[2]);
-			assertEquals(String.valueOf(courseList.get(1).getDuration()),     newCourseinfo02[3]);
-			assertEquals(courseList.get(1).getPreCourse(),                    newCourseinfo02[4]);
-			assertEquals("Course updated.", result);
+		// --- Delete C002
+		// Normal - Test Course List Size is 0 after Deleting Course - C002
+		// Normal - Test Course - C002 doesn't exist in the Course List
+		result = C206_CaseStudy.doDeleteCourse(courseList, "C002");            
+		assertEquals(0, courseList.size());
+		assertFalse(courseList.contains(c002));
+		assertEquals("Course deleted.", result);
+						
+		// --- Delete C003
+		// Normal - Test Course List Size is still 0 after Failed Deletion
+		result = C206_CaseStudy.doDeleteCourse(courseList, "C003");            
+		assertEquals(0, courseList.size());
+		
+		// Error - Test Course ID - C003 doesn't exist and display Message
+		assertEquals("Course not found.", result);
+	}
 			
-			//--- Update C003
-			//Error - Test Course ID C003 doesn't exist in the Course List 
-			result = C206_CaseStudy.doUpdateCourse(courseList, "C003", newCourseinfo02);     //non-existent course
-			assertEquals("Course not found.", result);             
-			
-			//--- Update C002
-			//Normal - Test Course - C002 still have the same information after Failed Update
-			result = C206_CaseStudy.doUpdateCourse(courseList, "C002", newCourseinfo03);      
-			assertEquals(courseList.get(1).getTitle(),                        newCourseinfo02[0]);
-			assertEquals(courseList.get(1).getCategory(),                     newCourseinfo02[1]);
-			assertEquals(courseList.get(1).getDescription(),                  newCourseinfo02[2]);
-			assertEquals(String.valueOf(courseList.get(1).getDuration()),     newCourseinfo02[3]);
-			assertEquals(courseList.get(1).getPreCourse(),                    newCourseinfo02[4]);
-			
-			//Error - Test new course information is/are empty 
-			assertEquals("Empty field/s found.", result);
-		}
+	@Test
+	public void updateCourseTest() {
+		// Boundary - Test Valid Course List to Add Courses To
+		assertNotNull(courseList);
+						
+		// Normal - Test Course List Size is 0
+		// Normal - Test Course List Size is 2 after Adding 2 Courses
+		assertEquals(0, courseList.size());
+		courseList.add(c001);  
+		courseList.add(c002);  
+		assertEquals(2, courseList.size());
 				
-		@Test
-		public void searchCourseByCatTest() {
-			//Boundary - Test Valid Course List to Retrieve Courses From
-			assertNotNull(courseList);
-							
-			//Normal - Test Course List Size is 0
-			assertEquals(0, courseList.size());
-					
-			//Add Categories
-			categoryList.add(c3);  
-			categoryList.add(c4);  
-							
-			//--- Search searchCat03
-			//Boundary - Test Course Output contains the Course Header when No Result for that Category
-			String courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat03);
-			String expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-			assertEquals(expectedCourses, courses);
-							
-			//Normal - Test Course List Size is 2 after Adding 2 Courses
-			courseList.add(c001);  
-			courseList.add(c002);  
-			assertEquals(2, courseList.size());
-							
-			//--- Search searchCat01
-			//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
-			courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat01);
-			expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
-			assertEquals(expectedCourses, courses);
-					
-			//--- Search searchCat02
-			//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
-			courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat02);
-			expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-			expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
-			assertEquals(expectedCourses, courses);
-					
-		}
-/*
+		// --- Update C001
+		// Normal - Test Course - C001 have the same information after Update
+		// Normal - Test it displays Message after Successful update
+		String result = C206_CaseStudy.doUpdateCourse(courseList, "C001", newCourseinfo01);  
+		assertEquals(courseList.get(0).getTitle(),                        newCourseinfo01[0]);
+		assertEquals(courseList.get(0).getCategory(),                     newCourseinfo01[1]);
+		assertEquals(courseList.get(0).getDescription(),                  newCourseinfo01[2]);
+		assertEquals(String.valueOf(courseList.get(0).getDuration()),     newCourseinfo01[3]);
+		assertEquals(courseList.get(0).getPreCourse(),                    newCourseinfo01[4]);
+		assertEquals("Course updated.", result);
+				
+		//--- Update C002
+		//Normal - Test Course - C002 have the same information after Update
+		result = C206_CaseStudy.doUpdateCourse(courseList, "C002", newCourseinfo02);  
+		assertEquals(courseList.get(1).getTitle(),                        newCourseinfo02[0]);
+		assertEquals(courseList.get(1).getCategory(),                     newCourseinfo02[1]);
+		assertEquals(courseList.get(1).getDescription(),                  newCourseinfo02[2]);
+		assertEquals(String.valueOf(courseList.get(1).getDuration()),     newCourseinfo02[3]);
+		assertEquals(courseList.get(1).getPreCourse(),                    newCourseinfo02[4]);
+		assertEquals("Course updated.", result);
+		
+		//--- Update C003
+		//Error - Test Course ID C003 doesn't exist in the Course List 
+		result = C206_CaseStudy.doUpdateCourse(courseList, "C003", newCourseinfo02);     //non-existent course
+		assertEquals("Course not found.", result);             
+		
+		//--- Update C002
+		//Normal - Test Course - C002 still have the same information after Failed Update
+		result = C206_CaseStudy.doUpdateCourse(courseList, "C002", newCourseinfo03);      
+		assertEquals(courseList.get(1).getTitle(),                        newCourseinfo02[0]);
+		assertEquals(courseList.get(1).getCategory(),                     newCourseinfo02[1]);
+		assertEquals(courseList.get(1).getDescription(),                  newCourseinfo02[2]);
+		assertEquals(String.valueOf(courseList.get(1).getDuration()),     newCourseinfo02[3]);
+		assertEquals(courseList.get(1).getPreCourse(),                    newCourseinfo02[4]);
+		
+		//Error - Test new course information is/are empty 
+		assertEquals("Empty field/s found.", result);
+	}
+			
+	@Test
+	public void searchCourseByCatTest() {
+		//Boundary - Test Valid Course List to Retrieve Courses From
+		assertNotNull(courseList);
+						
+		//Normal - Test Course List Size is 0
+		assertEquals(0, courseList.size());
+				
+		//Add Categories
+		categoryList.add(c3);  
+		categoryList.add(c4);  
+						
+		//--- Search searchCat03
+		//Boundary - Test Course Output contains the Course Header when No Result for that Category
+		String courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat03);
+		String expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
+		assertEquals(expectedCourses, courses);
+						
+		//Normal - Test Course List Size is 2 after Adding 2 Courses
+		courseList.add(c001);  
+		courseList.add(c002);  
+		assertEquals(2, courseList.size());
+						
+		//--- Search searchCat01
+		//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
+		courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat01);
+		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
+		assertEquals(expectedCourses, courses);
+				
+		//--- Search searchCat02
+		//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
+		courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat02);
+		expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
+		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
+		assertEquals(expectedCourses, courses);
+				
+	}
+
 	//member 4 - sabrina
 	@Test
 	public void addCourseScheduleTest() {
@@ -616,74 +615,74 @@ public class C206_CaseStudyTest {
 	//member 4 ends
 	
 	// member 5 - rongxin
-		@Test
-		public void regScheTest() {
+	@Test
+	public void regScheTest() {
 
-			// reglist is not null, so that can add a new item
-			assertNotNull("Test if there is valid a arraylist to add to", reglist);
+		// reglist is not null, so that can add a new item
+		assertNotNull("Test if there is valid a arraylist to add to", reglist);
 
-			// Given an empty list, after adding 1 item, the size of the list is 1
-			
-			//normal
-			C206_CaseStudy.regSche(reglist, r1);
-			assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
-			// The reg info just added is as same as the first item of the list
-			assertSame("Test that Camcorder is added same as 1st item of the list?", r1, reglist.get(0));
-			// Add another item. test The size of the list is 2?
-			C206_CaseStudy.regSche(reglist, r2);
-			assertEquals("Test that Camcorder arraylist size is 2?", 2, reglist.size());
-			
-			//Error
-			C206_CaseStudy.regSche(reglist, f);
-			assertEquals("Check if the false input being added into the list", 2, reglist.size());
-			
-			//Boundary
-			C206_CaseStudy.regSche(reglist, rf1);
-			assertEquals("Test that Camcorder arraylist size is 3 while the similar recored"
-					+ " being inserted", 3, reglist.size());
-		}
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		
+		//normal
+		C206_CaseStudy.regSche(reglist, r1);
+		assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
+		// The reg info just added is as same as the first item of the list
+		assertSame("Test that Camcorder is added same as 1st item of the list?", r1, reglist.get(0));
+		// Add another item. test The size of the list is 2?
+		C206_CaseStudy.regSche(reglist, r2);
+		assertEquals("Test that Camcorder arraylist size is 2?", 2, reglist.size());
+		
+		//Error
+		C206_CaseStudy.regSche(reglist, f);
+		assertEquals("Check if the false input being added into the list", 2, reglist.size());
+		
+		//Boundary
+		C206_CaseStudy.regSche(reglist, rf1);
+		assertEquals("Test that Camcorder arraylist size is 3 while the similar recored"
+				+ " being inserted", 3, reglist.size());
+	}
 
-		@Test
-		public void viewAllrTest() {
-			//Normal
-			// reglist is not null, so that can add a new item
-			assertNotNull("Test if there is valid a arraylist to add to", reglist);
-			// test if the list of registerSchedule retrieved from the CaseStudy is empty
-			String allr = C206_CaseStudy.viewAllr(reglist);
-			String testOutput = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID",
-					"Member Email", "Status", "Registerion Date");
-			assertEquals("Check that if it is equal", testOutput, allr);
-			// Given an empty list, after adding 2 items, test if the size of the list is 2
-			C206_CaseStudy.regSche(reglist, r1);
-			assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
-			
-			
-			
+	@Test
+	public void viewAllrTest() {
+		//Normal
+		// reglist is not null, so that can add a new item
+		assertNotNull("Test if there is valid a arraylist to add to", reglist);
+		// test if the list of registerSchedule retrieved from the CaseStudy is empty
+		String allr = C206_CaseStudy.viewAllr(reglist);
+		String testOutput = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID",
+				"Member Email", "Status", "Registerion Date");
+		assertEquals("Check that if it is equal", testOutput, allr);
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		C206_CaseStudy.regSche(reglist, r1);
+		assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
+		
+		
+		
 
-		}
+	}
 
-		public void delrTest() {
-			// reglist is not null, so that can add a new item
-						assertNotNull("Test if there is valid a arraylist to add to", reglist);						
-						//normal
-						// add
-						C206_CaseStudy.regSche(reglist, r1);
-						// after delete, the size of the list should remain one
-						C206_CaseStudy.delr(reglist);
-						assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
-						// after delete, the size of the list should remain two if another is add while the status is set to deleted
-						C206_CaseStudy.regSche(reglist, r1);
-						assertEquals("Test if that reg arraylist size is 2?", 2, reglist.size());
-						// check for status for both r1 and r2
-						String x = reglist.get(0).status;
-						assertSame("Test has the record status setted to deleted", x, "Deleted");
-						String xx = reglist.get(1).status;
-						assertSame("Test has the record status setted to deleted", xx, "Deleted");
-						
-						
-						
-		}
-	*/
+	public void delrTest() {
+		// reglist is not null, so that can add a new item
+		assertNotNull("Test if there is valid a arraylist to add to", reglist);						
+		//normal
+		// add
+		C206_CaseStudy.regSche(reglist, r1);
+		// after delete, the size of the list should remain one
+		C206_CaseStudy.delr(reglist);
+		assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
+		// after delete, the size of the list should remain two if another is add while the status is set to deleted
+		C206_CaseStudy.regSche(reglist, r1);
+		assertEquals("Test if that reg arraylist size is 2?", 2, reglist.size());
+		// check for status for both r1 and r2
+		String x = reglist.get(0).status;
+		assertSame("Test has the record status setted to deleted", x, "Deleted");
+		String xx = reglist.get(1).status;
+		assertSame("Test has the record status setted to deleted", xx, "Deleted");
+					
+					
+					
+	}
+		
 	@After
 	public void tearDown() throws Exception {
 		//member 1 - Clarence
