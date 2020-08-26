@@ -699,7 +699,6 @@ public class C206_CaseStudyTest {
 		c2 = null;
 		categoryList = null;
 		
-		
 		//member 3 - daryl
 	    c3 = null;
 	    c4 = null;
