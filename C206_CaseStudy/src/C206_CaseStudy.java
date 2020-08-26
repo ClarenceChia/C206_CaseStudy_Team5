@@ -817,12 +817,19 @@ public class C206_CaseStudy {
 	public static void deleteCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String scheduleid = Helper.readString("Course schedule ID > ");
 		char yOrN = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
-
+		
+		boolean emptylist = false;
+		if ((viewAllr(reglist)).length() == 0) {
+			emptylist = true;
+		}
+		
 		if (yOrN == 'Y' || yOrN == 'y') {
 			for (int i = 0; i < scheduleList.size(); i++) {
 				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
-					scheduleList.remove(i);
-					System.out.println("Deleted!");
+					if (emptylist == true) {
+						scheduleList.remove(i);
+						System.out.println("Deleted!");	
+					} 
 				} else {
 					System.out.println("Delete failed");
 				}
