@@ -940,7 +940,7 @@ public class C206_CaseStudy {
 		String memail = Helper.readString("Enter your email > ");
 
 
-		registerSchedule newReg = new registerSchedule(rn, sid, memail,status, LocalDateTime.now());
+		registerSchedule newReg = new registerSchedule(rn, sid, memail,status, LocalDate.now());
 		return newReg;
 	}
 	public static void regSche(ArrayList<registerSchedule> reglist, registerSchedule newReg) {

@@ -1,4 +1,5 @@
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -19,18 +20,18 @@ public class registerSchedule {
 	String scheduleId; 
 	String memberEmail;
 	String status;
-	LocalDateTime registerDatetime;
+	LocalDate registerDate;
 	
 	public registerSchedule(String registrationNumber,
 	String scheduleId,
 	String memberEmail,
 	String status,
-													LocalDateTime registerDatetime) {
+	LocalDate registerDate) {
 		this.registrationNumber = registrationNumber;
 		this.scheduleId = scheduleId;
 		this.memberEmail = memberEmail;
 		this.status = status;
-		this.registerDatetime = registerDatetime;
+		this.registerDate = registerDate;
 	}
 
 	/**
@@ -89,12 +90,12 @@ public class registerSchedule {
 		this.status = status;
 	}
 
-	public LocalDateTime getRegisterDatetime() {
-		return registerDatetime;
+	public LocalDate getRegisterDatetime() {
+		return registerDate;
 	}
 
-	public void setRegisterDatetime(LocalDateTime registerDatetime) {
-		this.registerDatetime = registerDatetime;
+	public void setRegisterDatetime(LocalDate registerDate) {
+		this.registerDate = registerDate;
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class registerSchedule {
 			", scheduleId='" + scheduleId + '\'' +
 			", memberEmail='" + memberEmail + '\'' +
 			", status='" + status + '\'' +
-			", registerDatetime=" + registerDatetime +
+			", registerDatetime=" + registerDate +
 			'}';
 	}
 }
