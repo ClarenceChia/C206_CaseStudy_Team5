@@ -1,5 +1,6 @@
-import java.time.LocalDate;
-import java.util.Date;
+
+import java.time.LocalDateTime;
+
 
 /**
  * I declare that this code was written by me.
@@ -18,17 +19,18 @@ public class registerSchedule {
 	String scheduleId; 
 	String memberEmail;
 	String status;
-	LocalDate registerDate;
+	LocalDateTime registerDatetime;
 	
 	public registerSchedule(String registrationNumber,
 	String scheduleId,
 	String memberEmail,
-	LocalDate registerDate) {
+	String status,
+													LocalDateTime registerDatetime) {
 		this.registrationNumber = registrationNumber;
 		this.scheduleId = scheduleId;
 		this.memberEmail = memberEmail;
-		status = "Panding";
-		this.registerDate = registerDate;
+		this.status = status;
+		this.registerDatetime = registerDatetime;
 	}
 
 	/**
@@ -87,18 +89,22 @@ public class registerSchedule {
 		this.status = status;
 	}
 
-	/**
-	 * @return the registerDate
-	 */
-	public LocalDate getRegisterDate() {
-		return registerDate;
+	public LocalDateTime getRegisterDatetime() {
+		return registerDatetime;
 	}
 
-	/**
-	 * @param registerDate the registerDate to set
-	 */
-	public void setRegisterDate(LocalDate registerDate) {
-		this.registerDate = registerDate;
+	public void setRegisterDatetime(LocalDateTime registerDatetime) {
+		this.registerDatetime = registerDatetime;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "registerSchedule{" +
+			"registrationNumber='" + registrationNumber + '\'' +
+			", scheduleId='" + scheduleId + '\'' +
+			", memberEmail='" + memberEmail + '\'' +
+			", status='" + status + '\'' +
+			", registerDatetime=" + registerDatetime +
+			'}';
+	}
 }

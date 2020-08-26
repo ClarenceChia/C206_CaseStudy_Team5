@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -199,19 +200,21 @@ public class C206_CaseStudy {
 						regSche(reglist,newReg);
 					} else if (option5 == 3) {
 						delr(reglist);
+					} else if (option5 == 4){
+						selRegisterScheduleByScheduleId(reglist);
+					} else if(option5==5) {
+						setStatusByScheduleId(reglist);
+					} else if(option5==6){
+						selRegisterEmail(reglist);
 					} else if (option5 == OPTION1_QUIT) {
 						System.out.println("Bye!");
 					} else {
 						System.out.println("Invalid option");
 					}
+					
 				}
-			} else if (option == OPTION_QUIT) {
-				System.out.println("Bye!");
-			} else {
-				System.out.println("Invalid option");
 			}
 		}
-
 	} // - END OF MAIN METHOD -
 	
 
@@ -280,7 +283,10 @@ public class C206_CaseStudy {
 		System.out.println("1. View Register");
 		System.out.println("2. Add Register");
 		System.out.println("3. Delete Register");
-		System.out.println("4. Quit");
+		System.out.println("4. Search by schedule Id");
+		System.out.println("5. Set status with schedule id");
+		System.out.println("6. Display detail of the member by the email");
+		System.out.println("7. Quit");
 		Helper.line(80, "-");
 	}
 
@@ -851,26 +857,26 @@ public class C206_CaseStudy {
 
 	// Delete course schedule
 	public static void deleteCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
-		String scheduleid = Helper.readString("Course schedule ID > ");
-		char yOrN = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
-		
-		boolean emptylist = false;
-		if ((viewAllr(reglist)).length() == 0) {
-			emptylist = true;
-		}
-		
-		if (yOrN == 'Y' || yOrN == 'y') {
-			for (int i = 0; i < scheduleList.size(); i++) {
-				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
-					if (emptylist == true) {
-						scheduleList.remove(i);
-						System.out.println("Deleted!");	
-					} 
-				} else {
-					System.out.println("Delete failed");
-				}
-			}
-		}
+//		String scheduleid = Helper.readString("Course schedule ID > ");
+//		char yOrN = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
+//		
+//		boolean emptylist = false;
+//		if ((viewAllr(reglist)).length() == 0) {
+//			emptylist = true;
+//		}
+//		
+//		if (yOrN == 'Y' || yOrN == 'y') {
+//			for (int i = 0; i < scheduleList.size(); i++) {
+//				if (scheduleid.equals(scheduleList.get(i).getScheduleID())) {
+//					if (emptylist == true) {
+//						scheduleList.remove(i);
+//						System.out.println("Deleted!");	
+//					} 
+//				} else {
+//					System.out.println("Delete failed");
+//				}
+//			}
+//		}
 	}
 	
 	//searchPriceCourseSchedule
@@ -922,34 +928,124 @@ public class C206_CaseStudy {
 	public static registerSchedule add() {
 		String rn = Helper.readString("Enter a registration number > ");
 		String sid = Helper.readString("Enter a course schedule id > ");
+		int pick = Helper.readInt("Pick status:1.Accepted 2.Pending > ");
+		String status=null;
+		if(pick==1){
+			status="Accepted";
+		}else if(pick==2){
+			status="Pending";
+		}else{
+			System.out.println("Invalid input");
+		}
 		String memail = Helper.readString("Enter your email > ");
-		LocalDate rdate = LocalDate.now();
 
-		registerSchedule newReg = new registerSchedule(rn, sid, memail, rdate);
+
+		registerSchedule newReg = new registerSchedule(rn, sid, memail,status, LocalDateTime.now());
 		return newReg;
 	}
 	public static void regSche(ArrayList<registerSchedule> reglist, registerSchedule newReg) {
-
-		reglist.add(newReg);
-
 		for (registerSchedule i : reglist) {
-			if (!i.getRegistrationNumber().equalsIgnoreCase(newReg.registrationNumber)) {
-
-				System.out.println("Register triumph");
-			} else {
-
+			// check for same registrationNumber
+			if(i.getRegistrationNumber().equalsIgnoreCase(newReg.getRegistrationNumber())){
 				System.out.println("Registration number existed");
+				return;
+			}
+		}
+		// no same registrationNumber.
+		reglist.add(newReg);
+		System.out.println("Register triumph");
 			}
   
-		}   
-	} 
+   // update 2(sprint 2)
+	public static void selRegisterScheduleByScheduleId(ArrayList<registerSchedule> reglist){
+		String scheduleId = Helper.readString("Enter the schedule id > ");
+		registerSchedule rr=null;
+		for (registerSchedule r : reglist) {
+			if(r.getScheduleId().equals(scheduleId)){
+				rr=r;
+				//end the loop when find r
+				break;
+			}
+		}
+
+		if(rr==null){
+			System.out.println("No matched schedule id as "+scheduleId);
+		}else {
+			System.out.println(rr.toString());
+		}
+	}
+
+	public static void selRegisterEmail(ArrayList<registerSchedule> reglist){
+		String email = Helper.readString("Enter the email of the person >");
+		registerSchedule rr=null;
+
+		for (registerSchedule r : reglist) {
+			if(r.getMemberEmail().equals(email)){
+
+				rr=r;
+				break;
+			}
+		}
+
+		if(rr==null){
+			System.out.println("No matched email as "+email);
+		}else {
+			System.out.println(rr.toString());
+		}
+	}
+
+
+	public static void setStatusByScheduleId(ArrayList<registerSchedule> reglist){
+	
+		String scheduleId = Helper.readString("Enter the schedule id to update the status > ");
+		registerSchedule registerSchedule=null;
+		for (registerSchedule schedule : reglist) {
+			if(schedule.getScheduleId().equals(scheduleId)){
+				registerSchedule=schedule;
+				break;
+			}
+		}
+		if(registerSchedule==null){
+			System.out.println("No match result as "+scheduleId);
+			return;
+		}
+
+		Helper.line(30, "-");;
+		System.out.println("1.Accepted");
+		System.out.println("2.Pending");
+		int i = Helper.readInt("Enter you option > ");
+		
+		if(i==1){
+			
+			if(registerSchedule.getStatus().equals("Pending")){
+				registerSchedule.setStatus("Accepted");
+			}
+		}else if(i==2){
+		
+			if(registerSchedule.getStatus().equals("Accepted")){
+				Duration duration=Duration.between(registerSchedule.getRegisterDatetime(),LocalDateTime.now());
+				long l = duration.toDays();
+				if(l>0){
+					System.out.println("Sorry! It is more than one day");
+					return;
+				}
+				registerSchedule.setStatus("Pending");
+				System.out.println("Successful updated to Pending");
+			}
+		}else {
+			System.out.println("Invalid input");
+		}
+	}
+
+	
+	
 
 	static String viewAllr(ArrayList<registerSchedule> reglist) {
 		String op = String.format("%-30s %-20s %-20s %-15s %-20s\n", "Registration Number", "Schedule ID", "Member Email",
 				"Status", "Registerion Date");
 		for (registerSchedule i : reglist) {
 			op += String.format("%-30s %-20s %-20s %-15s %-20s\n", i.getRegistrationNumber(), i.getScheduleId(),
-					i.getMemberEmail(), i.getStatus(), i.getRegisterDate());
+					i.getMemberEmail(), i.getStatus(), i.getRegisterDatetime());
 		}
 		
 		System.out.println(op);
@@ -965,7 +1061,7 @@ public class C206_CaseStudy {
 				System.out.println("Deleted !");
  
 			} else {
-				System.out.println("Invalid registration numbe entered");
+				System.out.println("Invalid registration number entered");
 			}
 		}
 	}
