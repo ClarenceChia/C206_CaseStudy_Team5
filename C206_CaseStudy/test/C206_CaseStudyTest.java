@@ -517,44 +517,44 @@ public class C206_CaseStudyTest {
 			
 	@Test
 	public void searchCourseByCatTest() {
-		//Boundary - Test Valid Course List to Retrieve Courses From
+		// Boundary - Test Valid Course List to Retrieve Courses From
 		assertNotNull(courseList);
 						
-		//Normal - Test Course List Size is 0
+		// Normal - Test Course List Size is 0
 		assertEquals(0, courseList.size());
 				
-		//Add Categories
+		// Add Categories
 		categoryList.add(c3);  
 		categoryList.add(c4);  
 						
-		//--- Search searchCat03
-		//Boundary - Test Course Output contains the Course Header when No Result for that Category
+		// --- Search searchCat03
+		// Boundary - Test it displays a Message if no courses are found for that Category
 		categoryList.add(c5);
 		String result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat03);
 		String expectedCourses = "No Course/s found.";
 		assertEquals(expectedCourses, result);
 						
-		//Normal - Test Course List Size is 2 after Adding 2 Courses
+		// Normal - Test Course List Size is 2 after Adding 2 Courses
 		courseList.add(c001);  
 		courseList.add(c002);  
 		assertEquals(2, courseList.size());
 						
-		//--- Search searchCat01
-		//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
+		// --- Search searchCat01
+		// Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
 		result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat01);
 		expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
 		assertEquals(expectedCourses, result);
 				
-		//--- Search searchCat02
-		//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
+		// --- Search searchCat02
+		// Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
 		result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat02);
 		expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
 		assertEquals(expectedCourses, result);
 		
-		//--- Search searchCat03 (non-existent category)
-		//Error - Test category name doesn't exist in the Category List and display Message
+		// --- Search searchCat03 (non-existent category)
+		// Error - Test category name doesn't exist in the Category List and display Message
 		result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat04);
 		expectedCourses = "Category not found.";
 		assertEquals(expectedCourses, result);
