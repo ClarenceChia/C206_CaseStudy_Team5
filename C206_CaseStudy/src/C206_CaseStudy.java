@@ -151,7 +151,7 @@ public class C206_CaseStudy {
 						
 						viewCategories(CategoryList);
 						String category = inputCategoryName();
-						viewCoursesByCat(courseList, category);
+						viewCoursesByCat(courseList, CategoryList, category);
 						
 					} else if (option3 == 6) {
 						System.out.println("Bye!");
@@ -574,8 +574,8 @@ public class C206_CaseStudy {
 
 	}
 
-	//--- Member 3 - Daryl METHODS ---
-	   
+    //--- Member 3 - Daryl METHODS ---
+   
 	// 3.2 : View a Course
 
     // View all Courses
@@ -781,7 +781,6 @@ public class C206_CaseStudy {
 	
 	// 3.5 : Search Course by Category
 	
-	
 	// Search Course By Category
 	public static String retrieveCategories(List<Category> categories) {
 		String output = "";
@@ -800,18 +799,48 @@ public class C206_CaseStudy {
 		return catName;
 	}
 	
-	public static String retrieveCoursesByCat(List<Course> courses, String category) {
-		String output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
-				        "Duration", "Pre-requisite Course");
-		for (Course c : courses) {
-			if (c.getCategory().equalsIgnoreCase(category)) 
-				output += c.toString();
+	public static boolean searchCategory(List<Category> categories, String category) {
+		// check category exists
+		boolean isFound = false;
+		for (Category cat : categories) {
+			if (cat.name.equalsIgnoreCase(category)) {
+				isFound = true;
+				break;
+			}
 		}
+		return isFound;
+	}
+	
+	public static String retrieveCoursesByCat(List<Course> courses, List<Category> categories, String category) {
+		
+		String output = "";
+		boolean validCat = searchCategory(categories, category);
+		
+		if (validCat) {
+			output = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription",
+			        "Duration", "Pre-requisite Course");
+			
+			int count = 0;
+			for (Course c : courses) {
+				if (c.getCategory().equalsIgnoreCase(category)) {
+					output += c.toString();
+					count++;
+				}
+			}
+			
+			if (count == 0) 
+				output = "No Course/s found.";
+			
+		} else {
+			output = "Category not found.";
+		}
+		
 		return output;
 	}
 	
-	public static void viewCoursesByCat(List<Course> courses, String category) {
-		System.out.println(retrieveCoursesByCat(courses, category));
+	public static void viewCoursesByCat(List<Course> courses, List<Category> categories, String category) {
+		String output = retrieveCoursesByCat(courses, categories, category);
+		System.out.println(output);
 	}
 
 	//--- Member 4 - Sabrina METHODS ---

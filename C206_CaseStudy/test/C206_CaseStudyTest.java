@@ -25,14 +25,9 @@ public class C206_CaseStudyTest {
 	private ArrayList<Category> categoryList;
 	
 	// member 3 - daryl
-	private Course c001;
-	private Course c002;
-	private Course c003;
-	private Category c3;
-	private Category c4;
-	private String searchCat01;
-	private String searchCat02;
-	private String searchCat03;
+	private Course   c001, c002, c003;
+	private Category c3, c4, c5;
+	private String   searchCat01, searchCat02, searchCat03, searchCat04;
 	private String[] newCourseinfo01;
 	private String[] newCourseinfo02;
 	private String[] newCourseinfo03;
@@ -84,6 +79,7 @@ public class C206_CaseStudyTest {
 		c003 = new Course("C003", "Mobile Devpt", "Tech", "Develo..", 120, "Math"); 
 		c3 = new Category("Infocomm", "info..");
 		c4 = new Category("Applied Science", "apply..");
+		c5 = new Category("Medical", "treating..");
 				
 		newCourseinfo01 = new String[] {"Software Development", "Infocomm", "Develo..", "160.0", "Math"};
 		newCourseinfo02 = new String[] {"Applied Chemistry", "Applied Science", "pharmace..", "160.0", "Chemistry"};
@@ -92,6 +88,7 @@ public class C206_CaseStudyTest {
 		searchCat01 = "Infocomm";
 		searchCat02 = "Applied Science";
 		searchCat03 = "Medical";
+		searchCat04 = "Food";
 			
 		//member 4 - sabrina
 		scheduleList= new ArrayList<CourseSchedule>();
@@ -327,9 +324,10 @@ public class C206_CaseStudyTest {
 	}
 	
 	
-	//member 3 - daryl
+    //member 3 - daryl
 	@Test
 	public void retrieveCoursesTest() {
+		
 		// Boundary - Test Valid Course List to Retrieve Courses From
 		assertNotNull(courseList);
 				
@@ -532,9 +530,10 @@ public class C206_CaseStudyTest {
 						
 		//--- Search searchCat03
 		//Boundary - Test Course Output contains the Course Header when No Result for that Category
-		String courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat03);
-		String expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
-		assertEquals(expectedCourses, courses);
+		categoryList.add(c5);
+		String result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat03);
+		String expectedCourses = "No Course/s found.";
+		assertEquals(expectedCourses, result);
 						
 		//Normal - Test Course List Size is 2 after Adding 2 Courses
 		courseList.add(c001);  
@@ -543,17 +542,23 @@ public class C206_CaseStudyTest {
 						
 		//--- Search searchCat01
 		//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
-		courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat01);
+		result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat01);
+		expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C001", "Software Devpt", "Infocomm", "Develo..", 120.00, "Math");
-		assertEquals(expectedCourses, courses);
+		assertEquals(expectedCourses, result);
 				
 		//--- Search searchCat02
 		//Normal - Test Course Output contains the Course Header plus the Courses Information when 1 result for that Category
-		courses = C206_CaseStudy.retrieveCoursesByCat(courseList, searchCat02);
+		result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat02);
 		expectedCourses = String.format("%-10s %-20s %-20s %-20s %-20s %-20s\n", "Id", "Title", "Category", "Decription", "Duration", "Pre-requisite Course");
 		expectedCourses += String.format("%-10s %-20s %-20s %-20s %-20.2f %-20s\n", "C002", "Applied Chem", "Applied Science", "pharmace..", 120.00, "Chemistry");
-		assertEquals(expectedCourses, courses);
-				
+		assertEquals(expectedCourses, result);
+		
+		//--- Search searchCat03 (non-existent category)
+		//Error - Test category name doesn't exist in the Category List and display Message
+		result = C206_CaseStudy.retrieveCoursesByCat(courseList, categoryList, searchCat04);
+		expectedCourses = "Category not found.";
+		assertEquals(expectedCourses, result);
 	}
 
 	//member 4 - sabrina
@@ -655,9 +660,6 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.regSche(reglist, r1);
 		assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
 		
-		
-		
-
 	}
 
 	public void delrTest() {
@@ -700,6 +702,7 @@ public class C206_CaseStudyTest {
 		//member 3 - daryl
 	    c3 = null;
 	    c4 = null;
+	    c5 = null;
 		c001 = null;
 		c002 = null;
 		c003 = null;
@@ -707,6 +710,7 @@ public class C206_CaseStudyTest {
 		searchCat01 = null;
 		searchCat02 = null;
 		searchCat03 = null;
+		searchCat04 = null;
 		newCourseinfo01 = null;
 		newCourseinfo02 = null;
 		newCourseinfo03 = null;
