@@ -23,6 +23,10 @@ public class Member {
 		this.dob = dob;
 		this.country = country;
 	}
+	public Member(int mobile, String country) {
+		this.mobile = mobile;
+		this.country = country;
+	}
 
 	public String getName() {
 		return name;

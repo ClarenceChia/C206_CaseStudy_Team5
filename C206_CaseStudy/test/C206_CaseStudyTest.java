@@ -11,6 +11,14 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 	
+	//member 1 - Clarence
+	private Member m1;
+	private Member m2;
+	private ArrayList<Member> memberList;
+	private String searchCountry01;
+	private String searchCountry02;
+	private String searchCountry03;
+	
 	// member 2 - caven
 	private Category c1;
 	private Category c2;
@@ -51,6 +59,16 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
+		//member 1 - Clarence
+		memberList = new ArrayList<Member>();
+		m1 = new Member("Anna Bell", 'F', 92225555, "annabell@gmail.com", "06072000", "Australia");
+		m2 = new Member("Mike Chang", 'M', 93338888, "mikechang@gmail.com", "21031999", "Singapore");
+		searchCountry01 = "Australia";
+		searchCountry02 = "Singapore";
+		searchCountry03 = "Brazil";
+		
+		
 		//member 2 - caven
 		categoryList= new ArrayList<Category>();
 		c1= new Category("Math","All about solving painful question");
@@ -97,7 +115,150 @@ public class C206_CaseStudyTest {
 		//member 5 ends
 		
 	}
+	
+	//member 1 - Clarence
+	@Test
+	public void retrieveMemberTest() {
+		//Boundary - Test Valid Member List to Retrieve Members From
+		assertNotNull(memberList);
+				
+		//Normal - Test Member List Size is 0
+		assertEquals(0, memberList.size());
+				
+		//Boundary - Test Course Output Contains the Course Header when Course List is Empty (Size is 0)
+		String members = C206_CaseStudy.retrieveMembers(memberList);
+		String expectedMembers = String.format("%-30s %-10s %-10s %-20s %-15s %-20s", "Name", "Gender", "Mobile", "Email", "Date of Birth", "Country");
+		assertEquals(expectedMembers, members);
+				
+		//Normal - Test Member List Size is 2 after Adding 2 Members
+		memberList.add(m1);  
+		memberList.add(m2);  
+		assertEquals(2, memberList.size());
+				
+		//Normal - Test Member Output Contains the 2 Formatted Member Information + Member Header after Adding 2 Members
+		members = C206_CaseStudy.retrieveMembers(memberList);
+		expectedMembers += String.format("%-30s %-10s %-10d %-20s %-15s %-20s\n", "Anna Bell", 'F', 92225555, "annabell@gmail.com", "06072000", "Australia");
+		expectedMembers += String.format("%-30s %-10s %-10d %-20s %-15s %-20s\n", "Mike Chang", 'M', 93338888, "mikechang@gmail.com", "21031999", "Singapore");
+		assertEquals(expectedMembers, members);
+	}
+	
+	@Test
+	public void addMemberTest() {
+		//Boundary - Test Valid Member List to Add Members To
+		assertNotNull(memberList);
+				
+		//Normal - Test Course List Size is 0
+		assertEquals(0, memberList.size());
+				
+		//--- Add C001
+		//Normal - Test Member List Size is 1 after Adding 1 Member - m1
+		//Normal - Test Member - m1 is the First Member of the Member List
+		memberList.add(m1);                                                         //add Member category
+		boolean isValid = C206_CaseStudy.addMembers(memberList, m1);   //add Member
+		assertEquals(1, memberList.size());
+		assertSame(m1, memberList.get(0));
+				
+		//Error - Test Member ID - m1 doesn't exist
+		assertTrue(isValid);
+				
+		//--- Add m2
+		//Normal - Test Member List Size is 2 after Adding 1 Member - m2
+		//Normal - Test Member - m2 is the Second Member of the Member List
+		memberList.add(m2);                                                       //add another Member category
+		isValid = C206_CaseStudy.addMembers(memberList, m2);         //add another Member
+		assertEquals(2, memberList.size());
+		assertSame(m2, memberList.get(1));
+			
+		//Error - Test Member ID - m2 exist in the Member List OR Member Category Name doesn't exist in Member List
+		assertTrue(isValid);
 
+	}
+	
+	@Test
+	public void deleteMemberTest() {
+		//Boundary - Test Valid Member List to Delete Members From
+		assertNotNull(memberList);
+				
+		//Normal - Test Member List Size is 0
+		//Normal - Test Member List Size is 2 after Adding 2 Members
+		assertEquals(0, memberList.size());
+		memberList.add(m1);  
+		memberList.add(m2);  
+		assertEquals(2, memberList.size());
+				    
+		//--- Delete m1
+		//Normal - Test Member List Size is 1 after Deleting Member - m1
+		//Normal - Test Member - m1 doesn't exist in the Member List
+		boolean isDeleted = C206_CaseStudy.deleteMember(memberList, "m1");            
+		assertEquals(1, memberList.size());
+		assertFalse(memberList.contains(m1));
+				
+		//Error - Test Member ID - m1 doesn't exist
+		assertTrue(isDeleted);
+				
+		//--- Delete m2
+		//Normal - Test Member List Size is 0 after Deleting Member - m2
+		//Normal - Test Member - C002 doesn't exist in the Member List
+		isDeleted = C206_CaseStudy.deleteMember(memberList, "m2");            
+		assertEquals(0, memberList.size());
+		assertFalse(memberList.contains(m2));
+						
+		//Error - Test Member ID - m2 exist in the Member List
+		assertTrue(isDeleted);
+	}
+	
+	@Test
+	public void updateMemberTest() {
+		//Boundary - Test Valid Member List to Add Members To
+		assertNotNull(memberList);
+						
+		//Normal - Test Member List Size is 0
+		//Normal - Test Member List Size is 2 after Adding 2 Members
+		assertEquals(0, memberList.size());
+		memberList.add(m1);  
+		memberList.add(m2);  
+		assertEquals(2, memberList.size());
+			
+	}
+	
+	@Test
+	public void searchMembersByCountryTest() {
+		//Boundary - Test Valid Course List to Retrieve Members From
+		assertNotNull(memberList);
+						
+		//Normal - Test Member List Size is 0
+		assertEquals(0, memberList.size());
+				
+		//Add Member
+		memberList.add(m1);  
+		memberList.add(m2);  
+						
+		//--- Search searchMember
+		//Boundary - Test Member Output contains the Member Header when No Result for that country
+		String members = C206_CaseStudy.retrieveMembersByCountry(memberList, searchCountry03);
+		String expectedMembers = String.format("%-30s %-10s %-10s %-20s %-15s %-20s", "Name", "Gender", "Mobile", "Email", "Date of Birth", "Country");
+		assertEquals(expectedMembers, members);
+						
+		//Normal - Test Member List Size is 2 after Adding 2 Members
+		memberList.add(m1);  
+		memberList.add(m2);  
+		assertEquals(2, memberList.size());
+						
+		//--- Search searchCountry01
+		//Normal - Test Member Output contains the Member Header plus the Members Information when 1 result for that country
+		members = C206_CaseStudy.retrieveMembersByCountry(memberList, searchCountry01);
+		expectedMembers += String.format("%-30s %-10s %-10d %-20s %-15s %-20s\n", "Anna Bell", 'F', 92225555, "annabell@gmail.com", "06072000", "Australia");
+		assertEquals(expectedMembers, members);
+				
+		//--- Search searchCountry02
+		//Normal - Test Member Output contains the Member Header plus the Members Information when 1 result for that country
+		members = C206_CaseStudy.retrieveMembersByCountry(memberList, searchCountry02);
+		expectedMembers = String.format("%-30s %-10s %-10s %-20s %-15s %-20s", "Name", "Gender", "Mobile", "Email", "Date of Birth", "Country");
+		expectedMembers += String.format("%-30s %-10s %-10d %-20s %-15s %-20s\n", "Mike Chang", 'M', 93338888, "mikechang@gmail.com", "21031999", "Singapore");
+		assertEquals(expectedMembers, members);
+				
+	}
+	
 	// member 2 - caven
 	@Test
 	public void addCategoryTest() {
