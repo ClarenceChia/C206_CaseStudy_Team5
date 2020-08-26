@@ -113,9 +113,9 @@ public class C206_CaseStudyTest {
 
 		LocalDate d1 =LocalDate.now();
 		LocalDate d2 =LocalDate.now();
-		r1 = new registerSchedule("N1","S1","a1@yahoo.com","Pending",d1);
-		r2 = new registerSchedule("N2","S2","a2@yahoo.com","Pending",d2);
-		rf1 = new registerSchedule("N1 ","S1","a1@yahoo.com","Pending",d1);
+		r1 = new registerSchedule("N1","S1","a1@yahoo.com",d1);
+		r2 = new registerSchedule("N2","S2","a2@yahoo.com",d2);
+		rf1 = new registerSchedule("N1 ","S1","a1@yahoo.com",d1);
 		//member 5 ends
 		
 	}
@@ -378,7 +378,6 @@ public class C206_CaseStudyTest {
 		assertEquals(expectedCourse, course);
 		
 	}
-			
 			
 	@Test
 	public void addCourseTest() {

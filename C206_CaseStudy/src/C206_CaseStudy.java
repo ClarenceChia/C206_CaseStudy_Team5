@@ -175,7 +175,7 @@ public class C206_CaseStudy {
 					} else if (option4 == 3) {
 						addCourseSchedule(scheduleList);
 					} else if (option4 == 4) {
-						deleteCourseSchedule(scheduleList);
+						deleteCourseSchedule(scheduleList, reglist);
 					} else if (option4 == 5) {
 						updateCourseSchedule(scheduleList);
 					} else if (option4 == OPTION_QUIT) {
