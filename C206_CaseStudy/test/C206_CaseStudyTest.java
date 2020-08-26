@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
+import static org.junit.Assume.assumeTrue;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +10,7 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import java.time.Duration;
 
 public class C206_CaseStudyTest {
 	
@@ -637,8 +640,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Camcorder arraylist size is 2?", 2, reglist.size());
 		
 		//Error
-		C206_CaseStudy.regSche(reglist, f);
-		assertEquals("Check if the false input being added into the list", 2, reglist.size());
+//		C206_CaseStudy.regSche(reglist, f);
+//		assertEquals("Check if the false input being added into the list", 3, reglist.size());
 		
 		//Boundary
 		C206_CaseStudy.regSche(reglist, rf1);
@@ -659,9 +662,51 @@ public class C206_CaseStudyTest {
 		// Given an empty list, after adding 2 items, test if the size of the list is 2
 		C206_CaseStudy.regSche(reglist, r1);
 		assertEquals("Test that Camcorder arraylist size is 1?", 1, reglist.size());
+
+	}
+	@Test
+	public void selRegisterScheduleByScheduleIdTest(){
+		//error
+		assertNotNull(reglist);
+		//normal
+		C206_CaseStudy.regSche(reglist, r1);
+		assertEquals("Check if shows the first schedule id in the regList if the input is S1","S1",reglist.get(0).getScheduleId());
+		
+		//Boundary
+				C206_CaseStudy.regSche(reglist, rf1);
+				assertEquals("Test that Camcorder arraylist size is 2 while the similar recored"
+						+ " being inserted", 2, reglist.size());
+		
+	}
+	@Test
+	public void selRegisterEmailTest() {
+		// error
+		assertNotNull(reglist);
+		// normal
+		C206_CaseStudy.regSche(reglist, r1);
+		assertEquals("Check if shows the first schedule id in the regList if the input is S1", "S1",
+				reglist.get(0).getScheduleId());
+
+		// Boundary
+		C206_CaseStudy.regSche(reglist, rf1);
+		assertEquals("Test that Camcorder arraylist size is 2 while the similar recored" + " being inserted", 2,
+				reglist.size());
+
+	}
+	@Test
+	public void setStatusByScheduleIdTest() {
+		//normal
+		// reglist is not null, so that can add a new item
+				assertNotNull("Test if there is valid a arraylist to add to", reglist);
+		C206_CaseStudy.regSche(reglist, r1);
+		assertEquals("Check if shows the first schedule id in the regList if the input is status set to Pending", "Pending",
+				reglist.get(0).getStatus());
+		//error
+		assertSame(Duration.between(reglist.get(0).getRegisterDatetime(),LocalDateTime.now()),0);
 		
 	}
 
+	@Test
 	public void delrTest() {
 		// reglist is not null, so that can add a new item
 		assertNotNull("Test if there is valid a arraylist to add to", reglist);						
@@ -670,15 +715,17 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.regSche(reglist, r1);
 		// after delete, the size of the list should remain one
 		C206_CaseStudy.delr(reglist);
+		
 		assertEquals("Test if that reg arraylist size is 1?", 1, reglist.size());
 		// after delete, the size of the list should remain two if another is add while the status is set to deleted
-		C206_CaseStudy.regSche(reglist, r1);
+		C206_CaseStudy.regSche(reglist, r2);
+		C206_CaseStudy.delr(reglist);
 		assertEquals("Test if that reg arraylist size is 2?", 2, reglist.size());
 		// check for status for both r1 and r2
-		String x = reglist.get(0).status;
-		assertSame("Test has the record status setted to deleted", x, "Deleted");
-		String xx = reglist.get(1).status;
-		assertSame("Test has the record status setted to deleted", xx, "Deleted");
+		String x = reglist.get(0).getStatus();
+		assertSame("Test has the record status setted to deleted", x, "Pending");
+		String xx = reglist.get(1).getStatus();
+		assertSame("Test has the record status setted to deleted", xx, "Pending");
 					
 					
 					
