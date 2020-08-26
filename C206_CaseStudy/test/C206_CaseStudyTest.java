@@ -317,7 +317,7 @@ public class C206_CaseStudyTest {
 				categoryList.get(0).getDescription());
 		// Error:test if no such category description is still the same , which shouldn't happen if no error
 		assertEquals("check if category description is still the same  in category list","All about solving painful question",categoryList.get(0).getDescription());
-		// test boundary: no more to delete
+		// test boundary: no more to update
 		int size = categoryList.size();
 		assertEquals("check if size of list is 0", 0, size);
 	}
