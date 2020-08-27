@@ -297,7 +297,7 @@ public class C206_CaseStudy {
 	// --- Member 1 - Clarence METHODS ---
 
 	public static String retrieveMembers(List<Member> members) {
-		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s", "Name", "Gender", "Mobile", "Email",
+		String output = String.format("%-10s %-10s %-10s %-10s %-20s %-10s\n", "Name", "Gender", "Mobile", "Email",
 				"Date of Birth", "Country");
 		for (Member m : members) {
 			output += m.toString();
