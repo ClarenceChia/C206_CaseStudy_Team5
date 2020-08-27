@@ -79,7 +79,7 @@ public class C206_CaseStudy {
 						viewMembers(memberList);
 						String countryName = inputCountryName();
 						viewMembersByCountry(memberList, countryName);
-					} else if (option1 == OPTION1_QUIT) {
+					} else if (option1 == 6) {
 						System.out.println("Bye!");
 					} else {
 						System.out.println("Invalid option");
