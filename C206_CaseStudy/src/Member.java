@@ -53,7 +53,7 @@ public class Member {
 	}
 	
 	public String toString() {
-		return String.format("%-30s %-10s %-10d %-30s %-10s %-20s", getName(), getGender(), getMobile(), getEmail(), getDob(), getCountry());
+		return String.format("%-30s %-10s %-10d %-30s %-10s %-20s\n", getName(), getGender(), getMobile(), getEmail(), getDob(), getCountry());
 	}
 
 	public void setName(String name) {
