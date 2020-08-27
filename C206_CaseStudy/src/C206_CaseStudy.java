@@ -35,7 +35,7 @@ public class C206_CaseStudy {
 				//--- M e m b e r  1   M E N U ---
 				
 				int option1 = 0;
-				while (option1 != OPTION1_QUIT) {
+				while (option1 != 6) {
 					// insert menu
 					membersMenu();
 					option1 = Helper.readInt("Enter an option > ");
